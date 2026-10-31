@@ -1116,9 +1116,7 @@ function syncPickPop(){
   if(!el) return;
   const p = boardPicksFor(pickPop.key)[pickPop.race] || {};
   el.querySelectorAll(".pp-row button").forEach(b => {
-    b.classList.toggle("sel-D", p.winner === "D");
-    b.classList.toggle("sel-R", p.winner === "R");
-    b.classList.toggle("sel-O", p.winner === "O");
+    b.classList.toggle("sel-" + b.dataset.w, b.dataset.w === p.winner);
   });
   const inp = el.querySelector(".pp-margin input");
   if(inp && document.activeElement !== inp){
