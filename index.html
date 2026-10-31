@@ -110,6 +110,36 @@
   .pick input[type=number]{font:inherit; width:82px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; text-align:right; font-variant-numeric:tabular-nums}
   .pick .saved{font-size:12px; color:#256b34; font-weight:600; margin-left:auto}
 
+  .pick.hero{margin:0; border:0; border-bottom:1px solid var(--line); border-radius:0; padding:18px 24px 20px; background:linear-gradient(180deg,#eaf7ef,#dff2e6); box-shadow:inset 0 0 0 2px #2f9e57}
+  .pick.hero .sec{color:#146c3b; font-size:12px; letter-spacing:.13em; margin-bottom:10px}
+  .pick.hero .row{gap:8px}
+  .pick.hero .row button{font-size:14.5px; padding:12px 14px; border-width:2px; border-color:#bfe3ca; background:#fff}
+  .pick.hero .row button:hover{border-color:#2f9e57}
+  .pick.hero label{font-size:13.5px; font-weight:600; color:#1c5a36}
+  .pick.hero input[type=number]{border-color:#bfe3ca; border-width:2px}
+  .pick.hero .saved{color:#146c3b}
+
+  .guide{background:linear-gradient(180deg,#f3fbf6,#eef7f1); border:1px solid #cfe6d7; border-radius:14px; box-shadow:var(--shadow); padding:16px 18px; margin:18px 0 4px}
+  .guide h2{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:18px; margin:0 0 12px; font-weight:600; color:#14512f}
+  .guide .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+  @media (max-width:900px){ .guide .steps{grid-template-columns:1fr 1fr} }
+  @media (max-width:560px){ .guide .steps{grid-template-columns:1fr} }
+  .stepcard{display:flex; gap:10px; align-items:flex-start; text-align:left; font:inherit; cursor:pointer; background:#fff; border:1px solid var(--line); border-radius:11px; padding:10px 12px; color:#3c414b}
+  .stepcard:hover{border-color:#2f9e57; background:#fbfefc}
+  .stepcard .n{flex:none; width:24px; height:24px; border-radius:50%; background:#2f9e57; color:#fff; font-size:12.5px; font-weight:800; display:grid; place-items:center}
+  .stepcard .txt{font-size:12.5px; line-height:1.4}
+  .stepcard .txt b{display:block; font-size:13px; color:var(--ink); margin-bottom:2px}
+  .stepcard .txt b .go{font-weight:700; color:#1c7a43}
+
+  .pcard .row.mini{display:flex; gap:5px; margin-top:8px}
+  .pcard .row.mini button{flex:1; font:inherit; font-size:12px; font-weight:800; padding:6px 0; border-radius:7px; border:1px solid var(--line); background:#fff; color:#3f4551; cursor:pointer}
+  .pcard .row.mini button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
+  .pcard .row.mini button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
+  .pcard .row.mini button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
+  .pcard label.mini-margin{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted); margin-top:6px; font-weight:600}
+  .pcard input[type=number]{font:inherit; font-size:12.5px; width:64px; padding:4px 6px; border:1px solid var(--line); border-radius:6px; text-align:right; font-variant-numeric:tabular-nums}
+  .pcard.picked{border-color:#b9dcc4; box-shadow:0 0 0 1px #d7ecdd inset}
+
   .summary{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:6px}
   .stat{background:#faf7f1; border:1px solid var(--line); border-radius:10px; padding:12px 14px}
   .stat .k{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700}
@@ -159,20 +189,30 @@
       </div>
     </div>
     <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-page="senate">Make Picks - Senate</button>
+      <button role="tab" aria-selected="true" data-page="group">Live Group Board &amp; Scores</button>
+      <button role="tab" aria-selected="false" data-page="senate">Make Picks - Senate</button>
       <button role="tab" aria-selected="false" data-page="gov">Make Picks - Governors</button>
-      <button role="tab" aria-selected="false" data-page="mycard">My card</button>
-      <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
+      <button role="tab" aria-selected="false" data-page="mycard">My Card &amp; Edit</button>
       <button role="tab" aria-selected="false" data-page="national">National picture</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="page on" id="page-senate">
+  <section class="guide" aria-label="How to use this app">
+    <h2>Start here: four quick steps</h2>
+    <div class="steps">
+      <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board &amp; Scores</span> and enter your first name.</span></button>
+      <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:#1c7a43">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick D, R, or O and enter the margin.</span></button>
+      <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Card &amp; Edit</span> to see everything in one place and quickly change any pick.</span></button>
+      <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board &amp; Scores</span> to see everyone's picks and scores as results come in.</span></button>
+    </div>
+  </section>
+
+  <div class="page" id="page-senate">
     <div class="lede">
       <h2>Flip through the map</h2>
-      <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin at the bottom; everything saves in your browser.</p>
+      <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin in the green box at the top of each card; everything saves in your browser.</p>
     </div>
     <div class="layout">
       <aside class="rail" id="rail-senate"></aside>
@@ -183,7 +223,7 @@
   <div class="page" id="page-gov">
     <div class="lede">
       <h2>36 governorships</h2>
-      <p>Nineteen open seats. Ratings are Cook's as of Oct 29. Same deal: read, then pick a winner and a margin.</p>
+      <p>Nineteen open seats. Ratings are Cook's as of Oct 29. Same deal: read, then use the green box at the top of each card to pick a winner and a margin.</p>
     </div>
     <div class="layout">
       <aside class="rail" id="rail-gov"></aside>
@@ -225,10 +265,11 @@
   <div class="page" id="page-mycard">
     <div class="banner" id="shared-banner"></div>
     <div class="panel">
-      <h2>My card</h2>
-      <p class="sub" id="mycard-sub">Nothing picked yet. Go flip some races.</p>
+      <h2>My Card &amp; Edit</h2>
+      <p class="sub" id="mycard-sub">Nothing picked yet. Go make some picks.</p>
       <div class="summary" id="mycard-stats"></div>
 
+      <p class="note" style="margin-top:14px">Edit right here: tap D, R, or O and set a margin on any race card.</p>
       <h4>Senate picks</h4>
       <div class="mycard-grid" id="mycard-senate"></div>
       <h4>Governor picks</h4>
@@ -237,14 +278,14 @@
       <div class="btns">
         <button class="btn ghost" id="clear-picks">Clear my picks</button>
       </div>
-      <p class="note">Picks sync live to the Group Board.</p>
+      <p class="note">Changes save automatically and sync to the Live Group Board &amp; Scores.</p>
       <pre class="copybox" id="copybox" hidden></pre>
     </div>
   </div>
 
-  <div class="page" id="page-group">
+  <div class="page on" id="page-group">
     <div class="panel">
-      <h2>Live Group Board</h2>
+      <h2>Live Group Board &amp; Scores</h2>
       <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks will sync live for everyone to see.</p>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
         <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
@@ -268,7 +309,7 @@
           <tbody id="group-gov"></tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live.</p>
+      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live. Scores appear once results are entered.</p>
     </div>
   </div>
 
@@ -385,6 +426,21 @@ function renderDetail(chamber){
     <div class="cand"><span class="tag ${c.party}">${c.party}</span>
       <span class="nm">${c.name}</span><span class="role">${c.role || ""}</span></div>`).join("");
 
+  const pickHero = `
+    <div class="pick hero" data-race="${r.id}">
+      <h3 class="sec">ENTER YOUR PREDICTION HERE</h3>
+      <div class="row">
+        <button data-w="D" class="${p.winner === "D" ? "sel-D" : ""}">Democrat</button>
+        <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">Republican</button>
+        <button data-w="O" class="${p.winner === "O" ? "sel-O" : ""}">Other / ind.</button>
+      </div>
+      <label>Winning margin
+        <input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ""}" placeholder="0.0">
+        <span>pts</span>
+        <span class="saved" id="saved-${r.id}">${p.winner ? "saved" : ""}</span>
+      </label>
+    </div>`;
+
   host.innerHTML = `
     <div class="card">
       <div class="card-head">
@@ -397,6 +453,7 @@ function renderDetail(chamber){
           <span class="chip">${r.open ? "Open seat" : "Incumbent on ballot"}</span>
         </div>
       </div>
+      ${pickHero}
       <div class="body-grid">
         <div class="col">
           <h3 class="sec">The shape of the race</h3>
@@ -413,19 +470,6 @@ function renderDetail(chamber){
             <div class="lbl">Reference margin</div>
             <div class="big ${r.avg !== null ? marginClass(r.avg) : ""}">${r.avg !== null ? fmtMargin(r.avg) : "No average"}</div>
             <div class="sub">${r.avg !== null ? `Plain average of the ${r.n} listed poll${r.n === 1 ? "" : "s"}, Democratic minus Republican. Not a forecast.` : "No polls to average. Use the rating and history."}</div>
-          </div>
-          <div class="pick" data-race="${r.id}">
-            <h3 class="sec">Your call</h3>
-            <div class="row">
-              <button data-w="D" class="${p.winner === "D" ? "sel-D" : ""}">Democrat</button>
-              <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">Republican</button>
-              <button data-w="O" class="${p.winner === "O" ? "sel-O" : ""}">Other / ind.</button>
-            </div>
-            <label>Winning margin
-              <input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ""}" placeholder="0.0">
-              <span>pts</span>
-              <span class="saved" id="saved-${r.id}">${p.winner ? "saved" : ""}</span>
-            </label>
           </div>
         </div>
         <div class="col">
@@ -475,7 +519,7 @@ function renderMyCard(){
   const s = tally("senate"), g = tally("gov");
   const sub = document.getElementById("mycard-sub");
   sub.textContent = s.picked + g.picked === 0
-    ? "Nothing picked yet. Go flip some races."
+    ? "Nothing picked yet. Go make some picks in the Senate or Governors tab."
     : `${s.picked} Senate and ${g.picked} Governor races called. ${DATA.races.length - s.picked - g.picked} still blank.`;
 
   document.getElementById("mycard-stats").innerHTML = `
@@ -484,19 +528,46 @@ function renderMyCard(){
     <div class="stat"><div class="k">Governors called</div><div class="v">${g.picked}/36</div></div>
     <div class="stat"><div class="k">Your governor count</div><div class="v">${projectGov(g)}</div></div>`;
 
-  const cards = (chamber, host) => {
-    const races = DATA.races.filter(r => r.chamber === chamber);
-    host.innerHTML = races.map(r => {
-      const p = picks[r.id];
-      if(!p || !p.winner) return `<div class="pcard empty-p"><div class="t">${r.abbr} · ${r.state}</div><div class="m" style="color:#9aa0aa">not called</div><div class="g">${r.cook}</div></div>`;
-      const label = p.winner === "D" ? "Democrat" : p.winner === "R" ? "Republican" : "Other";
-      return `<div class="pcard"><div class="t">${r.abbr} · ${r.state}</div>
-        <div class="m" style="color:${p.winner === "D" ? "var(--d)" : p.winner === "R" ? "var(--r)" : "#4b5563"}">${label} +${Number(p.margin || 0).toFixed(1)}</div>
-        <div class="g">Cook: ${r.cook}</div></div>`;
-    }).join("");
+  const cardHtml = (r) => {
+    const p = picks[r.id] || {};
+    const picked = !!p.winner;
+    return `<div class="pcard${picked ? " picked" : " empty-p"}" data-race="${r.id}">
+      <div class="t">${r.abbr} · ${r.state}</div>
+      <div class="g">Cook: ${r.cook}</div>
+      <div class="row mini">
+        <button data-w="D" class="${p.winner === "D" ? "sel-D" : ""}">D</button>
+        <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">R</button>
+        <button data-w="O" class="${p.winner === "O" ? "sel-O" : ""}">O</button>
+      </div>
+      <label class="mini-margin">+<input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ""}" placeholder="0.0"> pts</label>
+    </div>`;
   };
-  cards("senate", document.getElementById("mycard-senate"));
-  cards("gov", document.getElementById("mycard-gov"));
+  const renderInto = (chamber, host) => {
+    host.innerHTML = DATA.races.filter(r => r.chamber === chamber).map(cardHtml).join("");
+    host.querySelectorAll(".pcard").forEach(card => {
+      const id = card.dataset.race;
+      card.querySelectorAll(".row.mini button").forEach(b => {
+        b.onclick = () => {
+          const cur = picks[id] || {};
+          cur.winner = b.dataset.w;
+          picks[id] = cur;
+          savePicks();
+          refreshPicks();
+        };
+      });
+      const inp = card.querySelector("input");
+      inp.onchange = () => {
+        const cur = picks[id] || {};
+        cur.margin = parseFloat(inp.value || "0");
+        if(!cur.winner) cur.winner = "D";
+        picks[id] = cur;
+        savePicks();
+        refreshPicks();
+      };
+    });
+  };
+  renderInto("senate", document.getElementById("mycard-senate"));
+  renderInto("gov", document.getElementById("mycard-gov"));
 }
 
 function projectSenate(s){
@@ -539,6 +610,37 @@ function b64url(str){
 }
 
 const state = { sel: { senate: null, gov: null } };
+const RESULTS = {};
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function scoreFor(personPicks){
+  let correct = 0, judged = 0;
+  DATA.races.forEach(r => {
+    const res = RESULTS[r.id], p = personPicks[r.id];
+    if(!res || !p || !p.winner) return;
+    judged++;
+    if(p.winner === res.winner) correct++;
+  });
+  return {correct, judged};
+}
+
+function showPage(name, scroll){
+  document.querySelectorAll("nav.tabs button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.page === name)));
+  document.querySelectorAll(".page").forEach(p => p.classList.toggle("on", p.id === "page-" + name));
+  if(name === "mycard") renderMyCard();
+  if(name === "group") renderGroup();
+  if(scroll !== false) window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function refreshPicks(){
+  renderList("senate"); renderDetail("senate");
+  renderList("gov"); renderDetail("gov");
+  renderMyCard();
+}
+
 const FIREBASE_DB_URL = "https://midterm-desk-default-rtdb.firebaseio.com";
 const GROUP_ROOM = "main";
 const GROUP_ENDPOINT = FIREBASE_DB_URL ? FIREBASE_DB_URL.replace(/\/+$/, "") + "/picks/" + GROUP_ROOM + ".json" : "";
@@ -588,36 +690,34 @@ function renderGroup(){
   govT.innerHTML = "";
   const races = DATA.races;
   const people = Object.keys(groupData.picks || {}).sort();
-  document.getElementById("group-stats").innerHTML = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
-  races.filter(r=>r.chamber==="senate").forEach(r=>{
-    const tr = document.createElement("tr");
-    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
-    people.forEach(pn=>{
-      const pr = (groupData.picks[pn]||{}).picks||{};
-      const pk = pr[r.id];
-      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
-      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
-    });
-    tr.innerHTML = cells;
-    senT.appendChild(tr);
+  const anyResults = Object.keys(RESULTS).length > 0;
+  let stats = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
+  people.forEach(pn => {
+    const pr = (groupData.picks[pn] || {}).picks || {};
+    const made = DATA.races.filter(r => pr[r.id] && pr[r.id].winner).length;
+    const sc = scoreFor(pr);
+    const showScore = anyResults && sc.judged > 0;
+    stats += `<div class="stat"><div class="k">${esc(pn)} · ${showScore ? "Score" : "Picks made"}</div><div class="v">${showScore ? sc.correct + " / " + sc.judged : made}</div></div>`;
   });
-  races.filter(r=>r.chamber==="gov").forEach(r=>{
-    const tr = document.createElement("tr");
-    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
-    people.forEach(pn=>{
-      const pr = (groupData.picks[pn]||{}).picks||{};
+  document.getElementById("group-stats").innerHTML = stats;
+
+  const td = "padding:6px 10px; border-bottom:1px solid #f1ede5;";
+  const th = "text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);";
+  const head = () => `<th style="${th}">State</th><th style="${th}">Race</th><th style="${th}">Cook</th>` + people.map(pn => `<th style="${th}">${esc(pn)}</th>`).join("");
+  const rows = (chamber) => races.filter(r => r.chamber === chamber).map(r => {
+    const base = `<td style="${td}">${r.state} (${r.abbr})</td><td style="${td}">${r.cands.map(c => c.party + ":" + c.name).join(" vs ")}</td><td style="${td}">${r.cook}</td>`;
+    const cells = people.map(pn => {
+      const pr = (groupData.picks[pn] || {}).picks || {};
       const pk = pr[r.id];
-      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
-      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
-    });
-    tr.innerHTML = cells;
-    govT.appendChild(tr);
-  });
-  // update headers
-  const sh = document.querySelector("#group-senate").closest("table").querySelector("thead tr");
-  const gh = document.querySelector("#group-gov").closest("table").querySelector("thead tr");
-  if(sh){ sh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
-  if(gh){ gh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+      const val = pk && pk.winner ? (pk.winner + "+" + Number(pk.margin || 0).toFixed(1)) : "—";
+      return `<td style="${td}">${esc(pn)}: <b>${val}</b></td>`;
+    }).join("");
+    return `<tr>${base}${cells}</tr>`;
+  }).join("");
+  senT.innerHTML = rows("senate");
+  govT.innerHTML = rows("gov");
+  document.querySelector("#group-senate").closest("table").querySelector("thead tr").innerHTML = head();
+  document.querySelector("#group-gov").closest("table").querySelector("thead tr").innerHTML = head();
 }
 
 function initGroup(){
@@ -641,14 +741,10 @@ function init(){
   state.sel.gov = [...govRaces].sort((a,b) => rank(a) - rank(b))[0].id;
 
   document.querySelectorAll("nav.tabs button").forEach(b => {
-    b.onclick = () => {
-      document.querySelectorAll("nav.tabs button").forEach(x => x.setAttribute("aria-selected", "false"));
-      b.setAttribute("aria-selected", "true");
-      document.querySelectorAll(".page").forEach(p => p.classList.remove("on"));
-      document.getElementById("page-" + b.dataset.page).classList.add("on");
-      if(b.dataset.page === "mycard") renderMyCard();
-      window.scrollTo({top:0, behavior:"smooth"});
-    };
+    b.onclick = () => showPage(b.dataset.page);
+  });
+  document.querySelectorAll(".stepcard").forEach(b => {
+    b.onclick = () => showPage(b.dataset.page);
   });
 
   renderList("senate"); renderDetail("senate");
@@ -671,9 +767,10 @@ function init(){
   document.getElementById("clear-picks").onclick = () => {
     if(!confirm("Clear every pick in this browser?")) return;
     picks = {}; savePicks(); history.replaceState(null, "", location.pathname);
-    renderList("senate"); renderDetail("senate"); renderList("gov"); renderDetail("gov"); renderMyCard();
+    refreshPicks();
   };
   initGroup();
+  showPage(groupName ? "senate" : "group", false);
 }
 
 init();
