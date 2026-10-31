@@ -1360,7 +1360,7 @@ function renderGroup(){
     <div class="stat"><div class="k">Total picks</div><div class="v">${totalPicks}</div></div>
     ${leaderCard("Best winners", leaders.winners, `${leaders.winners ? leaders.winners.correct : 0} correct`)}
     ${leaderCard("Best with margin", leaders.margins, leaders.margins && leaders.margins.avgMiss !== null ? `${leaders.margins.total.toFixed(1)} pts` : "No margins yet")}
-    <div class="stat"><div class="k">Results feed</div><div class="v ${(liveStatus.demo || liveStatus.test) ? "test" : liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.demo ? "Demo" : liveStatus.test ? "Test" : liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.demo ? "Fake results · final scoring preview" : liveStatus.test ? "civicAPI test feed · checked " + checked : liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
+    <div class="stat"><div class="k">Results feed</div><div class="v ${(liveStatus.demo || liveStatus.test) ? "test" : liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.demo ? "Demo" : liveStatus.test ? "Test" : liveStatus.ok ? "Live" : liveWindow() === "before" ? "Nov 2" : liveWindow() === "after" ? "Closed" : "Offline"}</div><div class="g">${liveStatus.demo ? "Fake results · final scoring preview" : liveStatus.test ? "civicAPI test feed · checked " + checked : liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
 
   const pill = document.getElementById("live-pill");
   if(pill){
