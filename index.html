@@ -159,12 +159,11 @@
       </div>
     </div>
     <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-page="senate">Senate · 35 seats</button>
-      <button role="tab" aria-selected="false" data-page="gov">Governor · 36 races</button>
-      <button role="tab" aria-selected="false" data-page="national">National picture</button>
+      <button role="tab" aria-selected="true" data-page="senate">Make Picks - Senate</button>
+      <button role="tab" aria-selected="false" data-page="gov">Make Picks - Governors</button>
       <button role="tab" aria-selected="false" data-page="mycard">My card</button>
       <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
-      <button role="tab" aria-selected="false" data-page="howto">How to read this</button>
+      <button role="tab" aria-selected="false" data-page="national">National picture</button>
     </nav>
   </div>
 </header>
@@ -236,12 +235,9 @@
       <div class="mycard-grid" id="mycard-gov"></div>
 
       <div class="btns">
-        <button class="btn" id="copy-picks">Copy my picks as text</button>
-        <button class="btn ghost" id="copy-link">Copy shareable link to my card</button>
-        <button class="btn link" id="open-sheet">Open the group spreadsheet</button>
         <button class="btn ghost" id="clear-picks">Clear my picks</button>
       </div>
-      <p class="note">The dashboard stores picks in this browser only. The spreadsheet is where the group's picks actually live, so paste your card in there when you are done.</p>
+      <p class="note">Picks sync live to the Group Board.</p>
       <pre class="copybox" id="copybox" hidden></pre>
     </div>
   </div>
@@ -337,6 +333,8 @@ function fmtMargin(v){
 }
 function marginClass(v){ return v>0?"lead-D":v<0?"lead-R":"lead-E"; }
 
+function doPick(id,w,ch){const cur=picks[id]||{};cur.winner=w;picks[id]=cur;savePicks();renderList(ch);if(state.sel[ch]===id)renderDetail(ch);}
+function doMargin(id,v,ch){const cur=picks[id]||{};cur.margin=parseFloat(v||"0");if(!cur.winner)cur.winner="D";picks[id]=cur;savePicks();renderList(ch);if(state.sel[ch]===id)renderDetail(ch);}
 function raceRow(r, chamber){
   const p = picks[r.id];
   const btn = document.createElement("button");
