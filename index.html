@@ -143,49 +143,6 @@
   .banner.on{display:block}
   pre.copybox{background:#f6f3ec; border:1px solid var(--line); border-radius:10px; padding:14px; font-size:12.5px; overflow:auto; max-height:320px; margin:12px 0 0}
   footer{border-top:1px solid var(--line); padding:22px 0 40px; color:var(--muted); font-size:12.5px}
-  
-  /* Improved UX styles */
-  .quickstart{background:linear-gradient(135deg, #e8edfd 0%, #f1eafe 100%); border:2px solid #cfdaf9; border-radius:14px; padding:18px 22px; margin:16px 0 20px; box-shadow:var(--shadow)}
-  .quickstart h3{margin:0 0 10px; font-size:16px; font-weight:700; color:#14348f}
-  .quickstart ol{margin:0; padding-left:20px}
-  .quickstart li{margin:6px 0; font-size:14px; color:#1e293b}
-  .quickstart li strong{color:#14348f}
-  
-  .edit-callout{background:#fff8e6; border:2px solid #f0e0b8; border-radius:12px; padding:14px 18px; margin:14px 0 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
-  .edit-callout .icon{font-size:24px}
-  .edit-callout .text{flex:1; min-width:200px}
-  .edit-callout .text strong{display:block; font-size:15px; color:#6b4b06; margin-bottom:2px}
-  .edit-callout .text span{font-size:13px; color:#92400e}
-  
-  .race-edit-card{background:var(--panel); border:2px solid var(--line); border-radius:12px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow)}
-  .race-edit-card:hover{border-color:#cbd5e1}
-  .race-edit-card .race-header{display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap}
-  .race-edit-card .race-title{font-weight:700; font-size:15px; flex:1}
-  .race-edit-card .race-meta{font-size:12px; color:var(--muted)}
-  .race-edit-card .pick-row{display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap}
-  .race-edit-card .pick-row button{font:inherit; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; cursor:pointer; border:2px solid var(--line); background:#fff; color:#3f4551; min-width:90px}
-  .race-edit-card .pick-row button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
-  .race-edit-card .pick-row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
-  .race-edit-card .pick-row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
-  .race-edit-card .margin-input{display:flex; align-items:center; gap:8px; font-size:13px}
-  .race-edit-card .margin-input input{font:inherit; width:90px; padding:7px 10px; border:2px solid var(--line); border-radius:8px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600}
-  .race-edit-card .saved-indicator{color:#256b34; font-weight:600; font-size:12px; margin-left:auto}
-  
-  .group-table{width:100%; border-collapse:collapse; font-size:12.5px}
-  .group-table thead th{background:linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%); padding:10px 8px; text-align:left; font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; border:1px solid var(--line); position:sticky; top:0; z-index:10}
-  .group-table tbody td{padding:8px; border:1px solid #f1ede5; vertical-align:middle}
-  .group-table tbody tr:hover{background:#f9fafb}
-  .group-table .race-cell{font-weight:600; background:#faf7f1}
-  .group-table .pick-cell{text-align:center; font-weight:700; padding:6px 4px}
-  .group-table .pick-D{background:#e8edfd; color:#1e40af}
-  .group-table .pick-R{background:#fdeceb; color:#991b1b}
-  .group-table .pick-O{background:#f3f4f6; color:#374151}
-  .group-table .correct{box-shadow:inset 0 0 0 2px #22c55e}
-  .group-table .wrong{box-shadow:inset 0 0 0 2px #ef4444}
-  .group-table .score-cell{font-weight:700; text-align:center; background:#f0fdf4}
-  
-  .results-status{background:#f0f9ff; border:2px solid #bae6fd; border-radius:10px; padding:10px 16px; margin:12px 0; display:flex; align-items:center; gap:10px; font-size:13px}
-  .results-status.updating{background:#fef3c7; border-color:#fde68a}
 </style>
 </head>
 <body>
@@ -201,27 +158,19 @@
         <span id="countdown"></span>
       </div>
     </div>
-    <div class="quickstart">
-      <h3>🚀 QUICK START - 4 Easy Steps</h3>
-      <ol>
-        <li><strong>1) Join the group:</strong> Go to "Live Group Board & Scores" and enter your first name</li>
-        <li><strong>2) Enter your picks:</strong> Start with "Make Picks - Senate" or "Make Picks - Governors". Read each race and make your pick right at the top!</li>
-        <li><strong>3) Review your card:</strong> Check "My Card & Edit" to see all your picks in one place</li>
-        <li><strong>4) Follow along:</strong> Watch the "Live Group Board & Scores" to see everyone's picks and scores as results come in</li>
-      </ol>
-    </div>
     <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-page="senate">🗳️ Make Picks - Senate</button>
-      <button role="tab" aria-selected="false" data-page="gov">🗳️ Make Picks - Governors</button>
-      <button role="tab" aria-selected="false" data-page="mycard">📋 My Card & Edit</button>
-      <button role="tab" aria-selected="false" data-page="group">🏆 Live Group Board & Scores</button>
-      <button role="tab" aria-selected="false" data-page="national">📊 National Picture</button>
+      <button role="tab" aria-selected="true" data-page="senate">Senate · 35 seats</button>
+      <button role="tab" aria-selected="false" data-page="gov">Governor · 36 races</button>
+      <button role="tab" aria-selected="false" data-page="national">National picture</button>
+      <button role="tab" aria-selected="false" data-page="mycard">My card</button>
+      <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
+      <button role="tab" aria-selected="false" data-page="howto">How to read this</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="page" id="page-senate">
+  <div class="page on" id="page-senate">
     <div class="lede">
       <h2>Flip through the map</h2>
       <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin at the bottom; everything saves in your browser.</p>
@@ -287,61 +236,473 @@
       <div class="mycard-grid" id="mycard-gov"></div>
 
       <div class="btns">
+        <button class="btn" id="copy-picks">Copy my picks as text</button>
+        <button class="btn ghost" id="copy-link">Copy shareable link to my card</button>
+        <button class="btn link" id="open-sheet">Open the group spreadsheet</button>
         <button class="btn ghost" id="clear-picks">Clear my picks</button>
       </div>
-      <p class="note">All picks are now synced live to the Group Board. Use the "Edit My Picks" tab to make changes.</p>
+      <p class="note">The dashboard stores picks in this browser only. The spreadsheet is where the group's picks actually live, so paste your card in there when you are done.</p>
       <pre class="copybox" id="copybox" hidden></pre>
     </div>
   </div>
 
   <div class="page" id="page-group">
     <div class="panel">
-      <h2>🏆 Live Group Board & Scores</h2>
-      <p class="sub"><strong>Everyone's picks in one place.</strong> See who picked what, and track scores live as results come in on Election Night.</p>
-      
-      <div class="edit-callout">
-        <div class="icon">👤</div>
-        <div class="text">
-          <strong>Join the group:</strong>
-          <span>Enter your name below so your picks appear on the board</span>
-        </div>
-        <div style="display:flex; gap:8px; align-items:center;">
-          <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:8px 12px; border:2px solid var(--line); border-radius:8px; width:180px; font-weight:600;">
-          <button class="btn" id="group-save-name">Join Board</button>
-        </div>
-        <span class="note" id="group-status">Not joined yet</span>
+      <h2>Live Group Board</h2>
+      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks will sync live for everyone to see.</p>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
+          <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:7px; width:200px;">
+        </label>
+        <button class="btn" id="group-save-name">Set name</button>
+        <span class="note" id="group-status">Not synced yet</span>
       </div>
-      
-      <div class="results-status" id="results-status">
-        <span>⏳</span><span>Waiting for election results (Nov 3) - Scores will appear automatically when results are available</span>
-      </div>
-      
-      <h3 style="margin:20px 0 12px;">📊 Current Scores</h3>
-      <div class="summary" id="group-scores"></div>
-      
-      <h3 style="margin:24px 0 12px;">🏛️ Senate Picks</h3>
-      <div style="overflow:auto; border:2px solid var(--line); border-radius:12px; max-height:600px;">
-        <table class="group-table" id="group-senate-table">
-          <thead><tr></tr></thead>
+      <div class="summary" id="group-stats"></div>
+      <h4>Senate picks</h4>
+      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
           <tbody id="group-senate"></tbody>
         </table>
       </div>
-      
-      <h3 style="margin:28px 0 12px;">🏛️ Governor Picks</h3>
-      <div style="overflow:auto; border:2px solid var(--line); border-radius:12px; max-height:600px;">
-        <table class="group-table" id="group-gov-table">
-          <thead><tr></tr></thead>
+      <h4 style="margin-top:18px;">Governor picks</h4>
+      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
           <tbody id="group-gov"></tbody>
         </table>
       </div>
-      
-      <div style="background:#f0f9ff; border:1px solid #bae6fd; padding:12px 16px; border-radius:10px; margin-top:16px; font-size:13px;">
-        <strong>💡 How scoring works:</strong> Green highlight = correct pick, Red highlight = wrong pick. Scores update automatically as results come in on Election Night.
-      </div>
+      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live.</p>
     </div>
   </div>
 
-  
+  <div class="page" id="page-howto">
+    <div class="panel">
+      <h2>How to read this (and what's missing)</h2>
+      <p class="sub">Inherited almost verbatim from the original file, because the caveats are the honest part.</p>
+      <p>Each race card pulls what was publicly visible from Cook Political Report, RealClearPolling, CNN, NYT/Siena, Silver Bulletin and Pod Save America as of Oct 30. "No item found" means no race-specific public item was found, not that the source has nothing. Paywalled material (Cook's race pages, Silver's per-race odds table, NYT articles, subscriber-only podcast episodes) is excluded unless reported publicly elsewhere. "Reference margin" is one polling average picked for comparison and labeled on each card; it is not a forecast. Pod Save America is an openly Democratic-aligned advocacy show, not a forecaster.</p>
+      <h4>Poll tables</h4>
+      <p>Poll rows come from the Wikipedia race pages, which compile the public October polls. A poll is included if its field period ended in October 2026 (a few September polls are kept where October was thin). RCP does not grade pollsters, and neither does this page. The "Higher-quality" tag is a screen: independent media, university or nonpartisan pollsters that publish their methods and are not sponsored by a campaign or party committee. "Other" covers campaign- or party-sponsored polls and pollsters with a consistent partisan house effect, plus any that could not be classified. It is a screen, not a verdict, and a few "Other" pollsters have decent records.</p>
+      <h4>Reference margin</h4>
+      <p>The number in the box is a plain average of the listed polls' two-way margins (Democratic minus Republican), with third-party and undecided shares set aside. No house-effect adjustments, no recency weighting, no likely-voter correction. A positive number means the Democrat led the average.</p>
+      <h4>State profiles and history</h4>
+      <p>PVI, last statewide result, and incumbent status are from Cook/Wikipedia. Historic margins are rounded. Group-level vote patterns are typical patterns, not state exit-poll readings, so they are not repeated here.</p>
+      <h4>What is not here</h4>
+      <ul>
+        <li>No forecast model. Ratings are borrowed; the polls are borrowed; the only thing you are adding is your judgment.</li>
+        <li>No House district cards. Only the national environment.</li>
+        <li>No fundraising or ad-spending tracker, which is the biggest gap in a file like this.</li>
+      </ul>
+    </div>
   </div>
-
 </main>
+
+<footer class="wrap">
+  Built for a friendly prediction pool. Not affiliated with any campaign, party, or forecaster. Ratings © Cook Political Report; poll data compiled from public sources.
+</footer>
+
+<script>
+const DATA = {"races": [{"id": "sen:CO", "abbr": "CO", "state": "Colorado", "chamber": "senate", "title": "Colorado Senate", "cook": "Solid D", "pvi": "D+3", "last": "2022: Bennet 55.9-41.3", "open": false, "holder": "D", "cands": [{"party": "D", "name": "John Hickenlooper", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Democratic lean."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:DE", "abbr": "DE", "state": "Delaware", "chamber": "senate", "title": "Delaware Senate", "cook": "Solid D", "pvi": "D+7", "last": "2020: Coons 59.4-37.9", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Chris Coons", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Long Democratic hold."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:IL", "abbr": "IL", "state": "Illinois", "chamber": "senate", "title": "Illinois Senate", "cook": "Solid D", "pvi": "D+7", "last": "2020: Durbin 54.9-38.9", "open": true, "holder": "D", "cands": [{"party": "D", "name": "Juliana Stratton", "role": ""}, {"party": "R", "name": "TBA", "role": ""}], "note": "Open seat after Durbin retirement.", "weigh": ["Heavy blue tilt."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:MA", "abbr": "MA", "state": "Massachusetts", "chamber": "senate", "title": "Massachusetts Senate", "cook": "Solid D", "pvi": "D+15", "last": "2020: Markey 66.2-30.3", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Ed Markey", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Very blue state."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:NJ", "abbr": "NJ", "state": "New Jersey", "chamber": "senate", "title": "New Jersey Senate", "cook": "Solid D", "pvi": "D+6", "last": "2020: Booker 57.1-40.9", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Cory Booker", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Blue tilt."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:NM", "abbr": "NM", "state": "New Mexico", "chamber": "senate", "title": "New Mexico Senate", "cook": "Solid D", "pvi": "D+3", "last": "2020: Heinrich 54.0-43.5", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Martin Heinrich", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Hispanic voters."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:OR", "abbr": "OR", "state": "Oregon", "chamber": "senate", "title": "Oregon Senate", "cook": "Solid D", "pvi": "D+6", "last": "2020: Merkley 56.9-40.5", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Jeff Merkley", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Blue state."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:RI", "abbr": "RI", "state": "Rhode Island", "chamber": "senate", "title": "Rhode Island Senate", "cook": "Solid D", "pvi": "D+8", "last": "2020: Reed 66.0-33.0", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Jack Reed", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue seat.", "weigh": ["Very blue."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:VA", "abbr": "VA", "state": "Virginia", "chamber": "senate", "title": "Virginia Senate", "cook": "Solid D", "pvi": "D+1", "last": "2020: Warner 56.0-44.0", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Mark Warner", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue-leaning.", "weigh": ["Northern Virginia suburbs."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:GA", "abbr": "GA", "state": "Georgia", "chamber": "senate", "title": "Georgia Senate", "cook": "Likely D", "pvi": "EVEN", "last": "2020: Ossoff 50.6-49.4", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Jon Ossoff", "role": "Incumbent"}, {"party": "R", "name": "Mike Collins", "role": ""}], "note": "Tight rematch.", "weigh": ["Turnout, suburban Atlanta."], "polls": [{"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "508 (LV)", "moe": "± 5.2%", "d": 55.0, "r": 40.0, "margin": 15.0, "tag": "Other"}, {"pollster": "Quantus Insights", "dates": "October 15–17, 2026", "sample": "755 (LV)", "moe": "± 3.8%", "d": 52.0, "r": 45.0, "margin": 7.0, "tag": "Other"}, {"pollster": "University of Georgia School of Public and International Affairs", "dates": "October 7–15, 2026", "sample": "1,000 (LV)", "moe": "± 3.1%", "d": 48.0, "r": 40.0, "margin": 8.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "October 7–9, 2026", "sample": "1,101 (LV)", "moe": "± 2.9%", "d": 51.0, "r": 43.0, "margin": 8.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "October 6–20, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 54.0, "r": 46.0, "margin": 8.0, "tag": "Higher-quality"}, {"pollster": "InsiderAdvantage", "dates": "September 22–23, 2026", "sample": "1,200 (LV)", "moe": "± 4.0%", "d": 50.0, "r": 42.0, "margin": 8.0, "tag": "Other"}, {"pollster": "Big Data Poll", "dates": "September 21–23, 2026", "sample": "721 (RV)", "moe": "± 4.0%", "d": 51.0, "r": 40.0, "margin": 11.0, "tag": "Other"}], "avg": 9.3, "n": 7, "spread": null}, {"id": "sen:NC", "abbr": "NC", "state": "North Carolina", "chamber": "senate", "title": "North Carolina Senate", "cook": "Likely D", "pvi": "R+1", "last": "2020: Tillis 48.7-46.9", "open": true, "holder": "R", "cands": [{"party": "D", "name": "Roy Cooper", "role": ""}, {"party": "R", "name": "Michael Whatley", "role": ""}], "note": "Open seat; Cooper strong recruit.", "weigh": ["Cooper brand."], "polls": [{"pollster": "Quantus Insights", "dates": "October 24–25, 2026", "sample": "722 (LV)", "moe": "± 4.0%", "d": 51.0, "r": 43.0, "margin": 8.0, "tag": "Other"}, {"pollster": "Harper Polling", "dates": "October 18–20, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 49.0, "r": 39.0, "margin": 10.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "October 8–20, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 57.0, "r": 43.0, "margin": 14.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "October 8–10, 2026", "sample": "1,091 (LV)", "moe": "± 2.9%", "d": 49.0, "r": 41.0, "margin": 8.0, "tag": "Other"}, {"pollster": "Elon University / YouGov", "dates": "September 29 – October 8, 2026", "sample": "561 (LV)", "moe": "± 4.9%", "d": 52.0, "r": 39.0, "margin": 13.0, "tag": "Higher-quality"}, {"pollster": "SurveyUSA", "dates": "October 7–11, 2026", "sample": "643 (LV)", "moe": "± 5.0%", "d": 54.0, "r": 40.0, "margin": 14.0, "tag": "Higher-quality"}, {"pollster": "East Carolina University", "dates": "September 30 – October 3, 2026", "sample": "810 (LV)", "moe": "± 4.0%", "d": 50.0, "r": 43.0, "margin": 7.0, "tag": "Higher-quality"}], "avg": 10.6, "n": 7, "spread": "Cook Likely D; Cooper strong recruit"}, {"id": "sen:MN", "abbr": "MN", "state": "Minnesota", "chamber": "senate", "title": "Minnesota Senate", "cook": "Lean D", "pvi": "D+1", "last": "2020: Smith 48.7-43.5", "open": true, "holder": "D", "cands": [{"party": "D", "name": "Peggy Flanagan", "role": ""}, {"party": "R", "name": "Michele Tafoya", "role": ""}], "note": "Open seat; leans blue.", "weigh": ["Suburbs."], "polls": [{"pollster": "KSTP / SurveyUSA", "dates": "October 24–28, 2026", "sample": "714 (LV)", "moe": "± 4.2%", "d": 48.0, "r": 41.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "Victory Insights", "dates": "October 21–22, 2026", "sample": "1,194 (LV)", "moe": "—", "d": 48.0, "r": 44.0, "margin": 4.0, "tag": "Other"}, {"pollster": "Rasmussen Reports", "dates": "October 20–21, 2026", "sample": "1,182 (LV)", "moe": "± 3.0%", "d": 48.0, "r": 45.0, "margin": 3.0, "tag": "Other"}, {"pollster": "New York Times / Siena University", "dates": "October 19–26, 2026", "sample": "752 (LV)", "moe": "± 4.1%", "d": 54.0, "r": 40.0, "margin": 14.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "October 13–15, 2026", "sample": "1,079 (LV)", "moe": "± 2.9%", "d": 48.0, "r": 45.0, "margin": 3.0, "tag": "Other"}, {"pollster": "KSTP / SurveyUSA", "dates": "October 8–12, 2026", "sample": "718 (LV)", "moe": "± 4.2%", "d": 45.0, "r": 42.0, "margin": 3.0, "tag": "Higher-quality"}, {"pollster": "Mason-Dixon Polling & Strategy", "dates": "October 5–7, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 47.0, "r": 43.0, "margin": 4.0, "tag": "Higher-quality"}], "avg": 5.4, "n": 7, "spread": null}, {"id": "sen:NH", "abbr": "NH", "state": "New Hampshire", "chamber": "senate", "title": "New Hampshire Senate", "cook": "Lean D", "pvi": "D+1", "last": "2020: Shaheen 56.6-40.9", "open": true, "holder": "D", "cands": [{"party": "D", "name": "Chris Pappas", "role": ""}, {"party": "R", "name": "John E. Sununu", "role": ""}], "note": "Open seat; competitive.", "weigh": ["Independent voters."], "polls": [{"pollster": "Rasmussen Reports", "dates": "October 20–23, 2026", "sample": "970 (LV)", "moe": "± 3.0%", "d": 50.0, "r": 44.0, "margin": 6.0, "tag": "Other"}, {"pollster": "Saint Anselm College", "dates": "October 19–20, 2026", "sample": "1,672 (LV)", "moe": "± 2.4%", "d": 50.0, "r": 43.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "National Public Affairs", "dates": "October 8–12, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 50.0, "r": 45.0, "margin": 5.0, "tag": "Other"}, {"pollster": "YouGov", "dates": "September 28 – October 5, 2026", "sample": "1,520 (LV)", "moe": "± 3.9%", "d": 51.0, "r": 43.0, "margin": 8.0, "tag": "Higher-quality"}, {"pollster": "Rasmussen Reports", "dates": "October 2–4, 2026", "sample": "979 (LV)", "moe": "± 3.0%", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Saint Anselm College", "dates": "September 28–29, 2026", "sample": "1,042 (LV)", "moe": "± 3.0%", "d": 51.0, "r": 44.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "September 26–27, 2026", "sample": "1,082 (LV)", "moe": "± 2.9%", "d": 47.0, "r": 41.0, "margin": 6.0, "tag": "Other"}], "avg": 6.3, "n": 7, "spread": null}, {"id": "sen:AK", "abbr": "AK", "state": "Alaska", "chamber": "senate", "title": "Alaska Senate", "cook": "Toss Up", "pvi": "R+3", "last": "2020: Sullivan 53.0-40.4", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Mary Peltola", "role": ""}, {"party": "R", "name": "Dan S. Sullivan", "role": "Incumbent"}], "note": "Ranked choice in play.", "weigh": ["Alaska Natives, RCV."], "polls": [{"pollster": "Alaska Survey Research", "dates": "October 26–29, 2026", "sample": "1,326 (LV)", "moe": "± 3.0%", "d": 48.0, "r": 46.0, "margin": 2.0, "tag": "Higher-quality"}, {"pollster": "Public Policy Polling", "dates": "October 14–15, 2026", "sample": "578 (RV)", "moe": "–", "d": 48.0, "r": 47.0, "margin": 1.0, "tag": "Other"}, {"pollster": "Rasmussen Reports", "dates": "October 12–15, 2026", "sample": "775 (LV)", "moe": "± 3.0%", "d": 44.0, "r": 42.0, "margin": 2.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 9–10, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 48.0, "r": 43.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Data for Progress", "dates": "October 8–16, 2026", "sample": "694 (LV)", "moe": "± 4.0%", "d": 47.0, "r": 44.0, "margin": 3.0, "tag": "Other"}, {"pollster": "Alaska Survey Research", "dates": "October 1–3, 2026", "sample": "1,512 (LV)", "moe": "± 3.0%", "d": 47.0, "r": 45.0, "margin": 2.0, "tag": "Higher-quality"}, {"pollster": "New York Times / Siena University", "dates": "September 24 – October 1, 2026", "sample": "504 (LV)", "moe": "± 5.1%", "d": 50.0, "r": 43.0, "margin": 7.0, "tag": "Higher-quality"}], "avg": 3.1, "n": 7, "spread": "Cook Toss Up; some models lean R slightly"}, {"id": "sen:IA", "abbr": "IA", "state": "Iowa", "chamber": "senate", "title": "Iowa Senate", "cook": "Toss Up", "pvi": "R+6", "last": "2020: Ernst 51.8-45.2", "open": true, "holder": "R", "cands": [{"party": "D", "name": "Josh Turek", "role": ""}, {"party": "R", "name": "Ashley Hinson", "role": ""}], "note": "Open seat.", "weigh": ["Rural turnout."], "polls": [{"pollster": "co/efficient", "dates": "October 28, 2026", "sample": "1,020 (LV)", "moe": "± 3.1%", "d": 46.0, "r": 48.0, "margin": -2.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 21–22, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 45.0, "r": 47.0, "margin": -2.0, "tag": "Other"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "403 (LV)", "moe": "± 6.5%", "d": 45.0, "r": 43.0, "margin": 2.0, "tag": "Other"}, {"pollster": "co/efficient", "dates": "October 15–19, 2026", "sample": "863 (LV)", "moe": "± 3.3%", "d": 45.0, "r": 48.0, "margin": -3.0, "tag": "Other"}, {"pollster": "Trafalgar Group", "dates": "October 13–15, 2026", "sample": "1,094 (LV)", "moe": "± 2.9%", "d": 44.0, "r": 46.0, "margin": -2.0, "tag": "Other"}, {"pollster": "GS Strategy Group/ New River Strategies", "dates": "October 9–13, 2026", "sample": "602 (LV)", "moe": "—", "d": 46.0, "r": 44.0, "margin": 2.0, "tag": "Other"}, {"pollster": "NPA Polling", "dates": "October 8–12, 2026", "sample": "678 (LV)", "moe": "± 3.8%", "d": 44.0, "r": 47.0, "margin": -3.0, "tag": "Higher-quality"}], "avg": -1.1, "n": 7, "spread": null}, {"id": "sen:KS", "abbr": "KS", "state": "Kansas", "chamber": "senate", "title": "Kansas Senate", "cook": "Toss Up", "pvi": "R+11", "last": "2020: Marshall 53.2-44.2", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Adam Hamilton", "role": ""}, {"party": "R", "name": "Roger Marshall", "role": "Incumbent"}], "note": "Competitive despite red tilt.", "weigh": ["Abortion, Johnson County."], "polls": [{"pollster": "The Washington Post / SSPG", "dates": "October 22–26, 2026", "sample": "801 (LV)", "moe": "± 3.9%", "d": 52.0, "r": 43.0, "margin": 9.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–26, 2026", "sample": "838 (LV)", "moe": "± 4.5%", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "1,301 (LV)", "moe": "± 3.2%", "d": 45.0, "r": 46.0, "margin": -1.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 13–14, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 47.0, "r": 48.0, "margin": -1.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 9–10, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 48.0, "r": 47.0, "margin": 1.0, "tag": "Other"}, {"pollster": "GBAO", "dates": "September 30 – October 4, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 46.0, "r": 41.0, "margin": 5.0, "tag": "Other"}, {"pollster": "YouGov", "dates": "September 24 – October 4, 2026", "sample": "2,255 (LV)", "moe": "± 3.2%", "d": 48.0, "r": 45.0, "margin": 3.0, "tag": "Higher-quality"}], "avg": 2.9, "n": 7, "spread": "Cook Toss Up; abortion issue in play"}, {"id": "sen:ME", "abbr": "ME", "state": "Maine", "chamber": "senate", "title": "Maine Senate", "cook": "Toss Up", "pvi": "D+2", "last": "2020: Collins 50.98-42.37", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Susan Collins", "role": "Incumbent"}, {"party": "D", "name": "Troy Jackson", "role": ""}], "note": "Collins seeking reelection.", "weigh": ["Split-ticket voters."], "polls": [{"pollster": "Marist University", "dates": "October 22–25, 2026", "sample": "— (LV)", "moe": "± 6.6%", "d": 49.0, "r": 47.0, "margin": 2.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "October 21–23, 2026", "sample": "1,077 (LV)", "moe": "± 2.9%", "d": 47.0, "r": 47.0, "margin": 0.0, "tag": "Other"}, {"pollster": "SSRS", "dates": "October 20–26, 2026", "sample": "783 (LV)", "moe": "± 4.5%", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "413 (LV)", "moe": "± 6.3%", "d": 51.0, "r": 44.0, "margin": 7.0, "tag": "Other"}, {"pollster": "Beacon Research/ Shaw & Co. Research", "dates": "October 16–20, 2026", "sample": "1,514 (LV)", "moe": "± 2.5%", "d": 49.0, "r": 49.0, "margin": 0.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 13–14, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 49.0, "r": 47.0, "margin": 2.0, "tag": "Other"}, {"pollster": "Suffolk University", "dates": "October 8–11, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 49.0, "r": 47.0, "margin": 2.0, "tag": "Higher-quality"}], "avg": 2.4, "n": 7, "spread": "Cook Toss Up; Collins strong in Maine"}, {"id": "sen:MI", "abbr": "MI", "state": "Michigan", "chamber": "senate", "title": "Michigan Senate", "cook": "Toss Up", "pvi": "EVEN", "last": "2020: Peters 49.9-48.2", "open": true, "holder": "D", "cands": [{"party": "D", "name": "Abdul El-Sayed", "role": ""}, {"party": "R", "name": "Mike Rogers", "role": ""}], "note": "Open seat.", "weigh": ["Auto industry."], "polls": [{"pollster": "Rasmussen Reports", "dates": "October 28–29, 2026", "sample": "745 (LV)", "moe": "± 3.0%", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Mitchell Research & Communications", "dates": "October 26–27, 2026", "sample": "636 (LV)", "moe": "± 3.9%", "d": 51.0, "r": 44.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "Upswing Research", "dates": "October 24–28, 2026", "sample": "505 (LV)", "moe": "± 4.4%", "d": 50.0, "r": 45.0, "margin": 5.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 21–22, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 47.0, "r": 46.0, "margin": 1.0, "tag": "Other"}, {"pollster": "SSRS", "dates": "October 20–27, 2026", "sample": "768 (LV)", "moe": "± 4.7%", "d": 49.0, "r": 42.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "2,696 (LV)", "moe": "± 3.5%", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Glengariff Group", "dates": "October 19–22, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Higher-quality"}], "avg": 5.1, "n": 7, "spread": null}, {"id": "sen:OH", "abbr": "OH", "state": "Ohio", "chamber": "senate", "title": "Ohio Senate", "cook": "Toss Up", "pvi": "R+6", "last": "2022: Vance 53.0-46.9", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Sherrod Brown", "role": ""}, {"party": "R", "name": "Jon Husted", "role": "Incumbent"}], "note": "Special election.", "weigh": ["Working-class voters."], "polls": [{"pollster": "Suffolk University", "dates": "October 21–26, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 47.0, "r": 44.0, "margin": 3.0, "tag": "Higher-quality"}, {"pollster": "InsiderAdvantage", "dates": "October 21–22, 2026", "sample": "1,200 (LV)", "moe": "± 2.8%", "d": 47.0, "r": 44.0, "margin": 3.0, "tag": "Other"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "2,998 (LV)", "moe": "± 4.6%", "d": 47.0, "r": 44.0, "margin": 3.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "September 26 – October 18, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 50.0, "r": 50.0, "margin": 0.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "508 (LV)", "moe": "± 5.2%", "d": 47.0, "r": 47.0, "margin": 0.0, "tag": "Other"}, {"pollster": "Beacon Research/ Shaw & Co. Research", "dates": "October 15–19, 2026", "sample": "2,005 (RV)", "moe": "± 2.0%", "d": 53.0, "r": 46.0, "margin": 7.0, "tag": "Other"}, {"pollster": "Marist University", "dates": "October 15–18, 2026", "sample": "— (LV)", "moe": "± 4.5%", "d": 48.0, "r": 44.0, "margin": 4.0, "tag": "Higher-quality"}], "avg": 2.9, "n": 7, "spread": "Cook Toss Up; highly competitive special"}, {"id": "sen:TX", "abbr": "TX", "state": "Texas", "chamber": "senate", "title": "Texas Senate", "cook": "Toss Up", "pvi": "R+5", "last": "2020: Cornyn 53.5-43.9", "open": true, "holder": "R", "cands": [{"party": "D", "name": "James Talarico", "role": ""}, {"party": "R", "name": "Ken Paxton", "role": ""}], "note": "Open seat; expensive.", "weigh": ["Hispanic voters."], "polls": [{"pollster": "Quantus Insights", "dates": "October 26–28, 2026", "sample": "1,221 (LV)", "moe": "± 3.2%", "d": 48.0, "r": 49.0, "margin": -1.0, "tag": "Other"}, {"pollster": "A2 Insights", "dates": "October 23–27, 2026", "sample": "631 (LV)", "moe": "± 4.9%", "d": 50.0, "r": 47.0, "margin": 3.0, "tag": "Other"}, {"pollster": "Data for Progress", "dates": "October 23–26, 2026", "sample": "712 (LV)", "moe": "± 4.0%", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "October 22–28, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 52.0, "r": 48.0, "margin": 4.0, "tag": "Higher-quality"}, {"pollster": "YouGov Blue", "dates": "October 21–26, 2026", "sample": "1,000 (RV)", "moe": "± 4.6%", "d": 51.0, "r": 43.0, "margin": 8.0, "tag": "Other"}, {"pollster": "Texas Southern University", "dates": "October 21–25, 2026", "sample": "2,000 (LV)", "moe": "± 2.2%", "d": 49.0, "r": 47.0, "margin": 2.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–27, 2026", "sample": "923 (LV)", "moe": "± 4.2%", "d": 49.0, "r": 43.0, "margin": 6.0, "tag": "Higher-quality"}], "avg": 3.7, "n": 7, "spread": "Cook Toss Up; expensive battleground"}, {"id": "sen:SC", "abbr": "SC", "state": "South Carolina", "chamber": "senate", "title": "South Carolina Senate", "cook": "Lean R", "pvi": "R+8", "last": "2020: Graham 54.4-44.2", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Lindsey Graham", "role": "Incumbent"}, {"party": "D", "name": "Annie Andrews", "role": ""}], "note": "Leans Republican.", "weigh": ["Suburbs."], "polls": [{"pollster": "Patinkin Research Strategies", "dates": "October 27–29, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 48.0, "r": 43.0, "margin": 5.0, "tag": "Other"}, {"pollster": "New York Times / Siena University", "dates": "October 19–26, 2026", "sample": "707 (LV)", "moe": "± 4.3%", "d": 48.0, "r": 48.0, "margin": 0.0, "tag": "Higher-quality"}, {"pollster": "East Carolina University", "dates": "October 19–24, 2026", "sample": "955 (LV)", "moe": "± 3.7%", "d": 47.0, "r": 51.0, "margin": -4.0, "tag": "Higher-quality"}, {"pollster": "Targoz Media Research", "dates": "October 16–25, 2026", "sample": "895 (LV)", "moe": "± 2.8%", "d": 46.0, "r": 47.0, "margin": -1.0, "tag": "Higher-quality"}, {"pollster": "Trafalgar Group", "dates": "October 16–18, 2026", "sample": "1,095 (LV)", "moe": "± 2.9%", "d": 46.0, "r": 49.0, "margin": -3.0, "tag": "Other"}, {"pollster": "Impact Research", "dates": "October 15–21, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 45.0, "r": 44.0, "margin": 1.0, "tag": "Other"}, {"pollster": "The Citadel", "dates": "October 14–25, 2026", "sample": "890 (LV)", "moe": "± 3.4%", "d": 39.0, "r": 43.0, "margin": -4.0, "tag": "Higher-quality"}], "avg": -0.9, "n": 7, "spread": null}, {"id": "sen:MS", "abbr": "MS", "state": "Mississippi", "chamber": "senate", "title": "Mississippi Senate", "cook": "Likely R", "pvi": "R+11", "last": "2020: Wicker 57.6-41.0", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Roger Wicker", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Likely Republican hold.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:NE", "abbr": "NE", "state": "Nebraska", "chamber": "senate", "title": "Nebraska Senate", "cook": "Likely R", "pvi": "R+13", "last": "2020: Sasse 62.7-32.8", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Pete Ricketts", "role": "Incumbent"}, {"party": "I", "name": "Dan Osborn", "role": ""}], "note": "Osborn competitive as independent.", "weigh": ["Working class appeal."], "polls": [{"pollster": "GBAO", "dates": "July 2026", "sample": "—", "moe": "—", "d": 47.0, "r": 47.0, "margin": 0.0, "tag": "Other"}, {"pollster": "GBAO", "dates": "April 2026", "sample": "—", "moe": "—", "d": 46.0, "r": 45.0, "margin": 1.0, "tag": "Other"}, {"pollster": "GBAO", "dates": "October 18–22, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 46.0, "r": 45.0, "margin": 1.0, "tag": "Other"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "407 (LV)", "moe": "± 6.3%", "d": 46.0, "r": 47.0, "margin": -1.0, "tag": "Other"}, {"pollster": "Concord Public Opinion Partners", "dates": "October 15–18, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 48.0, "r": 41.0, "margin": 7.0, "tag": "Other"}, {"pollster": "National Public Affairs", "dates": "October 15–18, 2026", "sample": "598 (LV)", "moe": "± 4.0%", "d": 43.0, "r": 46.0, "margin": -3.0, "tag": "Other"}, {"pollster": "Impact Research", "dates": "October 14–20, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 47.0, "r": 49.0, "margin": -2.0, "tag": "Other"}], "avg": 0.4, "n": 7, "spread": null}, {"id": "sen:AL", "abbr": "AL", "state": "Alabama", "chamber": "senate", "title": "Alabama Senate", "cook": "Solid R", "pvi": "R+15", "last": "2020: Tuberville 60.1-39.7", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:AR", "abbr": "AR", "state": "Arkansas", "chamber": "senate", "title": "Arkansas Senate", "cook": "Solid R", "pvi": "R+16", "last": "2020: Cotton 66.2-33.5", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Tom Cotton", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:FL", "abbr": "FL", "state": "Florida", "chamber": "senate", "title": "Florida Senate", "cook": "Solid R", "pvi": "R+3", "last": "2022: Rubio 57.7-41.3", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Ashley Moody", "role": "Incumbent"}, {"party": "D", "name": "Angie Nixon", "role": ""}], "note": "Special election.", "weigh": ["Hispanic voters."], "polls": [{"pollster": "St. Pete Polls", "dates": "October 25–27, 2026", "sample": "916 (LV)", "moe": "± 3.2%", "d": 45.0, "r": 49.0, "margin": -4.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "4,832 (LV)", "moe": "± 2.5%", "d": 43.0, "r": 50.0, "margin": -7.0, "tag": "Other"}, {"pollster": "New York Times / Siena University", "dates": "October 19–25, 2026", "sample": "813 (LV)", "moe": "± 3.9%", "d": 44.0, "r": 50.0, "margin": -6.0, "tag": "Higher-quality"}, {"pollster": "Workbench Strategy", "dates": "October 18–22, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 47.0, "r": 49.0, "margin": -2.0, "tag": "Other"}, {"pollster": "co/efficient", "dates": "October 18–20, 2026", "sample": "1,014 (LV)", "moe": "± 3.1%", "d": 40.0, "r": 48.0, "margin": -8.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "October 17–27, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 47.0, "r": 53.0, "margin": -6.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "515 (LV)", "moe": "± 5.0%", "d": 43.0, "r": 51.0, "margin": -8.0, "tag": "Other"}], "avg": -5.9, "n": 7, "spread": null}, {"id": "sen:ID", "abbr": "ID", "state": "Idaho", "chamber": "senate", "title": "Idaho Senate", "cook": "Solid R", "pvi": "R+22", "last": "2020: Crapo 71.1-28.3", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Mike Crapo", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:KY", "abbr": "KY", "state": "Kentucky", "chamber": "senate", "title": "Kentucky Senate", "cook": "Solid R", "pvi": "R+16", "last": "2020: McConnell 57.8-42.0", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:LA", "abbr": "LA", "state": "Louisiana", "chamber": "senate", "title": "Louisiana Senate", "cook": "Solid R", "pvi": "R+12", "last": "2020: Cassidy 59.3-39.7", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:MT", "abbr": "MT", "state": "Montana", "chamber": "senate", "title": "Montana Senate", "cook": "Solid R", "pvi": "R+11", "last": "2020: Daines 55.0-44.0", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:OK", "abbr": "OK", "state": "Oklahoma", "chamber": "senate", "title": "Oklahoma Senate", "cook": "Solid R", "pvi": "R+20", "last": "2020: Inhofe 62.9-32.7", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:SD", "abbr": "SD", "state": "South Dakota", "chamber": "senate", "title": "South Dakota Senate", "cook": "Solid R", "pvi": "R+16", "last": "2020: Thune 70.6-29.4", "open": false, "holder": "R", "cands": [{"party": "R", "name": "John Thune", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:TN", "abbr": "TN", "state": "Tennessee", "chamber": "senate", "title": "Tennessee Senate", "cook": "Solid R", "pvi": "R+14", "last": "2020: Hagerty 62.2-35.2", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Bill Hagerty", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:WV", "abbr": "WV", "state": "West Virginia", "chamber": "senate", "title": "West Virginia Senate", "cook": "Solid R", "pvi": "R+22", "last": "2020: Capito 70.3-27.0", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Shelley Moore Capito", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "sen:WY", "abbr": "WY", "state": "Wyoming", "chamber": "senate", "title": "Wyoming Senate", "cook": "Solid R", "pvi": "R+25", "last": "2020: Lummis 72.9-26.6", "open": true, "holder": "R", "cands": [{"party": "R", "name": "TBA", "role": ""}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:CA", "abbr": "CA", "state": "California", "chamber": "gov", "title": "California Governor", "cook": "Solid D", "pvi": "D+13", "last": "2022: Newsom 59.2-40.8", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Gavin Newsom", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Safe blue.", "weigh": ["Deep blue."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:CO", "abbr": "CO", "state": "Colorado", "chamber": "gov", "title": "Colorado Governor", "cook": "Solid D", "pvi": "D+3", "last": "2022: Polis 58.5-39.0", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Jared Polis", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue-leaning.", "weigh": ["Suburbs."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:CT", "abbr": "CT", "state": "Connecticut", "chamber": "gov", "title": "Connecticut Governor", "cook": "Solid D", "pvi": "D+7", "last": "2022: Lamont 56.0-43.9", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Ned Lamont", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue state.", "weigh": ["Suburbs."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:HI", "abbr": "HI", "state": "Hawaii", "chamber": "gov", "title": "Hawaii Governor", "cook": "Solid D", "pvi": "D+14", "last": "2022: Green 62.4-37.0", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Josh Green", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Deep blue.", "weigh": ["Deep blue."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:IL", "abbr": "IL", "state": "Illinois", "chamber": "gov", "title": "Illinois Governor", "cook": "Solid D", "pvi": "D+7", "last": "2022: Pritzker 54.9-41.7", "open": false, "holder": "D", "cands": [{"party": "D", "name": "JB Pritzker", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue state.", "weigh": ["Cook County."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:MA", "abbr": "MA", "state": "Massachusetts", "chamber": "gov", "title": "Massachusetts Governor", "cook": "Solid D", "pvi": "D+15", "last": "2022: Healey 63.7-35.0", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Maura Healey", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Deep blue.", "weigh": ["Deep blue."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:MD", "abbr": "MD", "state": "Maryland", "chamber": "gov", "title": "Maryland Governor", "cook": "Solid D", "pvi": "D+14", "last": "2022: Moore 64.5-32.1", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Wes Moore", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Deep blue.", "weigh": ["DC suburbs."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:ME", "abbr": "ME", "state": "Maine", "chamber": "gov", "title": "Maine Governor", "cook": "Solid D", "pvi": "D+2", "last": "2022: Mills 55.7-42.3", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Janet Mills", "role": "Incumbent"}, {"party": "R", "name": "Bobby Charles", "role": ""}], "note": "Blue-leaning.", "weigh": ["Split-ticket."], "polls": [{"pollster": "Marist University", "dates": "October 22–25, 2026", "sample": "— (LV)", "moe": "± 6.6%", "d": 44.0, "r": 44.0, "margin": 0.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–26, 2026", "sample": "783 (LV)", "moe": "± 4.5%", "d": 53.0, "r": 39.0, "margin": 14.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "413 (LV)", "moe": "± 6.3%", "d": 51.0, "r": 38.0, "margin": 13.0, "tag": "Other"}, {"pollster": "Beacon Research/Shaw & Co. Research", "dates": "October 16–20, 2026", "sample": "1,514 (LV)", "moe": "± 2.5%", "d": 49.0, "r": 39.0, "margin": 10.0, "tag": "Other"}, {"pollster": "Suffolk University", "dates": "October 8–11, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 49.0, "r": 38.0, "margin": 11.0, "tag": "Higher-quality"}, {"pollster": "The Washington Post / SSPG", "dates": "September 30 – October 5, 2026", "sample": "800 (LV)", "moe": "± 3.6%", "d": 49.0, "r": 36.0, "margin": 13.0, "tag": "Higher-quality"}, {"pollster": "Marist University", "dates": "October 1–4, 2026", "sample": "1,505 (RV)", "moe": "± 3.8%", "d": 52.0, "r": 40.0, "margin": 12.0, "tag": "Higher-quality"}], "avg": 10.4, "n": 7, "spread": null}, {"id": "gov:MN", "abbr": "MN", "state": "Minnesota", "chamber": "gov", "title": "Minnesota Governor", "cook": "Solid D", "pvi": "D+1", "last": "2022: Walz 52.3-44.6", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Tim Walz", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue-leaning.", "weigh": ["Suburbs."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:NM", "abbr": "NM", "state": "New Mexico", "chamber": "gov", "title": "New Mexico Governor", "cook": "Solid D", "pvi": "D+3", "last": "2022: Lujan Grisham 52.0-47.7", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Michelle Lujan Grisham", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue-leaning.", "weigh": ["Hispanic voters."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:NY", "abbr": "NY", "state": "New York", "chamber": "gov", "title": "New York Governor", "cook": "Solid D", "pvi": "D+10", "last": "2022: Hochul 53.2-46.7", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Kathy Hochul", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Blue state.", "weigh": ["Upstate/downstate."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:PA", "abbr": "PA", "state": "Pennsylvania", "chamber": "gov", "title": "Pennsylvania Governor", "cook": "Solid D", "pvi": "EVEN", "last": "2022: Shapiro 56.5-42.8", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Josh Shapiro", "role": "Incumbent"}, {"party": "R", "name": "Stacy Garrity", "role": ""}], "note": "Strong incumbent.", "weigh": ["Suburbs."], "polls": [{"pollster": "Franklin & Marshall College", "dates": "October 7–18, 2026", "sample": "808 (RV)", "moe": "± 4.1%", "d": 52.0, "r": 30.0, "margin": 22.0, "tag": "Higher-quality"}, {"pollster": "PennLive", "dates": "October 5–11, 2026", "sample": "628 (RV)", "moe": "± 4.5%", "d": 58.0, "r": 28.0, "margin": 30.0, "tag": "Higher-quality"}, {"pollster": "ActiVote", "dates": "October 1–21, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 61.5, "r": 38.5, "margin": 23.0, "tag": "Higher-quality"}, {"pollster": "Z to A Research", "dates": "September 28 – October 1, 2026", "sample": "630 (LV)", "moe": "–", "d": 53.0, "r": 34.0, "margin": 19.0, "tag": "Other"}, {"pollster": "Susquehanna Polling & Research", "dates": "September 22–30, 2026", "sample": "700 (LV)", "moe": "± 3.7%", "d": 52.0, "r": 31.0, "margin": 21.0, "tag": "Other"}, {"pollster": "PennLive", "dates": "September 16–22, 2026", "sample": "624 (RV)", "moe": "± 4.3%", "d": 55.0, "r": 28.0, "margin": 27.0, "tag": "Higher-quality"}, {"pollster": "The New York Times / The Philadelphia Inquirer / Siena University", "dates": "September 15–22, 2026", "sample": "615 (LV)", "moe": "± 4.4%", "d": 58.0, "r": 38.0, "margin": 20.0, "tag": "Higher-quality"}], "avg": 23.1, "n": 7, "spread": null}, {"id": "gov:RI", "abbr": "RI", "state": "Rhode Island", "chamber": "gov", "title": "Rhode Island Governor", "cook": "Solid D", "pvi": "D+8", "last": "2022: McKee 57.9-38.1", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Dan McKee", "role": "Incumbent"}, {"party": "R", "name": "TBA", "role": ""}], "note": "Deep blue.", "weigh": ["Deep blue."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:AZ", "abbr": "AZ", "state": "Arizona", "chamber": "gov", "title": "Arizona Governor", "cook": "Likely D", "pvi": "R+2", "last": "2022: Hobbs 50.3-49.6", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Katie Hobbs", "role": "Incumbent"}, {"party": "R", "name": "Andy Biggs", "role": ""}], "note": "Tight rematch.", "weigh": ["Suburbs."], "polls": [{"pollster": "Noble Predictive Insights", "dates": "October 26–28, 2026", "sample": "511 (LV)", "moe": "± 4.3%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Higher-quality"}, {"pollster": "HighGround, Inc.", "dates": "October 21–25, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 52.0, "r": 39.0, "margin": 13.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "2,686 (LV)", "moe": "± 3.7%", "d": 47.0, "r": 42.0, "margin": 5.0, "tag": "Other"}, {"pollster": "GrayHouse", "dates": "October 18–20, 2026", "sample": "550 (LV)", "moe": "± 4.2%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Other"}, {"pollster": "HighGround, Inc.", "dates": "October 6–8, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 51.0, "r": 34.0, "margin": 17.0, "tag": "Higher-quality"}, {"pollster": "GrayHouse", "dates": "October 6–8, 2026", "sample": "550 (LV)", "moe": "± 4.2%", "d": 50.0, "r": 44.0, "margin": 6.0, "tag": "Other"}, {"pollster": "GQR", "dates": "September 30 – October 5, 2026", "sample": "600 (LV)", "moe": "—", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Other"}], "avg": 8.1, "n": 7, "spread": null}, {"id": "gov:AK", "abbr": "AK", "state": "Alaska", "chamber": "gov", "title": "Alaska Governor", "cook": "Lean D", "pvi": "R+3", "last": "2022: Dunleavy 50.3-46.0", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Jonathan Kreiss-Tomkins", "role": ""}, {"party": "R", "name": "Bernadette Wilson", "role": ""}], "note": "Competitive.", "weigh": ["RCV."], "polls": [{"pollster": "Alaska Survey Research", "dates": "October 15–18, 2026", "sample": "1,568 (LV)", "moe": "± 3.0%", "d": 50.0, "r": 30.0, "margin": 20.0, "tag": "Higher-quality"}, {"pollster": "Data for Progress", "dates": "October 8–16, 2026", "sample": "694 (LV)", "moe": "± 4.0%", "d": 46.0, "r": 28.0, "margin": 18.0, "tag": "Other"}, {"pollster": "Alaska Survey Research", "dates": "October 1–3, 2026", "sample": "1,512 (LV)", "moe": "± 3.0%", "d": 48.0, "r": 27.0, "margin": 21.0, "tag": "Higher-quality"}, {"pollster": "New York Times / Siena University", "dates": "September 24 – October 1, 2026", "sample": "504 (LV)", "moe": "± 5.1%", "d": 40.0, "r": 20.0, "margin": 20.0, "tag": "Higher-quality"}, {"pollster": "Cygnal", "dates": "September 24–27, 2026", "sample": "502 (LV)", "moe": "± 4.37%", "d": 44.0, "r": 24.0, "margin": 20.0, "tag": "Other"}, {"pollster": "co/efficient", "dates": "September 14–17, 2026", "sample": "799 (LV)", "moe": "± 3.5%", "d": 43.0, "r": 20.0, "margin": 23.0, "tag": "Other"}, {"pollster": "Fabrizio Ward/ Impact Research", "dates": "September 8–11, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 40.0, "r": 20.0, "margin": 20.0, "tag": "Other"}], "avg": 20.3, "n": 7, "spread": null}, {"id": "gov:IA", "abbr": "IA", "state": "Iowa", "chamber": "gov", "title": "Iowa Governor", "cook": "Lean D", "pvi": "R+6", "last": "2022: Reynolds 58.0-39.5", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Rob Sand", "role": ""}, {"party": "R", "name": "Zach Lahn", "role": ""}], "note": "Competitive despite red tilt.", "weigh": ["Suburbs."], "polls": [{"pollster": "co/efficient", "dates": "October 28, 2026", "sample": "1,020 (LV)", "moe": "± 3.1%", "d": 50.0, "r": 45.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "403 (LV)", "moe": "± 6.5%", "d": 50.0, "r": 46.0, "margin": 4.0, "tag": "Other"}, {"pollster": "co/efficient", "dates": "October 15–19, 2026", "sample": "678 (LV)", "moe": "± 3.3%", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Other"}, {"pollster": "GS Strategy Group/ New River Strategies", "dates": "October 9–13, 2026", "sample": "602 (LV)", "moe": "—", "d": 54.0, "r": 43.0, "margin": 11.0, "tag": "Other"}, {"pollster": "NPA Polling", "dates": "October 8–12, 2026", "sample": "678 (LV)", "moe": "± 3.8%", "d": 50.0, "r": 45.0, "margin": 5.0, "tag": "Higher-quality"}, {"pollster": "Marist University", "dates": "October 8–11, 2026", "sample": "— (LV)", "moe": "± 6.6%", "d": 52.0, "r": 45.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "YouGov", "dates": "October 6–12, 2026", "sample": "2,245 (LV)", "moe": "± 3.1%", "d": 50.0, "r": 44.0, "margin": 6.0, "tag": "Higher-quality"}], "avg": 6.0, "n": 7, "spread": null}, {"id": "gov:MI", "abbr": "MI", "state": "Michigan", "chamber": "gov", "title": "Michigan Governor", "cook": "Lean D", "pvi": "EVEN", "last": "2022: Whitmer 54.5-43.9", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Jocelyn Benson", "role": ""}, {"party": "R", "name": "John James", "role": ""}], "note": "Open seat.", "weigh": ["Detroit suburbs."], "polls": [{"pollster": "Mitchell Research & Communications", "dates": "October 26–27, 2026", "sample": "636 (LV)", "moe": "± 3.9%", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–27, 2026", "sample": "768 (LV)", "moe": "± 4.7%", "d": 53.0, "r": 41.0, "margin": 12.0, "tag": "Higher-quality"}, {"pollster": "Glengariff Group", "dates": "October 19–22, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Higher-quality"}, {"pollster": "Marist University", "dates": "October 15–18, 2026", "sample": "— (LV)", "moe": "± 4.3%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Higher-quality"}, {"pollster": "YouGov", "dates": "September 22 – October 4, 2026", "sample": "3,949 (LV)", "moe": "± 2.5%", "d": 48.0, "r": 45.0, "margin": 3.0, "tag": "Higher-quality"}, {"pollster": "Michigan State University / YouGov", "dates": "October 2–19, 2026", "sample": "836 (LV)", "moe": "± 4.4%", "d": 52.0, "r": 40.0, "margin": 12.0, "tag": "Higher-quality"}, {"pollster": "Mitchell Research & Communications", "dates": "October 1, 2026", "sample": "682 (LV)", "moe": "± 3.8%", "d": 46.0, "r": 39.0, "margin": 7.0, "tag": "Higher-quality"}], "avg": 7.3, "n": 7, "spread": null}, {"id": "gov:OH", "abbr": "OH", "state": "Ohio", "chamber": "gov", "title": "Ohio Governor", "cook": "Lean D", "pvi": "R+6", "last": "2022: DeWine 62.4-37.2", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Amy Acton", "role": ""}, {"party": "R", "name": "Vivek Ramaswamy", "role": ""}], "note": "Open seat.", "weigh": ["Working class."], "polls": [{"pollster": "Suffolk University", "dates": "October 21–26, 2026", "sample": "500 (LV)", "moe": "± 4.4%", "d": 48.0, "r": 44.0, "margin": 4.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "2,998 (LV)", "moe": "± 4.6%", "d": 48.0, "r": 44.0, "margin": 4.0, "tag": "Other"}, {"pollster": "ActiVote", "dates": "September 27 – October 19, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 49.0, "r": 51.0, "margin": -2.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "508 (LV)", "moe": "± 5.2%", "d": 45.0, "r": 47.0, "margin": -2.0, "tag": "Other"}, {"pollster": "Beacon Research/ Shaw & Co. Research", "dates": "October 15–19, 2026", "sample": "2,005 (RV)", "moe": "± 2.0%", "d": 51.0, "r": 47.0, "margin": 4.0, "tag": "Other"}, {"pollster": "Marist University", "dates": "October 15–18, 2026", "sample": "— (LV)", "moe": "± 4.5%", "d": 51.0, "r": 43.0, "margin": 8.0, "tag": "Higher-quality"}, {"pollster": "GS Strategy Group/ New River Strategies", "dates": "October 9–13, 2026", "sample": "959 (LV)", "moe": "—", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Other"}], "avg": 3.0, "n": 7, "spread": null}, {"id": "gov:OR", "abbr": "OR", "state": "Oregon", "chamber": "gov", "title": "Oregon Governor", "cook": "Lean D", "pvi": "D+6", "last": "2022: Kotek 46.9-43.5", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Tina Kotek", "role": "Incumbent"}, {"party": "R", "name": "Christine Drazan", "role": ""}], "note": "Incumbent competitive.", "weigh": ["Portland metro."], "polls": [{"pollster": "GBAO", "dates": "October 1–4, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 46.0, "r": 42.0, "margin": 4.0, "tag": "Other"}, {"pollster": "DHM Research", "dates": "September 24 – October 1, 2026", "sample": "549 (LV)", "moe": "± 4.0%", "d": 46.0, "r": 44.0, "margin": 2.0, "tag": "Higher-quality"}, {"pollster": "DHM Research", "dates": "September 3–9, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 43.0, "r": 45.0, "margin": -2.0, "tag": "Higher-quality"}], "avg": 1.3, "n": 3, "spread": null}, {"id": "gov:WI", "abbr": "WI", "state": "Wisconsin", "chamber": "gov", "title": "Wisconsin Governor", "cook": "Lean D", "pvi": "EVEN", "last": "2022: Evers 51.2-47.8", "open": false, "holder": "D", "cands": [{"party": "D", "name": "David Crowley", "role": ""}, {"party": "R", "name": "Tom Tiffany", "role": ""}], "note": "Open seat.", "weigh": ["Milwaukee suburbs."], "polls": [{"pollster": "Wick", "dates": "October 19–23, 2026", "sample": "1,213 (LV)", "moe": "± 3.0%", "d": 48.0, "r": 45.0, "margin": 3.0, "tag": "Other"}, {"pollster": "Marquette University", "dates": "October 14–22, 2026", "sample": "668 (LV)", "moe": "± 4.7%", "d": 51.0, "r": 44.0, "margin": 7.0, "tag": "Higher-quality"}, {"pollster": "YouGov", "dates": "September 22 – October 9, 2026", "sample": "1,715 (A)", "moe": "—", "d": 46.0, "r": 42.0, "margin": 4.0, "tag": "Other"}, {"pollster": "Z to A Research", "dates": "September 28 – October 1, 2026", "sample": "662 (LV)", "moe": "—", "d": 49.0, "r": 44.0, "margin": 5.0, "tag": "Other"}, {"pollster": "Marquette University", "dates": "September 16–23, 2026", "sample": "692 (LV)", "moe": "± 4.8%", "d": 49.0, "r": 46.0, "margin": 3.0, "tag": "Higher-quality"}], "avg": 4.4, "n": 5, "spread": null}, {"id": "gov:GA", "abbr": "GA", "state": "Georgia", "chamber": "gov", "title": "Georgia Governor", "cook": "Toss Up", "pvi": "EVEN", "last": "2022: Kemp 53.4-45.9", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Keisha Lance Bottoms", "role": ""}, {"party": "R", "name": "Rick Jackson", "role": ""}], "note": "Open seat.", "weigh": ["Suburban Atlanta."], "polls": [{"pollster": "State Navigate", "dates": "October 23–27, 2026", "sample": "679 (LV)", "moe": "± 3.8%", "d": 50.0, "r": 47.0, "margin": 3.0, "tag": "Higher-quality"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "508 (LV)", "moe": "± 5.2%", "d": 49.0, "r": 48.0, "margin": 1.0, "tag": "Other"}, {"pollster": "Quantus Insights", "dates": "October 15–17, 2026", "sample": "755 (LV)", "moe": "± 3.8%", "d": 47.0, "r": 48.0, "margin": -1.0, "tag": "Other"}, {"pollster": "InsiderAdvantage", "dates": "October 12–13, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 47.0, "r": 49.0, "margin": -2.0, "tag": "Other"}, {"pollster": "University of Georgia", "dates": "October 7–15, 2026", "sample": "1,000 (LV)", "moe": "± 3.1%", "d": 45.0, "r": 46.0, "margin": -1.0, "tag": "Higher-quality"}, {"pollster": "ActiVote", "dates": "October 6–20, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 48.5, "r": 51.5, "margin": -3.0, "tag": "Higher-quality"}, {"pollster": "InsiderAdvantage", "dates": "September 22–23, 2026", "sample": "1,200 (LV)", "moe": "± 4.0%", "d": 46.0, "r": 48.0, "margin": -2.0, "tag": "Other"}], "avg": -0.7, "n": 7, "spread": null}, {"id": "gov:KS", "abbr": "KS", "state": "Kansas", "chamber": "gov", "title": "Kansas Governor", "cook": "Toss Up", "pvi": "R+11", "last": "2022: Kelly 49.5-47.3", "open": false, "holder": "D", "cands": [{"party": "D", "name": "Cindy Holscher", "role": ""}, {"party": "R", "name": "Ty Masterson", "role": ""}], "note": "Term limited incumbent.", "weigh": ["Johnson County."], "polls": [{"pollster": "Emerson College", "dates": "October 26–28, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 46.0, "r": 50.0, "margin": -4.0, "tag": "Higher-quality"}, {"pollster": "The Washington Post / SSPG", "dates": "October 22–26, 2026", "sample": "801 (LV)", "moe": "± 3.9%", "d": 51.0, "r": 45.0, "margin": 6.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–26, 2026", "sample": "838 (LV)", "moe": "± 4.5%", "d": 45.0, "r": 50.0, "margin": -5.0, "tag": "Higher-quality"}, {"pollster": "Global Strategy Group", "dates": "October 18–21, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 47.0, "r": 47.0, "margin": 0.0, "tag": "Other"}, {"pollster": "YouGov", "dates": "September 24 – October 4, 2026", "sample": "2,255 (LV)", "moe": "± 3.2%", "d": 44.0, "r": 47.0, "margin": -3.0, "tag": "Higher-quality"}, {"pollster": "New York Times / Siena University", "dates": "September 22–30, 2026", "sample": "605 (LV)", "moe": "± 2.1%", "d": 44.0, "r": 49.0, "margin": -5.0, "tag": "Higher-quality"}, {"pollster": "Emerson College", "dates": "September 15–16, 2026", "sample": "750 (LV)", "moe": "± 3.6%", "d": 44.0, "r": 51.0, "margin": -7.0, "tag": "Higher-quality"}], "avg": -2.6, "n": 7, "spread": null}, {"id": "gov:NV", "abbr": "NV", "state": "Nevada", "chamber": "gov", "title": "Nevada Governor", "cook": "Toss Up", "pvi": "EVEN", "last": "2022: Lombardo 48.8-47.3", "open": false, "holder": "R", "cands": [{"party": "D", "name": "Aaron Ford", "role": ""}, {"party": "R", "name": "Joe Lombardo", "role": "Incumbent"}], "note": "Rematch.", "weigh": ["Latino voters."], "polls": [{"pollster": "Noble Predictive Insights", "dates": "October 26–28, 2026", "sample": "487 (LV)", "moe": "± 4.4%", "d": 47.0, "r": 47.0, "margin": 0.0, "tag": "Higher-quality"}, {"pollster": "Hart Research", "dates": "October 20–25, 2026", "sample": "950 (LV)", "moe": "± 3.5%", "d": 49.0, "r": 45.0, "margin": 4.0, "tag": "Other"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "1,407 (LV)", "moe": "± 3.6%", "d": 46.0, "r": 43.0, "margin": 3.0, "tag": "Other"}, {"pollster": "Global Strategy Group", "dates": "October 8–13, 2026", "sample": "700 (LV)", "moe": "± 3.7%", "d": 47.0, "r": 48.0, "margin": -1.0, "tag": "Other"}, {"pollster": "Concord Public Opinion Partners", "dates": "September 26–30, 2026", "sample": "565 (LV)", "moe": "± 4.1%", "d": 42.0, "r": 43.0, "margin": -1.0, "tag": "Other"}, {"pollster": "Noble Predictive Insights", "dates": "September 22–26, 2026", "sample": "800 (RV)", "moe": "± 3.5%", "d": 37.0, "r": 38.0, "margin": -1.0, "tag": "Higher-quality"}, {"pollster": "Emerson College", "dates": "September 5–8, 2026", "sample": "680 (LV)", "moe": "± 3.7%", "d": 44.0, "r": 42.0, "margin": 2.0, "tag": "Higher-quality"}], "avg": 0.9, "n": 7, "spread": null}, {"id": "gov:FL", "abbr": "FL", "state": "Florida", "chamber": "gov", "title": "Florida Governor", "cook": "Lean R", "pvi": "R+3", "last": "2022: DeSantis 59.4-40.0", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Byron Donalds", "role": ""}, {"party": "D", "name": "David Jolly", "role": ""}], "note": "Term limited.", "weigh": ["Hispanic shift."], "polls": [{"pollster": "St. Pete Polls", "dates": "October 25–27, 2026", "sample": "916 (LV)", "moe": "± 3.2%", "d": 46.0, "r": 48.0, "margin": -2.0, "tag": "Higher-quality"}, {"pollster": "RedBox Research", "dates": "October 20–23, 2026", "sample": "4,832 (LV)", "moe": "± 2.5%", "d": 44.0, "r": 49.0, "margin": -5.0, "tag": "Higher-quality"}, {"pollster": "New York Times / Siena University", "dates": "October 19–25, 2026", "sample": "813 (LV)", "moe": "± 3.9%", "d": 44.0, "r": 48.0, "margin": -4.0, "tag": "Higher-quality"}, {"pollster": "Workbench Strategy", "dates": "October 18–22, 2026", "sample": "800 (LV)", "moe": "± 3.5%", "d": 48.0, "r": 46.0, "margin": 2.0, "tag": "Other"}, {"pollster": "co/efficient", "dates": "October 18–20, 2026", "sample": "1,014 (LV)", "moe": "± 3.1%", "d": 40.0, "r": 49.0, "margin": -9.0, "tag": "Other"}, {"pollster": "Echelon Insights", "dates": "October 16–23, 2026", "sample": "515 (LV)", "moe": "± 5.0%", "d": 44.0, "r": 50.0, "margin": -6.0, "tag": "Other"}, {"pollster": "University of North Florida", "dates": "October 12–19, 2026", "sample": "1,471 (LV)", "moe": "± 2.8%", "d": 47.0, "r": 49.0, "margin": -2.0, "tag": "Higher-quality"}], "avg": -3.7, "n": 7, "spread": null}, {"id": "gov:NE", "abbr": "NE", "state": "Nebraska", "chamber": "gov", "title": "Nebraska Governor", "cook": "Lean R", "pvi": "R+13", "last": "2022: Pillen 59.2-40.6", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Jim Pillen", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Leans Republican.", "weigh": ["Rural."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:TX", "abbr": "TX", "state": "Texas", "chamber": "gov", "title": "Texas Governor", "cook": "Lean R", "pvi": "R+5", "last": "2022: Abbott 54.8-43.9", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Greg Abbott", "role": "Incumbent"}, {"party": "D", "name": "Gina Hinojosa", "role": ""}], "note": "Leans Republican.", "weigh": ["Suburbs."], "polls": [{"pollster": "Quantus Insights", "dates": "October 26–28, 2026", "sample": "1,221 (LV)", "moe": "± 3.2%", "d": 46.0, "r": 51.0, "margin": -5.0, "tag": "Other"}, {"pollster": "YouGov Blue", "dates": "October 21–26, 2026", "sample": "1,000 (RV)", "moe": "± 4.6%", "d": 49.0, "r": 46.0, "margin": 3.0, "tag": "Other"}, {"pollster": "Texas Southern University", "dates": "October 21–25, 2026", "sample": "2,000 (LV)", "moe": "± 2.2%", "d": 47.0, "r": 50.0, "margin": -3.0, "tag": "Higher-quality"}, {"pollster": "SSRS", "dates": "October 20–27, 2026", "sample": "923 (LV)", "moe": "± 4.2%", "d": 46.0, "r": 48.0, "margin": -2.0, "tag": "Higher-quality"}, {"pollster": "ActiVote", "dates": "October 17–21, 2026", "sample": "400 (LV)", "moe": "± 4.9%", "d": 48.0, "r": 53.0, "margin": -5.0, "tag": "Higher-quality"}, {"pollster": "Emerson College", "dates": "October 17–19, 2026", "sample": "1,000 (LV)", "moe": "± 3.0%", "d": 45.0, "r": 49.0, "margin": -4.0, "tag": "Higher-quality"}, {"pollster": "Beacon Research/ Shaw & Co. Research", "dates": "October 15–19, 2026", "sample": "2,011 (RV)", "moe": "± 2.0%", "d": 49.0, "r": 50.0, "margin": -1.0, "tag": "Other"}], "avg": -2.4, "n": 7, "spread": null}, {"id": "gov:NH", "abbr": "NH", "state": "New Hampshire", "chamber": "gov", "title": "New Hampshire Governor", "cook": "Likely R", "pvi": "D+1", "last": "2022: Sununu 57.0-41.5", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Kelly Ayotte", "role": ""}, {"party": "D", "name": "Cinde Warmington", "role": ""}], "note": "Term limited.", "weigh": ["Split-ticket."], "polls": [{"pollster": "Rasmussen Reports", "dates": "October 20–23, 2026", "sample": "970 (LV)", "moe": "± 3%", "d": 42.0, "r": 52.0, "margin": -10.0, "tag": "Other"}, {"pollster": "Saint Anselm College", "dates": "October 19–20, 2026", "sample": "1,672 (LV)", "moe": "± 2.4%", "d": 42.0, "r": 50.0, "margin": -8.0, "tag": "Higher-quality"}, {"pollster": "National Public Affairs", "dates": "October 8–12, 2026", "sample": "600 (LV)", "moe": "± 4.0%", "d": 38.0, "r": 54.0, "margin": -16.0, "tag": "Other"}, {"pollster": "YouGov", "dates": "September 28 – October 5, 2026", "sample": "1,520 (LV)", "moe": "± 3.9%", "d": 40.0, "r": 49.0, "margin": -9.0, "tag": "Higher-quality"}, {"pollster": "UMass Lowell / YouGov", "dates": "October 2–19, 2026", "sample": "600 (LV)", "moe": "± 5.0%", "d": 42.0, "r": 48.0, "margin": -6.0, "tag": "Higher-quality"}, {"pollster": "Saint Anselm College", "dates": "September 28–29, 2026", "sample": "1,042 (LV)", "moe": "± 3.0%", "d": 45.0, "r": 52.0, "margin": -7.0, "tag": "Higher-quality"}, {"pollster": "University of New Hampshire", "dates": "September 17–21, 2026", "sample": "1,418 (LV)", "moe": "± 2.6%", "d": 43.0, "r": 47.0, "margin": -4.0, "tag": "Higher-quality"}], "avg": -8.6, "n": 7, "spread": null}, {"id": "gov:OK", "abbr": "OK", "state": "Oklahoma", "chamber": "gov", "title": "Oklahoma Governor", "cook": "Likely R", "pvi": "R+20", "last": "2022: Stitt 55.4-41.8", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Kevin Stitt", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Likely Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:VT", "abbr": "VT", "state": "Vermont", "chamber": "gov", "title": "Vermont Governor", "cook": "Likely R", "pvi": "D+16", "last": "2022: Scott 71.4-27.2", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Phil Scott", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Republican in blue state.", "weigh": ["Split-ticket."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:AL", "abbr": "AL", "state": "Alabama", "chamber": "gov", "title": "Alabama Governor", "cook": "Solid R", "pvi": "R+15", "last": "2022: Ivey 66.9-33.1", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Kay Ivey", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:AR", "abbr": "AR", "state": "Arkansas", "chamber": "gov", "title": "Arkansas Governor", "cook": "Solid R", "pvi": "R+16", "last": "2022: Sanders 62.9-35.2", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Sarah Huckabee Sanders", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:ID", "abbr": "ID", "state": "Idaho", "chamber": "gov", "title": "Idaho Governor", "cook": "Solid R", "pvi": "R+22", "last": "2022: Little 60.5-39.3", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Brad Little", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:SC", "abbr": "SC", "state": "South Carolina", "chamber": "gov", "title": "South Carolina Governor", "cook": "Solid R", "pvi": "R+8", "last": "2022: McMaster 58.0-41.7", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Henry McMaster", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:SD", "abbr": "SD", "state": "South Dakota", "chamber": "gov", "title": "South Dakota Governor", "cook": "Solid R", "pvi": "R+16", "last": "2022: Noem 62.0-35.2", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Kristi Noem", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:TN", "abbr": "TN", "state": "Tennessee", "chamber": "gov", "title": "Tennessee Governor", "cook": "Solid R", "pvi": "R+14", "last": "2022: Lee 64.9-32.8", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Bill Lee", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}, {"id": "gov:WY", "abbr": "WY", "state": "Wyoming", "chamber": "gov", "title": "Wyoming Governor", "cook": "Solid R", "pvi": "R+25", "last": "2022: Gordon 63.7-26.3", "open": false, "holder": "R", "cands": [{"party": "R", "name": "Mark Gordon", "role": "Incumbent"}, {"party": "D", "name": "TBA", "role": ""}], "note": "Solid Republican.", "weigh": ["Deep red."], "polls": [], "avg": null, "n": 0, "spread": null}], "baseline": {"senateD_defense_lost": 0, "generic_ballot": 9.4}, "meta": {"date": "Fri Oct 30, 2026"}};
+const SHEET_URL = "";
+const KEY = "midterm-desk-2026-v1";
+let picks = {};
+
+function loadPicks(){
+  try{ picks = JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(e){ picks = {}; }
+  const h = location.hash;
+  if(h.startsWith("#p=")){
+    try{
+      const raw = decodeURIComponent(escape(atob(h.slice(3).replace(/-/g,"+").replace(/_/g,"/"))));
+      const incoming = JSON.parse(raw);
+      if(incoming && typeof incoming === "object"){
+        picks = incoming;
+        const b = document.getElementById("shared-banner");
+        b.className = "banner on";
+        b.innerHTML = "<b>You are viewing a shared card.</b> These picks came from a link, not from your browser. Anything you change now is yours; use My card to grab a link to your own.";
+      }
+    }catch(e){}
+  }
+}
+function savePicks(){ 
+  localStorage.setItem(KEY, JSON.stringify(picks)); 
+  syncToGroup();
+}
+
+const RATING_ORDER = {"Toss Up":0,"Lean D":1,"Lean R":1,"Likely D":2,"Likely R":2,"Solid D":3,"Solid R":3};
+function rateClass(r){ return r==="Toss Up" ? "T" : r.slice(-1); }
+function fmtMargin(v){
+  if(v === null || v === undefined) return "—";
+  const a = Math.abs(v).toFixed(1);
+  return (v > 0 ? "D +" : v < 0 ? "R +" : "Even ") + (v===0 ? "" : a);
+}
+function marginClass(v){ return v>0?"lead-D":v<0?"lead-R":"lead-E"; }
+
+function raceRow(r, chamber){
+  const p = picks[r.id];
+  const btn = document.createElement("button");
+  btn.className = "race-btn" + (r.id === state.sel[chamber] ? " on" : "");
+  btn.innerHTML = `<span class="dot ${rateClass(r.cook)}"></span><span class="ab">${r.abbr}</span>
+    <span class="nm">${r.chamber === "senate" ? "Senate" : "Gov"}${r.open ? " · open" : ""}</span>
+    <span class="mv">${p ? (p.winner === "D" ? "D+" : p.winner === "R" ? "R+" : "O+") + Number(p.margin||0).toFixed(1) : (r.avg !== null ? fmtMargin(r.avg) : "")}</span>`;
+  btn.onclick = () => { state.sel[chamber] = r.id; renderList(chamber); renderDetail(chamber); };
+  return btn;
+}
+
+function renderList(chamber){
+  const rail = document.getElementById("rail-" + chamber);
+  rail.innerHTML = "";
+  const races = DATA.races.filter(r => r.chamber === chamber);
+  const groups = [
+    ["Toss ups", r => r.cook === "Toss Up"],
+    ["Lean", r => r.cook.startsWith("Lean")],
+    ["Likely", r => r.cook.startsWith("Likely")],
+    ["Solid (safe)", r => r.cook.startsWith("Solid")],
+  ];
+  for(const [label, test] of groups){
+    const set = races.filter(test);
+    if(!set.length) continue;
+    const g = document.createElement("div");
+    g.className = "rail-group";
+    g.textContent = label;
+    rail.appendChild(g);
+    set.forEach(r => rail.appendChild(raceRow(r, chamber)));
+  }
+}
+
+function renderDetail(chamber){
+  const r = DATA.races.find(x => x.id === state.sel[chamber]);
+  const host = document.getElementById("detail-" + chamber);
+  if(!r){ host.innerHTML = ""; return; }
+  const p = picks[r.id] || {};
+  const pollRows = (r.polls || []).map(pl => `
+    <tr>
+      <td>${pl.pollster} <span class="q ${pl.tag === "Higher-quality" ? "" : "o"}">${pl.tag === "Higher-quality" ? "HQ" : "other"}</span></td>
+      <td>${pl.dates}</td>
+      <td class="num">${pl.d.toFixed(0)}</td>
+      <td class="num">${pl.r.toFixed(0)}</td>
+      <td class="num ${marginClass(pl.margin)}">${pl.margin > 0 ? "+" : ""}${pl.margin.toFixed(1)}</td>
+    </tr>`).join("");
+
+  const cands = r.cands.map(c => `
+    <div class="cand"><span class="tag ${c.party}">${c.party}</span>
+      <span class="nm">${c.name}</span><span class="role">${c.role || ""}</span></div>`).join("");
+
+  host.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="eyebrow">${r.chamber === "senate" ? "U.S. Senate" : "Governor"} · ${r.state}</div>
+        <h2>${r.title}</h2>
+        <div class="chips">
+          <span class="chip rate-${rateClass(r.cook)}">${r.cook}</span>
+          <span class="chip">PVI ${r.pvi}</span>
+          <span class="chip">Last: ${r.last}</span>
+          <span class="chip">${r.open ? "Open seat" : "Incumbent on ballot"}</span>
+        </div>
+      </div>
+      <div class="body-grid">
+        <div class="col">
+          <h3 class="sec">The shape of the race</h3>
+          <p class="why">${r.note}</p>
+          <h3 class="sec">On the ballot</h3>
+          <div class="cands">${cands}</div>
+          <h3 class="sec">October polls${r.n > 0 ? ` · ${r.n} listed` : ""}</h3>
+          ${r.n > 0 ? `<table class="polls">
+            <thead><tr><th>Pollster</th><th>Field dates</th><th class="num">D</th><th class="num">R</th><th class="num">Margin</th></tr></thead>
+            <tbody>${pollRows}</tbody></table>
+            <p class="note">HQ = independent, university or nonpartisan pollster. "other" = campaign- or party-sponsored, or a firm with a known house effect.</p>`
+          : `<p class="empty">No October public poll found for this race. The rating and the last result are doing the work.</p>`}
+          <div class="refbox">
+            <div class="lbl">Reference margin</div>
+            <div class="big ${r.avg !== null ? marginClass(r.avg) : ""}">${r.avg !== null ? fmtMargin(r.avg) : "No average"}</div>
+            <div class="sub">${r.avg !== null ? `Plain average of the ${r.n} listed poll${r.n === 1 ? "" : "s"}, Democratic minus Republican. Not a forecast.` : "No polls to average. Use the rating and history."}</div>
+          </div>
+          <div class="pick" data-race="${r.id}">
+            <h3 class="sec">Your call</h3>
+            <div class="row">
+              <button data-w="D" class="${p.winner === "D" ? "sel-D" : ""}">Democrat</button>
+              <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">Republican</button>
+              <button data-w="O" class="${p.winner === "O" ? "sel-O" : ""}">Other / ind.</button>
+            </div>
+            <label>Winning margin
+              <input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ""}" placeholder="0.0">
+              <span>pts</span>
+              <span class="saved" id="saved-${r.id}">${p.winner ? "saved" : ""}</span>
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <h3 class="sec">History</h3>
+          <div class="summary">
+            <div class="stat"><div class="k">Last statewide result</div><div class="v" style="font-size:19px">${r.last}</div></div>
+            <div class="stat"><div class="k">Cook rating</div><div class="v" style="font-size:19px">${r.cook}</div></div>
+            <div class="stat"><div class="k">2024 presidential lean</div><div class="v" style="font-size:19px">${r.pvi}</div></div>
+          </div>
+          <h4 class="sec" style="margin-top:20px">What to weigh</h4>
+          <ul style="padding-left:16px;margin:0;font-size:13.5px;color:#3c414b">
+            ${r.weigh.map(w => `<li style="margin-bottom:7px">${w}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+    </div>`;
+
+  host.querySelectorAll(".pick .row button").forEach(b => {
+    b.onclick = () => {
+      const cur = picks[r.id] || {};
+      cur.winner = b.dataset.w;
+      picks[r.id] = cur;
+      savePicks(); renderDetail(chamber); renderList(chamber);
+    };
+  });
+  const inp = host.querySelector(".pick input");
+  inp.onchange = () => {
+    const cur = picks[r.id] || {};
+    cur.margin = parseFloat(inp.value || "0");
+    if(!cur.winner) cur.winner = "D";
+    picks[r.id] = cur;
+    savePicks();
+    document.getElementById("saved-" + r.id).textContent = "saved";
+    renderList(chamber);
+  };
+}
+
+function tally(chamber){
+  const races = DATA.races.filter(r => r.chamber === chamber);
+  const picked = races.filter(r => picks[r.id] && picks[r.id].winner);
+  const d = picked.filter(r => picks[r.id].winner === "D").length;
+  const o = picked.filter(r => picks[r.id].winner === "O").length;
+  return {total: races.length, picked: picked.length, d, o, r: picked.length - d - o};
+}
+
+function renderMyCard(){
+  const s = tally("senate"), g = tally("gov");
+  const sub = document.getElementById("mycard-sub");
+  sub.textContent = s.picked + g.picked === 0
+    ? "Nothing picked yet. Go flip some races."
+    : `${s.picked} Senate and ${g.picked} Governor races called. ${DATA.races.length - s.picked - g.picked} still blank.`;
+
+  document.getElementById("mycard-stats").innerHTML = `
+    <div class="stat"><div class="k">Senate called</div><div class="v">${s.picked}/35</div></div>
+    <div class="stat"><div class="k">Your Senate</div><div class="v">${projectSenate(s)}</div></div>
+    <div class="stat"><div class="k">Governors called</div><div class="v">${g.picked}/36</div></div>
+    <div class="stat"><div class="k">Your governor count</div><div class="v">${projectGov(g)}</div></div>`;
+
+  const cards = (chamber, host) => {
+    const races = DATA.races.filter(r => r.chamber === chamber);
+    host.innerHTML = races.map(r => {
+      const p = picks[r.id];
+      if(!p || !p.winner) return `<div class="pcard empty-p"><div class="t">${r.abbr} · ${r.state}</div><div class="m" style="color:#9aa0aa">not called</div><div class="g">${r.cook}</div></div>`;
+      const label = p.winner === "D" ? "Democrat" : p.winner === "R" ? "Republican" : "Other";
+      return `<div class="pcard"><div class="t">${r.abbr} · ${r.state}</div>
+        <div class="m" style="color:${p.winner === "D" ? "var(--d)" : p.winner === "R" ? "var(--r)" : "#4b5563"}">${label} +${Number(p.margin || 0).toFixed(1)}</div>
+        <div class="g">Cook: ${r.cook}</div></div>`;
+    }).join("");
+  };
+  cards("senate", document.getElementById("mycard-senate"));
+  cards("gov", document.getElementById("mycard-gov"));
+}
+
+function projectSenate(s){
+  let d = 47;
+  DATA.races.filter(r => r.chamber === "senate").forEach(r => {
+    const p = picks[r.id];
+    if(!p || !p.winner) return;
+    const heldByD = r.holder === "D";
+    if(p.winner === "D" && !heldByD) d++;
+    if(p.winner === "R" && heldByD) d--;
+  });
+  return d + " D / " + (100 - d) + " R";
+}
+function projectGov(g){
+  let d = 24;
+  DATA.races.filter(r => r.chamber === "gov").forEach(r => {
+    const p = picks[r.id];
+    if(!p || !p.winner) return;
+    const heldByD = r.holder === "D";
+    if(p.winner === "D" && !heldByD) d++;
+    if(p.winner === "R" && heldByD) d--;
+  });
+  return d + " D / " + (50 - d) + " R";
+}
+
+function picksAsText(){
+  const line = (r) => {
+    const p = picks[r.id];
+    if(!p || !p.winner) return `${r.abbr} ${r.chamber === "senate" ? "Sen" : "Gov"}: —`;
+    const who = p.winner === "D" ? "D" : p.winner === "R" ? "R" : "O";
+    return `${r.abbr} ${r.chamber === "senate" ? "Sen" : "Gov"}: ${who} +${Number(p.margin || 0).toFixed(1)}`;
+  };
+  const sen = DATA.races.filter(r => r.chamber === "senate").map(line);
+  const gov = DATA.races.filter(r => r.chamber === "gov").map(line);
+  return "2026 MIDTERM PREDICTION DESK\n\nSENATE\n" + sen.join("\n") + "\n\nGOVERNOR\n" + gov.join("\n");
+}
+
+function b64url(str){
+  return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+
+const state = { sel: { senate: null, gov: null } };
+const GROUP_BUCKET = "JGPGwkq56cimrCLKd3JNkJ";
+const GROUP_BASE = "https://kvdb.io/JGPGwkq56cimrCLKd3JNkJ";
+
+let groupData = {picks:{}, updatedAt:0};
+let groupName = localStorage.getItem("midterm-group-name") || "";
+
+function getGroupName(){
+  if(!groupName){
+    const n = prompt("Enter your first name to join the live group board:");
+    if(n && n.trim()){
+      groupName = n.trim();
+      localStorage.setItem("midterm-group-name", groupName);
+      document.getElementById("group-name").value = groupName;
+    }
+  }
+  return groupName;
+}
+
+async function fetchGroup(){
+  try{
+    const r = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
+    if(r.ok){
+      const txt = await r.text();
+      try{ groupData = JSON.parse(txt); }catch(e){}
+    }
+  }catch(e){}
+  renderGroup();
+}
+
+async function syncToGroup(){
+  const name = getGroupName();
+  if(!name) return;
+  try{
+    const all = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
+    if(all.ok){
+      try{ groupData = JSON.parse(await all.text()); }catch(e){ groupData = {picks:{}, updatedAt:0}; }
+    }else{
+      groupData = {picks:{}, updatedAt:0};
+    }
+  }catch(e){ groupData = {picks:{}, updatedAt:0}; }
+  if(!groupData.picks) groupData.picks = {};
+  groupData.picks[name] = {picks: JSON.parse(JSON.stringify(picks)), updatedAt: Date.now()};
+  groupData.updatedAt = Date.now();
+  try{
+    await fetch(GROUP_BASE + "/_key/picks_v1", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(groupData)});
+    document.getElementById("group-status").textContent = "Synced as " + name;
+  }catch(e){
+    document.getElementById("group-status").textContent = "Sync failed";
+  }
+  renderGroup();
+}
+
+function renderGroup(){
+  const senT = document.getElementById("group-senate");
+  const govT = document.getElementById("group-gov");
+  if(!senT || !govT) return;
+  senT.innerHTML = "";
+  govT.innerHTML = "";
+  const races = DATA.races;
+  const people = Object.keys(groupData.picks || {}).sort();
+  document.getElementById("group-stats").innerHTML = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
+  races.filter(r=>r.chamber==="senate").forEach(r=>{
+    const tr = document.createElement("tr");
+    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    people.forEach(pn=>{
+      const pr = (groupData.picks[pn]||{}).picks||{};
+      const pk = pr[r.id];
+      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
+      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+    });
+    tr.innerHTML = cells;
+    senT.appendChild(tr);
+  });
+  races.filter(r=>r.chamber==="gov").forEach(r=>{
+    const tr = document.createElement("tr");
+    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    people.forEach(pn=>{
+      const pr = (groupData.picks[pn]||{}).picks||{};
+      const pk = pr[r.id];
+      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
+      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+    });
+    tr.innerHTML = cells;
+    govT.appendChild(tr);
+  });
+  // update headers
+  const sh = document.querySelector("#group-senate").parentElement.previousElementSibling.querySelector("tr");
+  const gh = document.querySelector("#group-gov").parentElement.previousElementSibling.querySelector("tr");
+  if(sh){ sh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+  if(gh){ gh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+}
+
+function initGroup(){
+  const inp = document.getElementById("group-name");
+  if(inp) inp.value = groupName;
+  document.getElementById("group-save-name").onclick = ()=>{
+    const v = document.getElementById("group-name").value;
+    if(v && v.trim()){ groupName = v.trim(); localStorage.setItem("midterm-group-name", groupName); document.getElementById("group-status").textContent = "Name set: " + groupName; syncToGroup(); }
+  };
+  fetchGroup();
+  setInterval(fetchGroup, 10000);
+}
+
+function init(){
+  loadPicks();
+  document.getElementById("open-sheet").onclick = () => { if(SHEET_URL) window.open(SHEET_URL, "_blank"); };
+  const senateRaces = DATA.races.filter(r => r.chamber === "senate");
+  const govRaces = DATA.races.filter(r => r.chamber === "gov");
+  const rank = r => RATING_ORDER[r.cook] ?? 9;
+  state.sel.senate = [...senateRaces].sort((a,b) => rank(a) - rank(b))[0].id;
+  state.sel.gov = [...govRaces].sort((a,b) => rank(a) - rank(b))[0].id;
+
+  document.querySelectorAll("nav.tabs button").forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll("nav.tabs button").forEach(x => x.setAttribute("aria-selected", "false"));
+      b.setAttribute("aria-selected", "true");
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("on"));
+      document.getElementById("page-" + b.dataset.page).classList.add("on");
+      if(b.dataset.page === "mycard") renderMyCard();
+      window.scrollTo({top:0, behavior:"smooth"});
+    };
+  });
+
+  renderList("senate"); renderDetail("senate");
+  renderList("gov"); renderDetail("gov");
+
+  const days = Math.ceil((new Date("2026-11-03T12:00:00Z") - new Date()) / 86400000);
+  document.getElementById("countdown").innerHTML = days > 0 ? `<b>${days} days</b> to Election Day` : "Election Day";
+
+  document.getElementById("national-stats").innerHTML = `
+    <div class="stat"><div class="k">Generic ballot</div><div class="v">D +9.4</div><div class="g" style="font-size:11.5px;color:var(--muted)">DDHQ, Oct 29</div></div>
+    <div class="stat"><div class="k">Trump disapproval</div><div class="v">61.2%</div><div class="g" style="font-size:11.5px;color:var(--muted)">Cook tracker, Oct 15</div></div>
+    <div class="stat"><div class="k">Senate needed</div><div class="v">+4</div><div class="g" style="font-size:11.5px;color:var(--muted)">for a 51-49 majority</div></div>
+    <div class="stat"><div class="k">Cook toss-ups</div><div class="v">7</div><div class="g" style="font-size:11.5px;color:var(--muted)">6 R-held, 1 D-held</div></div>`;
+
+  const spread = DATA.races.filter(r => r.chamber === "senate" && r.spread).slice(0, 6);
+  document.getElementById("disagreement").innerHTML = spread.map(r => `
+    <div class="stat" style="margin-bottom:8px"><div class="k">${r.abbr} · ${r.state} · Cook ${r.cook}</div>
+      <div style="font-size:13px;margin-top:3px">${r.spread}</div></div>`).join("");
+
+  document.getElementById("copy-picks").onclick = async () => {
+    const txt = picksAsText();
+    const box = document.getElementById("copybox");
+    box.hidden = false; box.textContent = txt;
+    try{ await navigator.clipboard.writeText(txt); box.textContent = txt + "\n\n(copied to clipboard)"; }catch(e){}
+  };
+  document.getElementById("copy-link").onclick = () => {
+    const payload = b64url(JSON.stringify(picks));
+    const url = location.origin + location.pathname + "#p=" + payload;
+    const box = document.getElementById("copybox");
+    box.hidden = false; box.textContent = url;
+    navigator.clipboard && navigator.clipboard.writeText(url).then(() => { box.textContent = url + "\n\n(copied)"; }).catch(()=>{});
+  };
+  document.getElementById("clear-picks").onclick = () => {
+    if(!confirm("Clear every pick in this browser?")) return;
+    picks = {}; savePicks(); history.replaceState(null, "", location.pathname);
+    renderList("senate"); renderDetail("senate"); renderList("gov"); renderDetail("gov"); renderMyCard();
+  };
+  initGroup();
+}
+
+init();
+</script>
+</body>
+</html>
