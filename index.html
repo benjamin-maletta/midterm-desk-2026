@@ -539,18 +539,24 @@ function b64url(str){
 }
 
 const state = { sel: { senate: null, gov: null } };
-const GROUP_BUCKET = "JGPGwkq56cimrCLKd3JNkJ";
-const GROUP_BASE = "https://kvdb.io/JGPGwkq56cimrCLKd3JNkJ";
+const FIREBASE_DB_URL = "";
+const GROUP_ROOM = "main";
+const GROUP_ENDPOINT = FIREBASE_DB_URL ? FIREBASE_DB_URL.replace(/\/+$/, "") + "/picks/" + GROUP_ROOM + ".json" : "";
 
 let groupData = {picks:{}, updatedAt:0};
 let groupName = localStorage.getItem("midterm-group-name") || "";
 
+function groupPersonUrl(name){
+  return FIREBASE_DB_URL.replace(/\/+$/, "") + "/picks/" + GROUP_ROOM + "/" + encodeURIComponent(name) + ".json";
+}
+
 async function fetchGroup(){
+  if(!GROUP_ENDPOINT){ renderGroup(); return; }
   try{
-    const r = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
+    const r = await fetch(GROUP_ENDPOINT, {cache:"no-store"});
     if(r.ok){
-      const txt = await r.text();
-      try{ groupData = JSON.parse(txt); }catch(e){}
+      const data = await r.json();
+      groupData = {picks: (data && typeof data === "object") ? data : {}, updatedAt: Date.now()};
     }
   }catch(e){}
   renderGroup();
@@ -559,25 +565,15 @@ async function fetchGroup(){
 async function syncToGroup(){
   const name = groupName;
   if(!name) return;
-  let loaded = false;
-  try{
-    const all = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
-    if(all.ok){
-      try{ groupData = JSON.parse(await all.text()); loaded = true; }catch(e){}
-    }else if(all.status === 404){
-      groupData = {picks:{}, updatedAt:0}; loaded = true;
-    }
-  }catch(e){}
-  if(!loaded){
-    document.getElementById("group-status").textContent = "Sync failed (board unavailable)";
+  if(!GROUP_ENDPOINT){
+    document.getElementById("group-status").textContent = "Live board not configured yet";
     return;
   }
-  if(!groupData.picks) groupData.picks = {};
-  groupData.picks[name] = {picks: JSON.parse(JSON.stringify(picks)), updatedAt: Date.now()};
-  groupData.updatedAt = Date.now();
+  const payload = {picks: JSON.parse(JSON.stringify(picks)), updatedAt: Date.now()};
   try{
-    const res = await fetch(GROUP_BASE + "/_key/picks_v1", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(groupData)});
+    const res = await fetch(groupPersonUrl(name), {method:"PUT", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)});
     document.getElementById("group-status").textContent = res.ok ? "Synced as " + name : "Sync failed (board unavailable)";
+    if(res.ok){ groupData.picks[name] = payload; }
   }catch(e){
     document.getElementById("group-status").textContent = "Sync failed (offline)";
   }
@@ -632,7 +628,8 @@ function initGroup(){
     if(v && v.trim()){ groupName = v.trim(); localStorage.setItem("midterm-group-name", groupName); document.getElementById("group-status").textContent = "Name set: " + groupName; syncToGroup(); }
   };
   fetchGroup();
-  setInterval(fetchGroup, 10000);
+  if(GROUP_ENDPOINT) setInterval(fetchGroup, 10000);
+  else document.getElementById("group-status").textContent = "Live board not configured yet";
 }
 
 function init(){
