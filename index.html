@@ -545,18 +545,6 @@ const GROUP_BASE = "https://kvdb.io/JGPGwkq56cimrCLKd3JNkJ";
 let groupData = {picks:{}, updatedAt:0};
 let groupName = localStorage.getItem("midterm-group-name") || "";
 
-function getGroupName(){
-  if(!groupName){
-    const n = prompt("Enter your first name to join the live group board:");
-    if(n && n.trim()){
-      groupName = n.trim();
-      localStorage.setItem("midterm-group-name", groupName);
-      document.getElementById("group-name").value = groupName;
-    }
-  }
-  return groupName;
-}
-
 async function fetchGroup(){
   try{
     const r = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
@@ -569,24 +557,29 @@ async function fetchGroup(){
 }
 
 async function syncToGroup(){
-  const name = getGroupName();
+  const name = groupName;
   if(!name) return;
+  let loaded = false;
   try{
     const all = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
     if(all.ok){
-      try{ groupData = JSON.parse(await all.text()); }catch(e){ groupData = {picks:{}, updatedAt:0}; }
-    }else{
-      groupData = {picks:{}, updatedAt:0};
+      try{ groupData = JSON.parse(await all.text()); loaded = true; }catch(e){}
+    }else if(all.status === 404){
+      groupData = {picks:{}, updatedAt:0}; loaded = true;
     }
-  }catch(e){ groupData = {picks:{}, updatedAt:0}; }
+  }catch(e){}
+  if(!loaded){
+    document.getElementById("group-status").textContent = "Sync failed (board unavailable)";
+    return;
+  }
   if(!groupData.picks) groupData.picks = {};
   groupData.picks[name] = {picks: JSON.parse(JSON.stringify(picks)), updatedAt: Date.now()};
   groupData.updatedAt = Date.now();
   try{
-    await fetch(GROUP_BASE + "/_key/picks_v1", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(groupData)});
-    document.getElementById("group-status").textContent = "Synced as " + name;
+    const res = await fetch(GROUP_BASE + "/_key/picks_v1", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(groupData)});
+    document.getElementById("group-status").textContent = res.ok ? "Synced as " + name : "Sync failed (board unavailable)";
   }catch(e){
-    document.getElementById("group-status").textContent = "Sync failed";
+    document.getElementById("group-status").textContent = "Sync failed (offline)";
   }
   renderGroup();
 }
@@ -625,8 +618,8 @@ function renderGroup(){
     govT.appendChild(tr);
   });
   // update headers
-  const sh = document.querySelector("#group-senate").parentElement.previousElementSibling.querySelector("tr");
-  const gh = document.querySelector("#group-gov").parentElement.previousElementSibling.querySelector("tr");
+  const sh = document.querySelector("#group-senate").closest("table").querySelector("thead tr");
+  const gh = document.querySelector("#group-gov").closest("table").querySelector("thead tr");
   if(sh){ sh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
   if(gh){ gh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
 }
@@ -644,7 +637,6 @@ function initGroup(){
 
 function init(){
   loadPicks();
-  document.getElementById("open-sheet").onclick = () => { if(SHEET_URL) window.open(SHEET_URL, "_blank"); };
   const senateRaces = DATA.races.filter(r => r.chamber === "senate");
   const govRaces = DATA.races.filter(r => r.chamber === "gov");
   const rank = r => RATING_ORDER[r.cook] ?? 9;
@@ -679,19 +671,6 @@ function init(){
     <div class="stat" style="margin-bottom:8px"><div class="k">${r.abbr} · ${r.state} · Cook ${r.cook}</div>
       <div style="font-size:13px;margin-top:3px">${r.spread}</div></div>`).join("");
 
-  document.getElementById("copy-picks").onclick = async () => {
-    const txt = picksAsText();
-    const box = document.getElementById("copybox");
-    box.hidden = false; box.textContent = txt;
-    try{ await navigator.clipboard.writeText(txt); box.textContent = txt + "\n\n(copied to clipboard)"; }catch(e){}
-  };
-  document.getElementById("copy-link").onclick = () => {
-    const payload = b64url(JSON.stringify(picks));
-    const url = location.origin + location.pathname + "#p=" + payload;
-    const box = document.getElementById("copybox");
-    box.hidden = false; box.textContent = url;
-    navigator.clipboard && navigator.clipboard.writeText(url).then(() => { box.textContent = url + "\n\n(copied)"; }).catch(()=>{});
-  };
   document.getElementById("clear-picks").onclick = () => {
     if(!confirm("Clear every pick in this browser?")) return;
     picks = {}; savePicks(); history.replaceState(null, "", location.pathname);
