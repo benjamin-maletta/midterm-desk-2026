@@ -193,6 +193,23 @@
   .live-pill.off{color:#8f2b21; background:var(--r-soft); border-color:#f6d3d0}
   .live-pill.off .dot{background:#b23b30}
 
+  .scorebox{background:#fffdf7; border:1px solid #e7dcc2; border-left:4px solid var(--gold); border-radius:12px; padding:14px 16px; margin:0 0 18px; box-shadow:var(--shadow)}
+  .scorebox .sb-head{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:10px}
+  .scorebox h3{margin:0; font:inherit; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:800}
+  .scorebox .sb-tag{font-size:11.5px; color:var(--muted); font-weight:600}
+  .scorebox .sb-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px}
+  @media (max-width:720px){ .scorebox .sb-grid{grid-template-columns:1fr} }
+  .sb-rule{background:#fff; border:1px solid var(--line); border-radius:9px; padding:10px 12px}
+  .sb-rule .t{font-size:12.5px; font-weight:800; color:var(--ink); margin-bottom:3px}
+  .sb-rule p{margin:0; font-size:12.5px; color:#3c414b}
+  .scorebox .sb-foot{margin:0; font-size:12px; color:var(--muted)}
+  .rankbar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px}
+  .rankbar .lbl{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:800}
+  .rank-toggle{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:#fff}
+  .rank-toggle button{font:inherit; font-size:12.5px; font-weight:700; padding:6px 12px; border:0; background:transparent; color:#3f4551; cursor:pointer}
+  .rank-toggle button[aria-pressed="true"]{background:var(--ink); color:#fff}
+  .gh-score.pts{color:#14512f}
+
   .page{display:none} .page.on{display:block}
   .panel{background:var(--panel); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:24px}
   .panel h2{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:24px; margin:0 0 4px; font-weight:600}
@@ -240,9 +257,9 @@
       <h2>Start here: four quick steps</h2>
       <div class="steps">
         <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board</span> and enter your first name.</span></button>
-        <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:var(--ink)">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b> and enter the margin.</span></button>
+        <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:var(--ink)">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b>, and add a margin if you want the closeness bonus.</span></button>
         <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Predictions</span> to see everything in one place and quickly change any pick.</span></button>
-        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> to see everyone's picks and scores as results come in.</span></button>
+        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> to see everyone's picks and scores as results come in. Scoring is +1 per correct winner, plus an optional margin bonus.</span></button>
       </div>
     </section>
     <nav class="tabs" role="tablist">
@@ -316,7 +333,7 @@
       <p class="sub" id="mycard-sub">Nothing picked yet. Go make some picks.</p>
       <div class="summary" id="mycard-stats"></div>
 
-      <p class="note" style="margin-top:14px">Edit right here: tap D, R, or O and set a margin on any race card.</p>
+      <p class="note" style="margin-top:14px">Edit right here: tap D, R, or O and, if you want the closeness bonus, add a margin on any race card.</p>
       <h4>Senate picks</h4>
       <div class="mycard-grid" id="mycard-senate"></div>
       <h4>Governor picks</h4>
@@ -334,6 +351,20 @@
     <div class="panel">
       <h2>Live Group Board</h2>
       <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks sync live. Scores update automatically as results come in.</p>
+      <div class="scorebox" aria-label="How scoring works">
+        <div class="sb-head"><h3>How scoring works</h3><span class="sb-tag">Margins are optional</span></div>
+        <div class="sb-grid">
+          <div class="sb-rule">
+            <div class="t">Winners only</div>
+            <p><b>+1 point</b> for every called race where your winner pick is right. No margin needed.</p>
+          </div>
+          <div class="sb-rule">
+            <div class="t">Winners + margin</div>
+            <p><b>+1 point</b> per correct winner, plus up to <b>+1</b> for a close margin. A perfect margin adds the full second point and it fades to zero at 5+ points off. Margins only count when the winner is right.</p>
+          </div>
+        </div>
+        <p class="sb-foot">✓ correct, ✗ wrong. A race scores once a winner is called. Rank the board by either score; ties break on average margin miss.</p>
+      </div>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
         <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
           <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:7px; width:200px;">
@@ -343,6 +374,13 @@
         <span class="live-pill" id="live-pill" style="margin-left:auto;"><span class="dot"></span><span id="live-text">Loading results</span></span>
       </div>
       <div class="summary" id="group-stats"></div>
+      <div class="rankbar">
+        <span class="lbl">Rank by</span>
+        <div class="rank-toggle" role="group" aria-label="Rank the board by">
+          <button type="button" data-rank="winners" aria-pressed="false">Winners only</button>
+          <button type="button" data-rank="total" aria-pressed="true">Winners + margin</button>
+        </div>
+      </div>
       <h4>Senate picks</h4>
       <div class="table-wrap">
         <table class="group-board">
@@ -358,7 +396,7 @@
         </table>
       </div>
       <p class="note" style="margin-top:12px;">Your name is the column header. Use the × in a header to remove someone, after confirming.</p>
-      <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. A race scores once a winner is called; ✓ means the winner pick was right, ✗ means it was wrong. Margins are displayed but do not affect the score.</p>
+      <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. Scoring rules are at the top of this page.</p>
     </div>
   </div>
 
@@ -498,7 +536,7 @@ function renderDetail(chamber){
         <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">Republican</button>
         <button data-w="O" class="${p.winner === "O" ? "sel-O" : ""}">Other / ind.</button>
       </div>
-      <label>Winning margin
+      <label>Winning margin <span class="muted" style="font-size:11.5px; font-weight:600">optional · earns up to +1</span>
         <input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ""}" placeholder="0.0">
         <span>pts</span>
         <span class="saved" id="saved-${r.id}">${p.winner ? "saved" : ""}</span>
@@ -562,11 +600,13 @@ function renderDetail(chamber){
   const inp = host.querySelector(".pick input");
   inp.onchange = () => {
     const cur = picks[r.id] || {};
-    cur.margin = parseFloat(inp.value || "0");
-    if(!cur.winner) cur.winner = "D";
+    const raw = inp.value.trim();
+    const val = parseFloat(raw);
+    if(raw === "" || !isFinite(val)) delete cur.margin;
+    else cur.margin = val;
     picks[r.id] = cur;
     savePicks();
-    document.getElementById("saved-" + r.id).textContent = "saved";
+    document.getElementById("saved-" + r.id).textContent = cur.winner ? "saved" : "";
     renderList(chamber);
   };
 }
@@ -581,6 +621,7 @@ function tally(chamber){
 
 function renderMyCard(){
   const s = tally("senate"), g = tally("gov");
+  const mine = scorePerson(picks);
   const sub = document.getElementById("mycard-sub");
   sub.textContent = s.picked + g.picked === 0
     ? "Nothing picked yet. Go make some picks in the Senate or Governors tab."
@@ -590,7 +631,8 @@ function renderMyCard(){
     <div class="stat"><div class="k">Senate called</div><div class="v">${s.picked}/35</div></div>
     <div class="stat"><div class="k">Your Senate</div><div class="v">${projectSenate(s)}</div></div>
     <div class="stat"><div class="k">Governors called</div><div class="v">${g.picked}/36</div></div>
-    <div class="stat"><div class="k">Your governor count</div><div class="v">${projectGov(g)}</div></div>`;
+    <div class="stat"><div class="k">Your governor count</div><div class="v">${projectGov(g)}</div></div>
+    <div class="stat"><div class="k">Your score</div><div class="v">${mine.judged ? mine.total.toFixed(1) : "—"}</div><div class="g">${mine.judged ? `${mine.correct} winners + ${mine.bonus.toFixed(1)} margin` : "Scores once results are called"}</div></div>`;
 
   const cardHtml = (r) => {
     const p = picks[r.id] || {};
@@ -622,8 +664,10 @@ function renderMyCard(){
       const inp = card.querySelector("input");
       inp.onchange = () => {
         const cur = picks[id] || {};
-        cur.margin = parseFloat(inp.value || "0");
-        if(!cur.winner) cur.winner = "D";
+        const raw = inp.value.trim();
+        const val = parseFloat(raw);
+        if(raw === "" || !isFinite(val)) delete cur.margin;
+        else cur.margin = val;
         picks[id] = cur;
         savePicks();
         refreshPicks();
@@ -662,7 +706,8 @@ function picksAsText(){
     const p = picks[r.id];
     if(!p || !p.winner) return `${r.abbr} ${r.chamber === "senate" ? "Sen" : "Gov"}: —`;
     const who = p.winner === "D" ? "D" : p.winner === "R" ? "R" : "O";
-    return `${r.abbr} ${r.chamber === "senate" ? "Sen" : "Gov"}: ${who} +${Number(p.margin || 0).toFixed(1)}`;
+    const hasMargin = p.margin !== undefined && p.margin !== null && p.margin !== "";
+    return `${r.abbr} ${r.chamber === "senate" ? "Sen" : "Gov"}: ${who}${hasMargin ? " +" + Number(p.margin).toFixed(1) : ""}`;
   };
   const sen = DATA.races.filter(r => r.chamber === "senate").map(line);
   const gov = DATA.races.filter(r => r.chamber === "gov").map(line);
@@ -673,7 +718,7 @@ function b64url(str){
   return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 }
 
-const state = { sel: { senate: null, gov: null } };
+const state = { sel: { senate: null, gov: null }, rankBy: "total" };
 const CIVIC_API = "https://civicapi.org/api/v2/race";
 const LIVE_RACE_IDS = { senate: 87528, gov: 87535 };
 let liveResults = {};
@@ -695,15 +740,70 @@ function resultFor(id){
   return r && r.called ? r : null;
 }
 
-function scoreFor(personPicks){
-  let correct = 0, judged = 0;
+function marginMiss(pk, res){
+  if(!pk || !res || pk.winner !== res.winner) return null;
+  if(pk.margin === undefined || pk.margin === null || pk.margin === "") return null;
+  const guess = Number(pk.margin);
+  if(!isFinite(guess)) return null;
+  if(res.margin === null || res.margin === undefined) return null;
+  return Math.abs(guess - Number(res.margin));
+}
+
+function scorePerson(personPicks){
+  let correct = 0, judged = 0, bonus = 0, missSum = 0, missCount = 0;
   DATA.races.forEach(r => {
     const res = resultFor(r.id), p = personPicks[r.id];
     if(!res || !p || !p.winner) return;
     judged++;
-    if(p.winner === res.winner) correct++;
+    if(p.winner !== res.winner) return;
+    correct++;
+    const miss = marginMiss(p, res);
+    if(miss === null) return;
+    missCount++;
+    missSum += miss;
+    bonus += Math.max(0, 1 - miss / 5);
   });
-  return {correct, judged};
+  return {
+    correct, judged, bonus,
+    avgMiss: missCount ? missSum / missCount : null,
+    total: correct + bonus
+  };
+}
+
+function scoreLeaders(people){
+  const scores = people.map(name => {
+    const pr = ((groupData.picks[name] || {}).picks) || {};
+    return Object.assign({name}, scorePerson(pr));
+  });
+  const byMiss = (a, b) => {
+    const ma = a.avgMiss === null ? Infinity : a.avgMiss;
+    const mb = b.avgMiss === null ? Infinity : b.avgMiss;
+    return ma === mb ? 0 : (ma < mb ? -1 : 1);
+  };
+  const winners = [...scores].sort((a, b) => b.correct - a.correct || byMiss(a, b) || b.bonus - a.bonus)[0] || null;
+  const margins = [...scores].sort((a, b) => b.total - a.total || b.correct - a.correct || byMiss(a, b))[0] || null;
+  return {winners, margins};
+}
+
+function sortPeople(people){
+  const score = name => scorePerson(((groupData.picks[name] || {}).picks) || {});
+  const byMiss = (a, b) => {
+    const ma = a.avgMiss === null ? Infinity : a.avgMiss;
+    const mb = b.avgMiss === null ? Infinity : b.avgMiss;
+    return ma === mb ? 0 : (ma < mb ? -1 : 1);
+  };
+  return [...people].sort((a, b) => {
+    const sa = score(a), sb = score(b);
+    if(state.rankBy === "winners"){
+      if(sb.correct !== sa.correct) return sb.correct - sa.correct;
+    } else {
+      if(sb.total !== sa.total) return sb.total - sa.total;
+      if(sb.correct !== sa.correct) return sb.correct - sa.correct;
+    }
+    const missOrder = byMiss(sa, sb);
+    if(missOrder !== 0) return missOrder;
+    return a.localeCompare(b);
+  });
 }
 
 function showPage(name, scroll){
@@ -803,18 +903,26 @@ function renderGroup(){
   if(!senT || !govT) return;
 
   const races = DATA.races;
-  const people = Object.keys(groupData.picks || {}).sort();
+  const people = sortPeople(Object.keys(groupData.picks || {}));
   const called = races.filter(r => resultFor(r.id)).length;
   const totalPicks = people.reduce((sum, pn) => {
     const pr = (groupData.picks[pn] || {}).picks || {};
     return sum + races.filter(r => pr[r.id] && pr[r.id].winner).length;
   }, 0);
+  const leaders = scoreLeaders(people);
   const checked = liveStatus.checkedAt ? new Date(liveStatus.checkedAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "";
+
+  const leaderCard = (label, person, value) => {
+    if(!person || person.judged === 0) return `<div class="stat"><div class="k">${label}</div><div class="v" style="font-size:18px">—</div><div class="g">No called races yet</div></div>`;
+    return `<div class="stat"><div class="k">${label}</div><div class="v" style="font-size:18px">${esc(person.name)}</div><div class="g">${value}</div></div>`;
+  };
 
   document.getElementById("group-stats").innerHTML = `
     <div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>
     <div class="stat"><div class="k">Races called</div><div class="v">${called}<span style="font-size:14px; color:var(--muted)">/${races.length}</span></div></div>
     <div class="stat"><div class="k">Total picks</div><div class="v">${totalPicks}</div></div>
+    ${leaderCard("Best winners", leaders.winners, `${leaders.winners ? leaders.winners.correct : 0} correct`)}
+    ${leaderCard("Best with margin", leaders.margins, leaders.margins && leaders.margins.avgMiss !== null ? `${leaders.margins.total.toFixed(1)} pts` : "No margins yet")}
     <div class="stat"><div class="k">Results feed</div><div class="v ${liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
 
   const pill = document.getElementById("live-pill");
@@ -827,10 +935,14 @@ function renderGroup(){
   const head = () => `<th>State</th><th>Race</th><th>Cook</th><th>Result</th>` + people.map(pn => {
     const pr = (groupData.picks[pn] || {}).picks || {};
     const made = races.filter(r => pr[r.id] && pr[r.id].winner).length;
-    const sc = scoreFor(pr);
-    const label = sc.judged > 0 ? `${sc.correct}/${sc.judged} correct` : `${made} picks`;
-    const tip = sc.judged > 0 ? `${sc.correct} correct of ${sc.judged} called races picked` : `${made} picks made`;
-    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span><button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button></div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tip}">${label}</div></div></th>`;
+    const sc = scorePerson(pr);
+    const primary = sc.judged > 0 ? `${sc.correct}/${sc.judged} correct` : `${made} picks`;
+    const tooltip = sc.judged > 0 ? `${sc.correct} winner points + ${sc.bonus.toFixed(1)} margin bonus` : `${made} picks made`;
+    const secondary = sc.judged === 0 ? ""
+      : state.rankBy === "winners"
+        ? (sc.avgMiss === null ? "" : `<div class="gh-score pts" title="${tooltip}">+${sc.bonus.toFixed(1)} margin</div>`)
+        : `<div class="gh-score pts" title="${tooltip}">${sc.total.toFixed(1)} pts</div>`;
+    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span><button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button></div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tooltip}">${primary}</div>${secondary}</div></th>`;
   }).join("");
 
   const rows = (chamber) => races.filter(r => r.chamber === chamber).map(r => {
@@ -848,12 +960,15 @@ function renderGroup(){
       const pr = (groupData.picks[pn] || {}).picks || {};
       const pk = pr[r.id];
       if(!pk || !pk.winner) return `<td class="pickcell"><span class="muted">—</span></td>`;
-      let content = `<span class="pickpill ${pk.winner}"><b>${pk.winner}</b> +${Number(pk.margin || 0).toFixed(1)}</span>`;
+      const hasMargin = pk.margin !== undefined && pk.margin !== null && pk.margin !== "" && isFinite(Number(pk.margin));
+      let content = `<span class="pickpill ${pk.winner}"><b>${pk.winner}</b>${hasMargin ? " +" + Number(pk.margin).toFixed(1) : ""}</span>`;
       let cls = "pickcell";
       if(res && res.called){
         const ok = pk.winner === res.winner;
+        const miss = marginMiss(pk, res);
         cls += ok ? " cell-ok" : " cell-no";
-        content += `<span class="mark ${ok ? "ok" : "no"}" title="${ok ? "Correct" : "Wrong"}">${ok ? "✓" : "✗"}</span>`;
+        const why = ok ? (miss === null ? "Correct winner" : `Correct winner · margin off by ${miss.toFixed(1)}`) : "Wrong winner";
+        content += `<span class="mark ${ok ? "ok" : "no"}" title="${why}">${ok ? "✓" : "✗"}</span>`;
       }
       return `<td class="${cls}">${content}</td>`;
     }).join("");
@@ -866,6 +981,10 @@ function renderGroup(){
   govT.closest("table").querySelector("thead tr").innerHTML = head();
   document.querySelectorAll(".del-name").forEach(b => {
     b.onclick = () => deletePerson(b.dataset.name);
+  });
+  document.querySelectorAll(".rank-toggle button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.rank === state.rankBy));
+    b.onclick = () => { state.rankBy = b.dataset.rank; renderGroup(); };
   });
 }
 
