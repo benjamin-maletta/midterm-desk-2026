@@ -155,6 +155,7 @@
   .stat .v{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:24px; font-weight:600; margin-top:2px}
   .stat .v.live{color:#1c7a43}
   .stat .v.demo{color:#8a5a00}
+  .stat .v.test{color:#8a5a00}
   .stat .g{font-size:11.5px; color:var(--muted); margin-top:2px}
 
   .table-wrap{overflow:auto; border:1px solid var(--line); border-radius:10px}
@@ -285,6 +286,8 @@
 
   .live-pill.demo{color:#8a5a00; background:#fff6df; border-color:#f0dda6}
   .live-pill.demo .dot{background:#d9a520}
+  .live-pill.test{color:#8a5a00; background:#fff6df; border-color:#f0dda6}
+  .live-pill.test .dot{background:#d9a520}
   .banner .exit{font:inherit; font-weight:800; background:none; border:0; color:#8a5a00; text-decoration:underline; cursor:pointer; padding:0; margin-left:4px}
 
   .page{display:none} .page.on{display:block}
@@ -807,8 +810,13 @@ function b64url(str){
 const state = { sel: { senate: null, gov: null }, rankBy: "total" };
 const CIVIC_API = "https://civicapi.org/api/v2/race";
 const LIVE_RACE_IDS = { senate: 87528, gov: 87535 };
+const LIVE_RESULTS_WINDOW = { start: Date.parse("2026-11-02T05:00:00Z"), end: Date.parse("2026-11-09T05:00:00Z") };
+const LIVE_POLL_MS = 60000;
+const LIVE_IDLE_MS = 300000;
+const LIVE_OVERRIDE = new URLSearchParams(location.search).get("live");
 let liveResults = {};
 let liveStatus = {ok:false, checkedAt:0, error:"Loading results"};
+let liveTimer = null;
 const DEMO_FINAL = new URLSearchParams(location.search).get("demo") === "final";
 
 function esc(s){
@@ -1093,18 +1101,40 @@ async function fetchGroup(){
   renderGroup();
 }
 
+function liveWindow(){
+  if(LIVE_OVERRIDE === "1") return "open";
+  if(LIVE_OVERRIDE === "0") return "before";
+  const now = Date.now();
+  if(now < LIVE_RESULTS_WINDOW.start) return "before";
+  if(now >= LIVE_RESULTS_WINDOW.end) return "after";
+  return "open";
+}
+
+function liveWindowNote(){
+  const fmt = t => new Date(t).toLocaleDateString([], {month:"short", day:"numeric"});
+  return liveWindow() === "after"
+    ? "Results feed closed " + fmt(LIVE_RESULTS_WINDOW.end)
+    : "Results feed starts " + fmt(LIVE_RESULTS_WINDOW.start);
+}
+
 async function fetchLiveResults(){
+  if(liveWindow() !== "open"){
+    liveResults = {};
+    liveStatus = {ok:false, checkedAt:0, error:liveWindowNote()};
+    renderGroup();
+    return;
+  }
   try{
     const [sen, gov] = await Promise.all([
       fetch(`${CIVIC_API}/${LIVE_RACE_IDS.senate}`, {cache:"no-store"}).then(r => r.ok ? r.json() : Promise.reject(new Error("senate feed"))),
       fetch(`${CIVIC_API}/${LIVE_RACE_IDS.gov}`, {cache:"no-store"}).then(r => r.ok ? r.json() : Promise.reject(new Error("governor feed")))
     ]);
-    if(sen.test_data || gov.test_data) throw new Error("test data");
+    const test = !!(sen.test_data || gov.test_data);
     const next = {};
     const absorb = (payload, chamber) => {
       Object.entries(payload.region_results || {}).forEach(([code, region]) => {
         const cands = region.candidates || [];
-        const winner = cands.find(c => c.winner);
+        const winner = payload.test_data ? null : cands.find(c => c.winner);
         let margin = null;
         if(winner){
           const runner = cands.filter(c => c !== winner).sort((a,b) => (b.percent || 0) - (a.percent || 0))[0];
@@ -1122,11 +1152,22 @@ async function fetchLiveResults(){
     absorb(sen, "sen");
     absorb(gov, "gov");
     liveResults = next;
-    liveStatus = {ok:true, checkedAt:Date.now()};
+    liveStatus = {ok:true, checkedAt:Date.now(), test};
   }catch(e){
     liveStatus = {ok:false, checkedAt:Date.now(), error:"Results feed offline"};
   }
   renderGroup();
+}
+
+function scheduleLivePoll(){
+  if(liveTimer) clearTimeout(liveTimer);
+  const win = liveWindow();
+  if(win === "after"){ liveTimer = null; return; }
+  const wait = win === "before" ? Math.min(LIVE_IDLE_MS, Math.max(5000, LIVE_RESULTS_WINDOW.start - Date.now())) : LIVE_POLL_MS;
+  liveTimer = setTimeout(async () => {
+    if(!document.hidden) await fetchLiveResults();
+    scheduleLivePoll();
+  }, wait);
 }
 
 async function syncToGroup(){
@@ -1319,14 +1360,15 @@ function renderGroup(){
     <div class="stat"><div class="k">Total picks</div><div class="v">${totalPicks}</div></div>
     ${leaderCard("Best winners", leaders.winners, `${leaders.winners ? leaders.winners.correct : 0} correct`)}
     ${leaderCard("Best with margin", leaders.margins, leaders.margins && leaders.margins.avgMiss !== null ? `${leaders.margins.total.toFixed(1)} pts` : "No margins yet")}
-    <div class="stat"><div class="k">Results feed</div><div class="v ${liveStatus.demo ? "demo" : liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.demo ? "Demo" : liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.demo ? "Fake results · final scoring preview" : liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
+    <div class="stat"><div class="k">Results feed</div><div class="v ${(liveStatus.demo || liveStatus.test) ? "test" : liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.demo ? "Demo" : liveStatus.test ? "Test" : liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.demo ? "Fake results · final scoring preview" : liveStatus.test ? "civicAPI test feed · checked " + checked : liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
 
   const pill = document.getElementById("live-pill");
   if(pill){
-    pill.classList.toggle("off", !liveStatus.ok);
+    pill.classList.toggle("off", !liveStatus.ok && !liveStatus.test);
     pill.classList.toggle("demo", !!liveStatus.demo);
+    pill.classList.toggle("test", !!liveStatus.test);
     const txt = document.getElementById("live-text");
-    if(txt) txt.textContent = liveStatus.demo ? "Demo results" : liveStatus.ok ? `Live results · ${checked}` : liveStatus.error;
+    if(txt) txt.textContent = liveStatus.demo ? "Demo results" : liveStatus.test ? `Test feed · ${checked}` : liveStatus.ok ? `Live results · ${checked}` : liveStatus.error;
   }
 
   const head = () => `<th>State</th><th>Race</th><th>Cook</th><th>Result</th>` + people.map(pn => {
@@ -1453,7 +1495,12 @@ function initGroup(){
   if(GROUP_ENDPOINT) setInterval(fetchGroup, 10000);
   else document.getElementById("group-status").textContent = "Live board not configured yet";
   fetchLiveResults();
-  setInterval(fetchLiveResults, 30000);
+  scheduleLivePoll();
+  document.addEventListener("visibilitychange", () => {
+    if(document.hidden || liveWindow() !== "open") return;
+    if(Date.now() - (liveStatus.checkedAt || 0) < LIVE_POLL_MS) return;
+    fetchLiveResults();
+  });
 }
 
 function init(){
