@@ -122,16 +122,16 @@
   .pick .row button.sel-R, .pick.hero .row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
   .pick .row button.sel-O, .pick.hero .row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
 
-  .guide{background:linear-gradient(180deg,#f3fbf6,#eef7f1); border:1px solid #cfe6d7; border-radius:14px; box-shadow:var(--shadow); padding:16px 18px; margin:2px 0 12px}
-  .guide h2{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:18px; margin:0 0 12px; font-weight:600; color:#14512f}
-  .guide .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+  .guide{background:linear-gradient(180deg,#f3fbf6,#eef7f1); border:1px solid #cfe6d7; border-radius:12px; box-shadow:var(--shadow); padding:12px 14px; margin:2px 0 10px}
+  .guide h2{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:16px; margin:0 0 8px; font-weight:600; color:#14512f}
+  .guide .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
   @media (max-width:900px){ .guide .steps{grid-template-columns:1fr 1fr} }
   @media (max-width:560px){ .guide .steps{grid-template-columns:1fr} }
-  .stepcard{display:flex; gap:10px; align-items:flex-start; text-align:left; font:inherit; cursor:pointer; background:#fff; border:1px solid var(--line); border-radius:11px; padding:10px 12px; color:#3c414b}
+  .stepcard{display:flex; gap:8px; align-items:flex-start; text-align:left; font:inherit; cursor:pointer; background:#fff; border:1px solid var(--line); border-radius:9px; padding:8px 10px; color:#3c414b}
   .stepcard:hover{border-color:#2f9e57; background:#fbfefc}
-  .stepcard .n{flex:none; width:24px; height:24px; border-radius:50%; background:#2f9e57; color:#fff; font-size:12.5px; font-weight:800; display:grid; place-items:center}
-  .stepcard .txt{font-size:12.5px; line-height:1.4}
-  .stepcard .txt b{display:block; font-size:13px; color:var(--ink); margin-bottom:2px}
+  .stepcard .n{flex:none; width:21px; height:21px; border-radius:50%; background:#2f9e57; color:#fff; font-size:11.5px; font-weight:800; display:grid; place-items:center}
+  .stepcard .txt{font-size:12px; line-height:1.35}
+  .stepcard .txt b{display:block; font-size:12.5px; color:var(--ink); margin-bottom:1px}
   .stepcard .txt b .go{font-weight:700; color:#1c7a43}
 
   .pcard .row.mini{display:flex; gap:5px; margin-top:8px}
@@ -154,6 +154,7 @@
   .stat .k{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700}
   .stat .v{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:24px; font-weight:600; margin-top:2px}
   .stat .v.live{color:#1c7a43}
+  .stat .v.demo{color:#8a5a00}
   .stat .g{font-size:11.5px; color:var(--muted); margin-top:2px}
 
   .table-wrap{overflow:auto; border:1px solid var(--line); border-radius:10px}
@@ -203,12 +204,53 @@
   .sb-rule .t{font-size:12.5px; font-weight:800; color:var(--ink); margin-bottom:3px}
   .sb-rule p{margin:0; font-size:12.5px; color:#3c414b}
   .scorebox .sb-foot{margin:0; font-size:12px; color:var(--muted)}
-  .rankbar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px}
+  .rankbar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:18px 0 12px}
   .rankbar .lbl{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:800}
   .rank-toggle{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:#fff}
   .rank-toggle button{font:inherit; font-size:12.5px; font-weight:700; padding:6px 12px; border:0; background:transparent; color:#3f4551; cursor:pointer}
   .rank-toggle button[aria-pressed="true"]{background:var(--ink); color:#fff}
   .gh-score.pts{color:#14512f}
+
+  table.group-board tfoot td{border-top:2px solid var(--line); background:#faf7f1; padding:9px 10px; white-space:nowrap; vertical-align:middle}
+  table.group-board tfoot td.total-label{font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:800}
+  .total-cell b{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:16px; color:var(--ink)}
+  .total-cell .tc-sub{display:block; font-size:10px; color:var(--muted); font-weight:700}
+  .total-cell.lead b{color:#14512f}
+
+  .final-legend{display:flex; align-items:center; gap:6px; flex-wrap:wrap; font-size:11px; color:var(--muted); font-weight:600; margin:0 0 8px}
+  .final-legend .sw{width:10px; height:10px; border-radius:3px; display:inline-block; margin-left:8px}
+  .final-legend .sw:first-child{margin-left:0}
+  .final-legend .sw.win{background:#2f9e57}
+  .final-legend .sw.bonus{background:#d9a520}
+  .final-board{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff}
+  .final-row{display:grid; grid-template-columns:44px minmax(120px,1.1fr) minmax(160px,2.4fr) 96px; gap:12px; align-items:center; padding:10px 14px; border-bottom:1px solid #f1ede5}
+  .final-row:last-child{border-bottom:0}
+  .final-row.head{background:#faf7f1; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:800; padding-top:8px; padding-bottom:8px}
+  .final-rank{text-align:center}
+  .final-rank .medal{display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:#f1ede5; color:#6b7280; font-size:12px; font-weight:800}
+  .final-row.r1 .medal{background:#f6d97a; color:#5b4300}
+  .final-row.r2 .medal{background:#d9dee5; color:#3e4753}
+  .final-row.r3 .medal{background:#e8c4a4; color:#6b3b17}
+  .final-name{font-weight:700; font-size:13.5px; min-width:0; line-height:1.3}
+  .final-board .final-name .sub{display:block; font-size:11px; color:var(--muted); font-weight:600; margin:1px 0 0; line-height:1.35}
+  .final-bar{display:flex; height:12px; border-radius:999px; overflow:hidden; background:#f1ede5}
+  .final-bar .win{background:#2f9e57}
+  .final-bar .bonus{background:#d9a520}
+  .final-pts{text-align:right; font-variant-numeric:tabular-nums; line-height:1.1}
+  .final-pts b{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:18px}
+  .final-board .final-pts .sub{display:block; font-size:10.5px; color:var(--muted); font-weight:700; margin:0; line-height:1.3}
+  @media (max-width:640px){
+    .final-row{grid-template-columns:36px 1fr 84px; grid-template-areas:"rank name pts" "rank bar bar"; row-gap:7px; padding:10px 12px}
+    .final-row.head{display:none}
+    .final-rank{grid-area:rank}
+    .final-name{grid-area:name}
+    .final-bar{grid-area:bar}
+    .final-pts{grid-area:pts}
+  }
+
+  .live-pill.demo{color:#8a5a00; background:#fff6df; border-color:#f0dda6}
+  .live-pill.demo .dot{background:#d9a520}
+  .banner .exit{font:inherit; font-weight:800; background:none; border:0; color:#8a5a00; text-decoration:underline; cursor:pointer; padding:0; margin-left:4px}
 
   .page{display:none} .page.on{display:block}
   .panel{background:var(--panel); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:24px}
@@ -257,9 +299,9 @@
       <h2>Start here: four quick steps</h2>
       <div class="steps">
         <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board</span> and enter your first name.</span></button>
-        <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:var(--ink)">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b>, and add a margin if you want the closeness bonus.</span></button>
+        <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Open <span class="go">Make Picks - Senate</span> or <span class="go">Governors</span>. In the box at the top of each card, pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b>; add an optional margin for the closeness bonus.</span></button>
         <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Predictions</span> to see everything in one place and quickly change any pick.</span></button>
-        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> to see everyone's picks and scores as results come in. Scoring is +1 per correct winner, plus an optional margin bonus.</span></button>
+        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> for everyone's picks and scores. +1 per correct winner, plus an optional margin bonus.</span></button>
       </div>
     </section>
     <nav class="tabs" role="tablist">
@@ -273,6 +315,7 @@
 </header>
 
 <main class="wrap">
+  <div class="banner" id="demo-banner" style="margin:14px 0 0"></div>
   <div class="page" id="page-senate">
     <div class="lede">
       <h2>Flip through the map</h2>
@@ -386,6 +429,7 @@
         <table class="group-board">
           <thead><tr><th>State</th><th>Race</th><th>Cook</th><th>Result</th></tr></thead>
           <tbody id="group-senate"></tbody>
+          <tfoot id="group-senate-foot"></tfoot>
         </table>
       </div>
       <h4 style="margin-top:18px;">Governor picks</h4>
@@ -393,8 +437,12 @@
         <table class="group-board">
           <thead><tr><th>State</th><th>Race</th><th>Cook</th><th>Result</th></tr></thead>
           <tbody id="group-gov"></tbody>
+          <tfoot id="group-gov-foot"></tfoot>
         </table>
       </div>
+      <h4 style="margin-top:22px;">Final scoreboard</h4>
+      <div class="final-legend"><span class="sw win"></span> Winner points <span class="sw bonus"></span> Margin bonus</div>
+      <div class="final-board" id="final-board"></div>
       <p class="note" style="margin-top:12px;">Your name is the column header. Use the × in a header to remove someone, after confirming.</p>
       <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. Scoring rules are at the top of this page.</p>
     </div>
@@ -448,6 +496,7 @@ function loadPicks(){
   }
 }
 function savePicks(){ 
+  if(DEMO_FINAL) return;
   localStorage.setItem(KEY, JSON.stringify(picks)); 
   syncToGroup();
 }
@@ -723,6 +772,7 @@ const CIVIC_API = "https://civicapi.org/api/v2/race";
 const LIVE_RACE_IDS = { senate: 87528, gov: 87535 };
 let liveResults = {};
 let liveStatus = {ok:false, checkedAt:0, error:"Loading results"};
+const DEMO_FINAL = new URLSearchParams(location.search).get("demo") === "final";
 
 function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -749,11 +799,14 @@ function marginMiss(pk, res){
   return Math.abs(guess - Number(res.margin));
 }
 
-function scorePerson(personPicks){
-  let correct = 0, judged = 0, bonus = 0, missSum = 0, missCount = 0;
+function scorePerson(personPicks, chamber){
+  let correct = 0, judged = 0, made = 0, bonus = 0, missSum = 0, missCount = 0;
   DATA.races.forEach(r => {
+    if(chamber && r.chamber !== chamber) return;
     const res = resultFor(r.id), p = personPicks[r.id];
-    if(!res || !p || !p.winner) return;
+    if(!p || !p.winner) return;
+    made++;
+    if(!res) return;
     judged++;
     if(p.winner !== res.winner) return;
     correct++;
@@ -764,46 +817,129 @@ function scorePerson(personPicks){
     bonus += Math.max(0, 1 - miss / 5);
   });
   return {
-    correct, judged, bonus,
+    correct, judged, made, bonus,
     avgMiss: missCount ? missSum / missCount : null,
     total: correct + bonus
   };
 }
 
-function scoreLeaders(people){
-  const scores = people.map(name => {
+function byAvgMiss(a, b){
+  const ma = a.avgMiss === null ? Infinity : a.avgMiss;
+  const mb = b.avgMiss === null ? Infinity : b.avgMiss;
+  return ma === mb ? 0 : (ma < mb ? -1 : 1);
+}
+
+function scoreSort(a, b){
+  if(state.rankBy === "winners"){
+    if(b.correct !== a.correct) return b.correct - a.correct;
+  } else {
+    if(b.total !== a.total) return b.total - a.total;
+    if(b.correct !== a.correct) return b.correct - a.correct;
+  }
+  return byAvgMiss(a, b);
+}
+
+function scoredPeople(people){
+  return people.map(name => {
     const pr = ((groupData.picks[name] || {}).picks) || {};
     return Object.assign({name}, scorePerson(pr));
   });
-  const byMiss = (a, b) => {
-    const ma = a.avgMiss === null ? Infinity : a.avgMiss;
-    const mb = b.avgMiss === null ? Infinity : b.avgMiss;
-    return ma === mb ? 0 : (ma < mb ? -1 : 1);
-  };
-  const winners = [...scores].sort((a, b) => b.correct - a.correct || byMiss(a, b) || b.bonus - a.bonus)[0] || null;
-  const margins = [...scores].sort((a, b) => b.total - a.total || b.correct - a.correct || byMiss(a, b))[0] || null;
+}
+
+function scoreLeaders(people){
+  const scores = scoredPeople(people);
+  const winners = [...scores].sort((a, b) => b.correct - a.correct || byAvgMiss(a, b) || b.bonus - a.bonus)[0] || null;
+  const margins = [...scores].sort((a, b) => b.total - a.total || b.correct - a.correct || byAvgMiss(a, b))[0] || null;
   return {winners, margins};
 }
 
 function sortPeople(people){
-  const score = name => scorePerson(((groupData.picks[name] || {}).picks) || {});
-  const byMiss = (a, b) => {
-    const ma = a.avgMiss === null ? Infinity : a.avgMiss;
-    const mb = b.avgMiss === null ? Infinity : b.avgMiss;
-    return ma === mb ? 0 : (ma < mb ? -1 : 1);
-  };
-  return [...people].sort((a, b) => {
-    const sa = score(a), sb = score(b);
-    if(state.rankBy === "winners"){
-      if(sb.correct !== sa.correct) return sb.correct - sa.correct;
-    } else {
-      if(sb.total !== sa.total) return sb.total - sa.total;
-      if(sb.correct !== sa.correct) return sb.correct - sa.correct;
-    }
-    const missOrder = byMiss(sa, sb);
-    if(missOrder !== 0) return missOrder;
-    return a.localeCompare(b);
+  return scoredPeople(people)
+    .sort((a, b) => scoreSort(a, b) || a.name.localeCompare(b.name))
+    .map(s => s.name);
+}
+
+function renderFinalBoard(people){
+  const board = document.getElementById("final-board");
+  if(!board) return;
+  if(!people.length){
+    board.innerHTML = `<p class="note" style="padding:12px 14px">No players on the board yet.</p>`;
+    return;
+  }
+  const rows = scoredPeople(people).sort((a, b) => b.total - a.total || b.correct - a.correct || byAvgMiss(a, b) || a.name.localeCompare(b.name));
+  if(!rows.some(r => r.judged)){
+    board.innerHTML = `<p class="note" style="padding:12px 14px">Scores appear here once races are called.</p>`;
+    return;
+  }
+  const max = Math.max(...rows.map(r => r.total), 1);
+  const head = `<div class="final-row head"><div>#</div><div>Player</div><div>Winner points + margin bonus</div><div style="text-align:right">Total</div></div>`;
+  const body = rows.map((r, i) => {
+    const winW = Math.max(0, Math.min(100, r.correct / max * 100));
+    const bonusW = Math.max(0, Math.min(100 - winW, r.bonus / max * 100));
+    const sub = r.judged ? `${r.correct}/${r.judged} winners` + (r.avgMiss === null ? "" : ` · ${r.avgMiss.toFixed(1)} avg miss`) : "No picks judged";
+    return `<div class="final-row ${i < 3 ? "r" + (i + 1) : ""}">
+      <div class="final-rank"><span class="medal">${i + 1}</span></div>
+      <div class="final-name">${esc(r.name)}<span class="sub">${sub}</span></div>
+      <div class="final-bar" title="${r.correct} winner points + ${r.bonus.toFixed(1)} margin bonus"><span class="win" style="width:${winW}%"></span><span class="bonus" style="width:${bonusW}%"></span></div>
+      <div class="final-pts"><b>${r.total.toFixed(1)}</b><span class="sub">${r.bonus.toFixed(1)} margin</span></div>
+    </div>`;
+  }).join("");
+  board.innerHTML = head + body;
+}
+
+function demoRand(seed){
+  let h = 2166136261;
+  for(let i = 0; i < seed.length; i++){ h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return (h >>> 0) / 4294967295;
+}
+
+function buildDemoFinal(){
+  const results = {};
+  DATA.races.forEach(r => {
+    const winner = r.cook.endsWith(" D") ? "D" : r.cook.endsWith(" R") ? "R" : (demoRand(r.id + "|w") < 0.52 ? "D" : "R");
+    const base = r.cook === "Toss Up" ? 2.2 : r.cook.startsWith("Lean") ? 5.5 : r.cook.startsWith("Likely") ? 11 : 19;
+    const margin = Math.max(0.4, Math.round((base + (demoRand(r.id + "|m") - 0.5) * 7) * 10) / 10);
+    results[r.id] = {winner, margin, reporting:100, called:true};
   });
+  const roster = [
+    {name:"Jordan", skill:0.88, marginChance:0, err:0},
+    {name:"Maya", skill:0.83, marginChance:0.9, err:1.2},
+    {name:"Priya", skill:0.74, marginChance:0.95, err:0.8},
+    {name:"Sam", skill:0.79, marginChance:0.6, err:2.2},
+    {name:"Elena", skill:0.68, marginChance:0.75, err:1.6},
+    {name:"Noah", skill:0.71, marginChance:0.35, err:3.2}
+  ];
+  const people = {};
+  roster.forEach(p => {
+    const pk = {};
+    DATA.races.forEach(r => {
+      const res = results[r.id];
+      const right = demoRand(p.name + "|" + r.id + "|w") < p.skill;
+      const entry = {winner: right ? res.winner : (res.winner === "D" ? "R" : "D")};
+      if(right && demoRand(p.name + "|" + r.id + "|m") < p.marginChance){
+        const miss = (demoRand(p.name + "|" + r.id + "|e") * 2 - 1) * p.err * 2.2;
+        entry.margin = Math.max(0, Math.round((res.margin + miss) * 10) / 10);
+      }
+      pk[r.id] = entry;
+    });
+    people[p.name] = {picks: pk, updatedAt: Date.now()};
+  });
+  return {results, people};
+}
+
+function applyDemoFinal(){
+  const demo = buildDemoFinal();
+  liveResults = demo.results;
+  liveStatus = {ok:true, checkedAt:Date.now(), error:"", demo:true};
+  groupData = {picks:demo.people, updatedAt:Date.now()};
+  picks = JSON.parse(JSON.stringify(demo.people["Maya"].picks));
+  const b = document.getElementById("demo-banner");
+  if(b){
+    b.className = "banner on";
+    b.innerHTML = `<b>Demo mode.</b> Fake results and six fake players, for previewing final scoring only. Nothing here is saved or synced. <button type="button" class="exit" id="demo-exit">Exit demo</button>`;
+    const exit = document.getElementById("demo-exit");
+    if(exit) exit.onclick = () => { location.href = location.pathname; };
+  }
 }
 
 function showPage(name, scroll){
@@ -880,6 +1016,7 @@ async function fetchLiveResults(){
 }
 
 async function syncToGroup(){
+  if(DEMO_FINAL) return;
   const name = groupName;
   if(!name) return;
   if(!GROUP_ENDPOINT){
@@ -923,26 +1060,27 @@ function renderGroup(){
     <div class="stat"><div class="k">Total picks</div><div class="v">${totalPicks}</div></div>
     ${leaderCard("Best winners", leaders.winners, `${leaders.winners ? leaders.winners.correct : 0} correct`)}
     ${leaderCard("Best with margin", leaders.margins, leaders.margins && leaders.margins.avgMiss !== null ? `${leaders.margins.total.toFixed(1)} pts` : "No margins yet")}
-    <div class="stat"><div class="k">Results feed</div><div class="v ${liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
+    <div class="stat"><div class="k">Results feed</div><div class="v ${liveStatus.demo ? "demo" : liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.demo ? "Demo" : liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.demo ? "Fake results · final scoring preview" : liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
 
   const pill = document.getElementById("live-pill");
   if(pill){
     pill.classList.toggle("off", !liveStatus.ok);
+    pill.classList.toggle("demo", !!liveStatus.demo);
     const txt = document.getElementById("live-text");
-    if(txt) txt.textContent = liveStatus.ok ? `Live results · ${checked}` : liveStatus.error;
+    if(txt) txt.textContent = liveStatus.demo ? "Demo results" : liveStatus.ok ? `Live results · ${checked}` : liveStatus.error;
   }
 
   const head = () => `<th>State</th><th>Race</th><th>Cook</th><th>Result</th>` + people.map(pn => {
     const pr = (groupData.picks[pn] || {}).picks || {};
-    const made = races.filter(r => pr[r.id] && pr[r.id].winner).length;
     const sc = scorePerson(pr);
-    const primary = sc.judged > 0 ? `${sc.correct}/${sc.judged} correct` : `${made} picks`;
-    const tooltip = sc.judged > 0 ? `${sc.correct} winner points + ${sc.bonus.toFixed(1)} margin bonus` : `${made} picks made`;
+    const primary = sc.judged > 0 ? `${sc.correct}/${sc.judged} correct` : `${sc.made} picks`;
+    const tooltip = sc.judged > 0 ? `${sc.correct} winner points + ${sc.bonus.toFixed(1)} margin bonus` : `${sc.made} picks made`;
     const secondary = sc.judged === 0 ? ""
       : state.rankBy === "winners"
         ? (sc.avgMiss === null ? "" : `<div class="gh-score pts" title="${tooltip}">+${sc.bonus.toFixed(1)} margin</div>`)
         : `<div class="gh-score pts" title="${tooltip}">${sc.total.toFixed(1)} pts</div>`;
-    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span><button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button></div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tooltip}">${primary}</div>${secondary}</div></th>`;
+    const del = DEMO_FINAL ? "" : `<button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button>`;
+    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span>${del}</div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tooltip}">${primary}</div>${secondary}</div></th>`;
   }).join("");
 
   const rows = (chamber) => races.filter(r => r.chamber === chamber).map(r => {
@@ -979,6 +1117,20 @@ function renderGroup(){
   govT.innerHTML = rows("gov");
   senT.closest("table").querySelector("thead tr").innerHTML = head();
   govT.closest("table").querySelector("thead tr").innerHTML = head();
+
+  const foot = (chamber) => people.map(pn => {
+    const pr = (groupData.picks[pn] || {}).picks || {};
+    const sc = scorePerson(pr, chamber);
+    const main = sc.judged ? sc.total.toFixed(1) : "—";
+    const sub = sc.judged ? `${sc.correct} + ${sc.bonus.toFixed(1)}` : `${sc.made} picks`;
+    return `<td class="total-cell ${sc.judged && sc.correct ? "lead" : ""}"><b>${main}</b><span class="tc-sub">${sub}</span></td>`;
+  }).join("");
+  const senFoot = document.getElementById("group-senate-foot");
+  const govFoot = document.getElementById("group-gov-foot");
+  if(senFoot) senFoot.innerHTML = `<tr><td colspan="4" class="total-label">Senate points</td>${foot("senate")}</tr>`;
+  if(govFoot) govFoot.innerHTML = `<tr><td colspan="4" class="total-label">Governor points</td>${foot("gov")}</tr>`;
+  renderFinalBoard(people);
+
   document.querySelectorAll(".del-name").forEach(b => {
     b.onclick = () => deletePerson(b.dataset.name);
   });
@@ -989,6 +1141,7 @@ function renderGroup(){
 }
 
 async function deletePerson(name){
+  if(DEMO_FINAL) return;
   if(!confirm("Remove " + name + " from the group board? This deletes their picks for everyone.")) return;
   try{
     const res = await fetch(groupPersonUrl(name), {method:"DELETE"});
@@ -1011,9 +1164,16 @@ function initGroup(){
   const inp = document.getElementById("group-name");
   if(inp) inp.value = groupName;
   document.getElementById("group-save-name").onclick = ()=>{
+    if(DEMO_FINAL){ document.getElementById("group-status").textContent = "Demo mode · nothing is saved"; return; }
     const v = document.getElementById("group-name").value;
     if(v && v.trim()){ groupName = v.trim(); localStorage.setItem("midterm-group-name", groupName); document.getElementById("group-status").textContent = "Name set: " + groupName; syncToGroup(); }
   };
+  if(DEMO_FINAL){
+    const status = document.getElementById("group-status");
+    if(status) status.textContent = "Demo data · nothing is saved";
+    renderGroup();
+    return;
+  }
   fetchGroup();
   if(GROUP_ENDPOINT) setInterval(fetchGroup, 10000);
   else document.getElementById("group-status").textContent = "Live board not configured yet";
@@ -1023,6 +1183,7 @@ function initGroup(){
 
 function init(){
   loadPicks();
+  if(DEMO_FINAL) applyDemoFinal();
   const senateRaces = DATA.races.filter(r => r.chamber === "senate");
   const govRaces = DATA.races.filter(r => r.chamber === "gov");
   const rank = r => RATING_ORDER[r.cook] ?? 9;
@@ -1055,7 +1216,8 @@ function init(){
 
   document.getElementById("clear-picks").onclick = () => {
     if(!confirm("Clear every pick in this browser?")) return;
-    picks = {}; savePicks(); history.replaceState(null, "", location.pathname);
+    picks = {}; savePicks();
+    if(!DEMO_FINAL) history.replaceState(null, "", location.pathname);
     refreshPicks();
   };
   initGroup();
