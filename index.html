@@ -539,7 +539,7 @@ function b64url(str){
 }
 
 const state = { sel: { senate: null, gov: null } };
-const FIREBASE_DB_URL = "";
+const FIREBASE_DB_URL = "https://midterm-desk-default-rtdb.firebaseio.com";
 const GROUP_ROOM = "main";
 const GROUP_ENDPOINT = FIREBASE_DB_URL ? FIREBASE_DB_URL.replace(/\/+$/, "") + "/picks/" + GROUP_ROOM + ".json" : "";
 
