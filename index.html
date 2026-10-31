@@ -863,21 +863,24 @@ function initGroup(){
   const inp = document.getElementById("group-name");
   if(inp) inp.value = groupName;
   if(groupName) {
-    document.getElementById("group-status").textContent = "✅ Joined as " + groupName;
+    const st = document.getElementById("group-status");
+    if(st) st.textContent = "✅ Joined as " + groupName;
   }
-  document.getElementById("group-save-name").onclick = ()=>{
-    const v = document.getElementById("group-name").value;
-    if(v && v.trim()){ 
-      groupName = v.trim(); 
-      localStorage.setItem("midterm-group-name", groupName); 
-      document.getElementById("group-status").textContent = "✅ Joined as " + groupName; 
-      syncToGroup(); 
-    }
-  };
-  fetchGroup();
-  fetchResults();
-  setInterval(fetchGroup, 8000);
-  setInterval(fetchResults, 60000);
+  const btn = document.getElementById("group-save-name");
+  if(btn) {
+    btn.onclick = ()=>{
+      const v = (document.getElementById("group-name")||{}).value;
+      if(v && v.trim()){ 
+        groupName = v.trim(); 
+        localStorage.setItem("midterm-group-name", groupName); 
+        const st = document.getElementById("group-status");
+        if(st) st.textContent = "✅ Joined as " + groupName; 
+        syncToGroup(); 
+      }
+    };
+  }
+  try { fetchGroup(); } catch(e){}
+  try { fetchResults(); } catch(e){}
 }
 
 function init(){
