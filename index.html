@@ -144,6 +144,45 @@
   .stat{background:#faf7f1; border:1px solid var(--line); border-radius:10px; padding:12px 14px}
   .stat .k{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:700}
   .stat .v{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:24px; font-weight:600; margin-top:2px}
+  .stat .v.live{color:#1c7a43}
+  .stat .g{font-size:11.5px; color:var(--muted); margin-top:2px}
+
+  .table-wrap{overflow:auto; border:1px solid var(--line); border-radius:10px}
+  table.group-board{width:100%; border-collapse:collapse; font-size:13px}
+  table.group-board th{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); background:#faf7f1; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; vertical-align:top; white-space:nowrap}
+  table.group-board th.name-th{text-transform:none; letter-spacing:0; color:var(--ink); min-width:108px}
+  table.group-board td{padding:7px 10px; border-bottom:1px solid #f1ede5; vertical-align:middle}
+  table.group-board tbody tr:last-child td{border-bottom:0}
+  table.group-board tbody tr:hover td{background:#fcfaf6}
+  .state-cell{font-weight:600; white-space:nowrap}
+  .state-cell .abbr{font-size:10.5px; color:var(--muted); font-weight:700; margin-left:3px}
+  .race-cell{min-width:210px; color:#3c414b}
+  .cook-cell{white-space:nowrap; color:#3c414b}
+  .result-cell{white-space:nowrap}
+  .pickcell{white-space:nowrap}
+  .pickcell.cell-ok{background:#f4fbf6!important}
+  .pickcell.cell-no{background:#fdf5f4!important}
+  .pickpill{display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; padding:2px 7px; border-radius:999px; border:1px solid; white-space:nowrap; font-variant-numeric:tabular-nums; line-height:1.5}
+  .pickpill b{font-size:10px; letter-spacing:.03em}
+  .pickpill.D{background:var(--d-soft); border-color:#cfdaf9; color:#14348f}
+  .pickpill.R{background:var(--r-soft); border-color:#f6d3d0; color:#8f2b21}
+  .pickpill.O{background:#f1f2f4; border-color:#d9dce1; color:#3f4551}
+  .rpt{font-size:10px; color:var(--muted); margin-left:5px; font-weight:600}
+  .mark{font-size:12px; font-weight:800; margin-left:4px}
+  .mark.ok{color:#1c7a43}
+  .mark.no{color:#b23b30}
+  .muted{color:#9aa0aa}
+  .gh{display:flex; flex-direction:column; gap:2px; min-width:92px}
+  .gh-top{display:flex; align-items:center; gap:5px}
+  .gh-name{font-weight:700; color:var(--ink); font-size:12.5px}
+  .gh-score{font-size:10.5px; font-weight:700; color:var(--muted); white-space:nowrap}
+  .gh-score.live{color:#1c7a43}
+  .del-name{font:inherit; font-size:12px; line-height:1; font-weight:800; color:#9aa0aa; background:#fff; border:1px solid var(--line); border-radius:5px; width:18px; height:18px; display:grid; place-items:center; cursor:pointer; padding:0}
+  .del-name:hover{color:#8f2b21; border-color:#e7bdb8; background:var(--r-soft)}
+  .live-pill{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; color:#1c7a43; background:#eaf7ef; border:1px solid #cfe6d7; border-radius:999px; padding:2px 8px; white-space:nowrap}
+  .live-pill .dot{width:6px; height:6px; border-radius:50%; background:#2f9e57}
+  .live-pill.off{color:#8f2b21; background:var(--r-soft); border-color:#f6d3d0}
+  .live-pill.off .dot{background:#b23b30}
 
   .page{display:none} .page.on{display:block}
   .panel{background:var(--panel); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:24px}
@@ -286,30 +325,32 @@
   <div class="page on" id="page-group">
     <div class="panel">
       <h2>Live Group Board &amp; Scores</h2>
-      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks will sync live for everyone to see.</p>
+      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks sync live. Scores update automatically as results come in.</p>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
         <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
           <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:7px; width:200px;">
         </label>
         <button class="btn" id="group-save-name">Set name</button>
         <span class="note" id="group-status">Not synced yet</span>
+        <span class="live-pill" id="live-pill" style="margin-left:auto;"><span class="dot"></span><span id="live-text">Loading results</span></span>
       </div>
       <div class="summary" id="group-stats"></div>
       <h4>Senate picks</h4>
-      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+      <div class="table-wrap">
+        <table class="group-board">
+          <thead><tr><th>State</th><th>Race</th><th>Cook</th><th>Result</th></tr></thead>
           <tbody id="group-senate"></tbody>
         </table>
       </div>
       <h4 style="margin-top:18px;">Governor picks</h4>
-      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+      <div class="table-wrap">
+        <table class="group-board">
+          <thead><tr><th>State</th><th>Race</th><th>Cook</th><th>Result</th></tr></thead>
           <tbody id="group-gov"></tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live. Scores appear once results are entered.</p>
+      <p class="note" style="margin-top:12px;">Your name is the column header. Use the × in a header to remove someone, after confirming.</p>
+      <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. A race scores once a winner is called; ✓ means the winner pick was right, ✗ means it was wrong. Margins are displayed but do not affect the score.</p>
     </div>
   </div>
 
@@ -610,16 +651,31 @@ function b64url(str){
 }
 
 const state = { sel: { senate: null, gov: null } };
-const RESULTS = {};
+const CIVIC_API = "https://civicapi.org/api/v2/race";
+const LIVE_RACE_IDS = { senate: 87528, gov: 87535 };
+let liveResults = {};
+let liveStatus = {ok:false, checkedAt:0, error:"Loading results"};
 
 function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
+function partyCode(party){
+  const p = String(party || "").toLowerCase();
+  if(p.includes("democrat")) return "D";
+  if(p.includes("republican")) return "R";
+  return "O";
+}
+
+function resultFor(id){
+  const r = liveResults[id];
+  return r && r.called ? r : null;
+}
+
 function scoreFor(personPicks){
   let correct = 0, judged = 0;
   DATA.races.forEach(r => {
-    const res = RESULTS[r.id], p = personPicks[r.id];
+    const res = resultFor(r.id), p = personPicks[r.id];
     if(!res || !p || !p.winner) return;
     judged++;
     if(p.winner === res.winner) correct++;
@@ -664,6 +720,42 @@ async function fetchGroup(){
   renderGroup();
 }
 
+async function fetchLiveResults(){
+  try{
+    const [sen, gov] = await Promise.all([
+      fetch(`${CIVIC_API}/${LIVE_RACE_IDS.senate}`, {cache:"no-store"}).then(r => r.ok ? r.json() : Promise.reject(new Error("senate feed"))),
+      fetch(`${CIVIC_API}/${LIVE_RACE_IDS.gov}`, {cache:"no-store"}).then(r => r.ok ? r.json() : Promise.reject(new Error("governor feed")))
+    ]);
+    if(sen.test_data || gov.test_data) throw new Error("test data");
+    const next = {};
+    const absorb = (payload, chamber) => {
+      Object.entries(payload.region_results || {}).forEach(([code, region]) => {
+        const cands = region.candidates || [];
+        const winner = cands.find(c => c.winner);
+        let margin = null;
+        if(winner){
+          const runner = cands.filter(c => c !== winner).sort((a,b) => (b.percent || 0) - (a.percent || 0))[0];
+          const wp = Number(winner.percent || 0), rp = Number(runner ? runner.percent : 0);
+          if(wp > 0 && rp > 0) margin = Math.abs(wp - rp);
+        }
+        next[chamber + ":" + code.toUpperCase()] = {
+          winner: winner ? partyCode(winner.party) : null,
+          margin: margin == null ? null : Math.round(margin * 10) / 10,
+          reporting: Number(region.percent_reporting || 0),
+          called: !!winner
+        };
+      });
+    };
+    absorb(sen, "sen");
+    absorb(gov, "gov");
+    liveResults = next;
+    liveStatus = {ok:true, checkedAt:Date.now()};
+  }catch(e){
+    liveStatus = {ok:false, checkedAt:Date.now(), error:"Results feed offline"};
+  }
+  renderGroup();
+}
+
 async function syncToGroup(){
   const name = groupName;
   if(!name) return;
@@ -686,38 +778,90 @@ function renderGroup(){
   const senT = document.getElementById("group-senate");
   const govT = document.getElementById("group-gov");
   if(!senT || !govT) return;
-  senT.innerHTML = "";
-  govT.innerHTML = "";
+
   const races = DATA.races;
   const people = Object.keys(groupData.picks || {}).sort();
-  const anyResults = Object.keys(RESULTS).length > 0;
-  let stats = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
-  people.forEach(pn => {
+  const called = races.filter(r => resultFor(r.id)).length;
+  const totalPicks = people.reduce((sum, pn) => {
     const pr = (groupData.picks[pn] || {}).picks || {};
-    const made = DATA.races.filter(r => pr[r.id] && pr[r.id].winner).length;
-    const sc = scoreFor(pr);
-    const showScore = anyResults && sc.judged > 0;
-    stats += `<div class="stat"><div class="k">${esc(pn)} · ${showScore ? "Score" : "Picks made"}</div><div class="v">${showScore ? sc.correct + " / " + sc.judged : made}</div></div>`;
-  });
-  document.getElementById("group-stats").innerHTML = stats;
+    return sum + races.filter(r => pr[r.id] && pr[r.id].winner).length;
+  }, 0);
+  const checked = liveStatus.checkedAt ? new Date(liveStatus.checkedAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "";
 
-  const td = "padding:6px 10px; border-bottom:1px solid #f1ede5;";
-  const th = "text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);";
-  const head = () => `<th style="${th}">State</th><th style="${th}">Race</th><th style="${th}">Cook</th>` + people.map(pn => `<th style="${th}">${esc(pn)}</th>`).join("");
+  document.getElementById("group-stats").innerHTML = `
+    <div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>
+    <div class="stat"><div class="k">Races called</div><div class="v">${called}<span style="font-size:14px; color:var(--muted)">/${races.length}</span></div></div>
+    <div class="stat"><div class="k">Total picks</div><div class="v">${totalPicks}</div></div>
+    <div class="stat"><div class="k">Results feed</div><div class="v ${liveStatus.ok ? "live" : ""}" style="font-size:18px">${liveStatus.ok ? "Live" : "Offline"}</div><div class="g">${liveStatus.ok ? "civicAPI · checked " + checked : liveStatus.error}</div></div>`;
+
+  const pill = document.getElementById("live-pill");
+  if(pill){
+    pill.classList.toggle("off", !liveStatus.ok);
+    const txt = document.getElementById("live-text");
+    if(txt) txt.textContent = liveStatus.ok ? `Live results · ${checked}` : liveStatus.error;
+  }
+
+  const head = () => `<th>State</th><th>Race</th><th>Cook</th><th>Result</th>` + people.map(pn => {
+    const pr = (groupData.picks[pn] || {}).picks || {};
+    const made = races.filter(r => pr[r.id] && pr[r.id].winner).length;
+    const sc = scoreFor(pr);
+    const label = sc.judged > 0 ? `${sc.correct}/${sc.judged} correct` : `${made} picks`;
+    const tip = sc.judged > 0 ? `${sc.correct} correct of ${sc.judged} called races picked` : `${made} picks made`;
+    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span><button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button></div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tip}">${label}</div></div></th>`;
+  }).join("");
+
   const rows = (chamber) => races.filter(r => r.chamber === chamber).map(r => {
-    const base = `<td style="${td}">${r.state} (${r.abbr})</td><td style="${td}">${r.cands.map(c => c.party + ":" + c.name).join(" vs ")}</td><td style="${td}">${r.cook}</td>`;
+    const res = liveResults[r.id];
+    let resultCell = `<span class="muted">—</span>`;
+    if(res && res.called){
+      resultCell = `<span class="pickpill ${res.winner}"><b>${res.winner}</b>${res.margin == null ? "" : " +" + res.margin.toFixed(1)}</span>`;
+      if(res.reporting > 0 && res.reporting < 100) resultCell += `<span class="rpt">${Math.round(res.reporting)}% in</span>`;
+    } else if(res && res.reporting > 0){
+      resultCell = `<span class="muted">Counting ${Math.round(res.reporting)}%</span>`;
+    }
+    const base = `<td class="state-cell">${r.state}<span class="abbr">${r.abbr}</span></td><td class="race-cell">${r.cands.map(c => c.party + ":" + c.name).join(" vs ")}</td><td class="cook-cell">${r.cook}</td><td class="result-cell">${resultCell}</td>`;
     const cells = people.map(pn => {
       const pr = (groupData.picks[pn] || {}).picks || {};
       const pk = pr[r.id];
-      const val = pk && pk.winner ? (pk.winner + "+" + Number(pk.margin || 0).toFixed(1)) : "—";
-      return `<td style="${td}">${esc(pn)}: <b>${val}</b></td>`;
+      if(!pk || !pk.winner) return `<td class="pickcell"><span class="muted">—</span></td>`;
+      let content = `<span class="pickpill ${pk.winner}"><b>${pk.winner}</b> +${Number(pk.margin || 0).toFixed(1)}</span>`;
+      let cls = "pickcell";
+      if(res && res.called){
+        const ok = pk.winner === res.winner;
+        cls += ok ? " cell-ok" : " cell-no";
+        content += `<span class="mark ${ok ? "ok" : "no"}" title="${ok ? "Correct" : "Wrong"}">${ok ? "✓" : "✗"}</span>`;
+      }
+      return `<td class="${cls}">${content}</td>`;
     }).join("");
     return `<tr>${base}${cells}</tr>`;
   }).join("");
+
   senT.innerHTML = rows("senate");
   govT.innerHTML = rows("gov");
-  document.querySelector("#group-senate").closest("table").querySelector("thead tr").innerHTML = head();
-  document.querySelector("#group-gov").closest("table").querySelector("thead tr").innerHTML = head();
+  senT.closest("table").querySelector("thead tr").innerHTML = head();
+  govT.closest("table").querySelector("thead tr").innerHTML = head();
+  document.querySelectorAll(".del-name").forEach(b => {
+    b.onclick = () => deletePerson(b.dataset.name);
+  });
+}
+
+async function deletePerson(name){
+  if(!confirm("Remove " + name + " from the group board? This deletes their picks for everyone.")) return;
+  try{
+    const res = await fetch(groupPersonUrl(name), {method:"DELETE"});
+    if(!res.ok) throw new Error("delete failed");
+    delete groupData.picks[name];
+    if(groupName === name){
+      groupName = "";
+      localStorage.removeItem("midterm-group-name");
+      const inp = document.getElementById("group-name");
+      if(inp) inp.value = "";
+    }
+    document.getElementById("group-status").textContent = "Removed " + name;
+    renderGroup();
+  }catch(e){
+    document.getElementById("group-status").textContent = "Could not remove " + name;
+  }
 }
 
 function initGroup(){
@@ -730,6 +874,8 @@ function initGroup(){
   fetchGroup();
   if(GROUP_ENDPOINT) setInterval(fetchGroup, 10000);
   else document.getElementById("group-status").textContent = "Live board not configured yet";
+  fetchLiveResults();
+  setInterval(fetchLiveResults, 30000);
 }
 
 function init(){
