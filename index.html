@@ -441,7 +441,7 @@
             <p><b>+1 point</b> per correct winner, plus up to <b>+1</b> for a close margin. A perfect margin adds the full second point and it fades to zero at 5+ points off. Margins only count when the winner is right.</p>
           </div>
         </div>
-        <p class="sb-foot">✓ correct, ✗ wrong. A race scores once a winner is called. Rank the board by either score; ties break on average margin miss.</p>
+        <p class="sb-foot">✓ correct, ✗ wrong. A race scores once a winner is called. Score the board by either measure; ties break on average margin miss.</p>
       </div>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
         <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
@@ -453,8 +453,8 @@
       </div>
       <div class="summary" id="group-stats"></div>
       <div class="rankbar">
-        <span class="lbl">Rank by</span>
-        <div class="rank-toggle" role="group" aria-label="Rank the board by">
+        <span class="lbl">Score by</span>
+        <div class="rank-toggle" role="group" aria-label="Score the board by">
           <button type="button" data-rank="winners" aria-pressed="false">Winners only</button>
           <button type="button" data-rank="total" aria-pressed="true">Winners + margin</button>
         </div>
@@ -476,7 +476,7 @@
         </table>
       </div>
       <h4 style="margin-top:22px;">Final scoreboard</h4>
-      <div class="final-legend"><span class="sw win"></span> Winner points <span class="sw bonus"></span> Margin bonus</div>
+      <div class="final-legend" id="final-legend"><span class="sw win"></span> Winner points <span class="sw bonus"></span> Margin bonus</div>
       <div class="final-board" id="final-board"></div>
       <p class="note" style="margin-top:12px;">Your name is the column header, marked "you". Click a cell in that column to change your pick right there, or use the × to remove someone, after confirming.</p>
       <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. Scoring rules are at the top of this page.</p>
@@ -934,26 +934,37 @@ function sortPeople(people){
 function renderFinalBoard(people){
   const board = document.getElementById("final-board");
   if(!board) return;
+  const legend = document.getElementById("final-legend");
+  const byWinners = state.rankBy === "winners";
+  if(legend){
+    legend.innerHTML = byWinners
+      ? `<span class="sw win"></span> Winners correct`
+      : `<span class="sw win"></span> Winner points <span class="sw bonus"></span> Margin bonus`;
+  }
   if(!people.length){
     board.innerHTML = `<p class="note" style="padding:12px 14px">No players on the board yet.</p>`;
     return;
   }
-  const rows = scoredPeople(people).sort((a, b) => b.total - a.total || b.correct - a.correct || byAvgMiss(a, b) || a.name.localeCompare(b.name));
+  const rows = scoredPeople(people).sort((a, b) => scoreSort(a, b) || a.name.localeCompare(b.name));
   if(!rows.some(r => r.judged)){
     board.innerHTML = `<p class="note" style="padding:12px 14px">Scores appear here once races are called.</p>`;
     return;
   }
-  const max = Math.max(...rows.map(r => r.total), 1);
-  const head = `<div class="final-row head"><div>#</div><div>Player</div><div>Winner points + margin bonus</div><div style="text-align:right">Total</div></div>`;
+  const metric = r => byWinners ? r.correct : r.total;
+  const max = Math.max(...rows.map(metric), 1);
+  const head = `<div class="final-row head"><div>#</div><div>Player</div><div>${byWinners ? "Winners called" : "Winner points + margin bonus"}</div><div style="text-align:right">${byWinners ? "Winners" : "Total"}</div></div>`;
   const body = rows.map((r, i) => {
     const winW = Math.max(0, Math.min(100, r.correct / max * 100));
-    const bonusW = Math.max(0, Math.min(100 - winW, r.bonus / max * 100));
+    const bonusW = byWinners ? 0 : Math.max(0, Math.min(100 - winW, r.bonus / max * 100));
     const sub = r.judged ? `${r.correct}/${r.judged} winners` + (r.avgMiss === null ? "" : ` · ${r.avgMiss.toFixed(1)} avg miss`) : "No picks judged";
+    const barTitle = byWinners ? `${r.correct} winners correct` : `${r.correct} winner points + ${r.bonus.toFixed(1)} margin bonus`;
+    const pts = byWinners ? `${r.correct}` : r.total.toFixed(1);
+    const ptsSub = byWinners ? "winners" : `${r.bonus.toFixed(1)} margin`;
     return `<div class="final-row ${i < 3 ? "r" + (i + 1) : ""}">
       <div class="final-rank"><span class="medal">${i + 1}</span></div>
       <div class="final-name">${esc(r.name)}<span class="sub">${sub}</span></div>
-      <div class="final-bar" title="${r.correct} winner points + ${r.bonus.toFixed(1)} margin bonus"><span class="win" style="width:${winW}%"></span><span class="bonus" style="width:${bonusW}%"></span></div>
-      <div class="final-pts"><b>${r.total.toFixed(1)}</b><span class="sub">${r.bonus.toFixed(1)} margin</span></div>
+      <div class="final-bar" title="${barTitle}"><span class="win" style="width:${winW}%"></span><span class="bonus" style="width:${bonusW}%"></span></div>
+      <div class="final-pts"><b>${pts}</b><span class="sub">${ptsSub}</span></div>
     </div>`;
   }).join("");
   board.innerHTML = head + body;
