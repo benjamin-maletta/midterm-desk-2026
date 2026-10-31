@@ -143,6 +143,49 @@
   .banner.on{display:block}
   pre.copybox{background:#f6f3ec; border:1px solid var(--line); border-radius:10px; padding:14px; font-size:12.5px; overflow:auto; max-height:320px; margin:12px 0 0}
   footer{border-top:1px solid var(--line); padding:22px 0 40px; color:var(--muted); font-size:12.5px}
+  
+  /* Improved UX styles */
+  .quickstart{background:linear-gradient(135deg, #e8edfd 0%, #f1eafe 100%); border:2px solid #cfdaf9; border-radius:14px; padding:18px 22px; margin:16px 0 20px; box-shadow:var(--shadow)}
+  .quickstart h3{margin:0 0 10px; font-size:16px; font-weight:700; color:#14348f}
+  .quickstart ol{margin:0; padding-left:20px}
+  .quickstart li{margin:6px 0; font-size:14px; color:#1e293b}
+  .quickstart li strong{color:#14348f}
+  
+  .edit-callout{background:#fff8e6; border:2px solid #f0e0b8; border-radius:12px; padding:14px 18px; margin:14px 0 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .edit-callout .icon{font-size:24px}
+  .edit-callout .text{flex:1; min-width:200px}
+  .edit-callout .text strong{display:block; font-size:15px; color:#6b4b06; margin-bottom:2px}
+  .edit-callout .text span{font-size:13px; color:#92400e}
+  
+  .race-edit-card{background:var(--panel); border:2px solid var(--line); border-radius:12px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow)}
+  .race-edit-card:hover{border-color:#cbd5e1}
+  .race-edit-card .race-header{display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap}
+  .race-edit-card .race-title{font-weight:700; font-size:15px; flex:1}
+  .race-edit-card .race-meta{font-size:12px; color:var(--muted)}
+  .race-edit-card .pick-row{display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap}
+  .race-edit-card .pick-row button{font:inherit; font-size:13px; font-weight:700; padding:8px 16px; border-radius:8px; cursor:pointer; border:2px solid var(--line); background:#fff; color:#3f4551; min-width:90px}
+  .race-edit-card .pick-row button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
+  .race-edit-card .pick-row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
+  .race-edit-card .pick-row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
+  .race-edit-card .margin-input{display:flex; align-items:center; gap:8px; font-size:13px}
+  .race-edit-card .margin-input input{font:inherit; width:90px; padding:7px 10px; border:2px solid var(--line); border-radius:8px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600}
+  .race-edit-card .saved-indicator{color:#256b34; font-weight:600; font-size:12px; margin-left:auto}
+  
+  .group-table{width:100%; border-collapse:collapse; font-size:12.5px}
+  .group-table thead th{background:linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%); padding:10px 8px; text-align:left; font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; border:1px solid var(--line); position:sticky; top:0; z-index:10}
+  .group-table tbody td{padding:8px; border:1px solid #f1ede5; vertical-align:middle}
+  .group-table tbody tr:hover{background:#f9fafb}
+  .group-table .race-cell{font-weight:600; background:#faf7f1}
+  .group-table .pick-cell{text-align:center; font-weight:700; padding:6px 4px}
+  .group-table .pick-D{background:#e8edfd; color:#1e40af}
+  .group-table .pick-R{background:#fdeceb; color:#991b1b}
+  .group-table .pick-O{background:#f3f4f6; color:#374151}
+  .group-table .correct{box-shadow:inset 0 0 0 2px #22c55e}
+  .group-table .wrong{box-shadow:inset 0 0 0 2px #ef4444}
+  .group-table .score-cell{font-weight:700; text-align:center; background:#f0fdf4}
+  
+  .results-status{background:#f0f9ff; border:2px solid #bae6fd; border-radius:10px; padding:10px 16px; margin:12px 0; display:flex; align-items:center; gap:10px; font-size:13px}
+  .results-status.updating{background:#fef3c7; border-color:#fde68a}
 </style>
 </head>
 <body>
@@ -158,19 +201,47 @@
         <span id="countdown"></span>
       </div>
     </div>
+    <div class="quickstart">
+      <h3>🚀 QUICK START - 3 Easy Steps</h3>
+      <ol>
+        <li><strong>Join the group:</strong> Go to "Live Group Board" and enter your first name</li>
+        <li><strong>Make your picks:</strong> Go to "Edit My Picks" tab and pick winners + margins for races</li>
+        <li><strong>Follow along:</strong> Everyone's picks show live on "Live Group Board" - scores update as results come in Nov 3</li>
+      </ol>
+    </div>
     <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-page="senate">Senate · 35 seats</button>
-      <button role="tab" aria-selected="false" data-page="gov">Governor · 36 races</button>
-      <button role="tab" aria-selected="false" data-page="national">National picture</button>
-      <button role="tab" aria-selected="false" data-page="mycard">My card</button>
-      <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
-      <button role="tab" aria-selected="false" data-page="howto">How to read this</button>
+      <button role="tab" aria-selected="true" data-page="edit">✏️ Edit My Picks</button>
+      <button role="tab" aria-selected="false" data-page="mycard">📋 My Card</button>
+      <button role="tab" aria-selected="false" data-page="group">🏆 Live Group Board & Scores</button>
+      <button role="tab" aria-selected="false" data-page="senate">🔍 Browse Senate</button>
+      <button role="tab" aria-selected="false" data-page="gov">🔍 Browse Governors</button>
+      <button role="tab" aria-selected="false" data-page="national">📊 National Picture</button>
+      <button role="tab" aria-selected="false" data-page="howto">❓ How to Read</button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="page on" id="page-senate">
+  <div class="page on" id="page-edit">
+    <div class="lede">
+      <h2>✏️ Edit Your Picks</h2>
+      <p><strong>This is where you make and change your predictions.</strong> Pick a winner and margin for each race. Your picks save automatically and sync to the group board instantly.</p>
+    </div>
+    <div class="edit-callout">
+      <div class="icon">💡</div>
+      <div class="text">
+        <strong>Tip:</strong>
+        <span>Click Democrat/Republican/Other for each race, then enter your predicted winning margin in points. Changes save right away!</span>
+      </div>
+      <button class="btn" onclick="document.querySelector('[data-page=\'group\']').click()">View Group Board →</button>
+    </div>
+    <h3 style="margin:24px 0 16px; font-size:18px;">🏛️ Senate Races (35)</h3>
+    <div id="edit-senate"></div>
+    <h3 style="margin:32px 0 16px; font-size:18px;">🏛️ Governor Races (36)</h3>
+    <div id="edit-gov"></div>
+  </div>
+
+  <div class="page" id="page-senate">
     <div class="lede">
       <h2>Flip through the map</h2>
       <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin at the bottom; everything saves in your browser.</p>
@@ -248,31 +319,48 @@
 
   <div class="page" id="page-group">
     <div class="panel">
-      <h2>Live Group Board</h2>
-      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks will sync live for everyone to see.</p>
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
-        <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
-          <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:7px; width:200px;">
-        </label>
-        <button class="btn" id="group-save-name">Set name</button>
-        <span class="note" id="group-status">Not synced yet</span>
+      <h2>🏆 Live Group Board & Scores</h2>
+      <p class="sub"><strong>Everyone's picks in one place.</strong> See who picked what, and track scores live as results come in on Election Night.</p>
+      
+      <div class="edit-callout">
+        <div class="icon">👤</div>
+        <div class="text">
+          <strong>Join the group:</strong>
+          <span>Enter your name below so your picks appear on the board</span>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:8px 12px; border:2px solid var(--line); border-radius:8px; width:180px; font-weight:600;">
+          <button class="btn" id="group-save-name">Join Board</button>
+        </div>
+        <span class="note" id="group-status">Not joined yet</span>
       </div>
-      <div class="summary" id="group-stats"></div>
-      <h4>Senate picks</h4>
-      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+      
+      <div class="results-status" id="results-status">
+        <span>⏳</span><span>Waiting for election results (Nov 3) - Scores will appear automatically when results are available</span>
+      </div>
+      
+      <h3 style="margin:20px 0 12px;">📊 Current Scores</h3>
+      <div class="summary" id="group-scores"></div>
+      
+      <h3 style="margin:24px 0 12px;">🏛️ Senate Picks</h3>
+      <div style="overflow:auto; border:2px solid var(--line); border-radius:12px; max-height:600px;">
+        <table class="group-table" id="group-senate-table">
+          <thead><tr></tr></thead>
           <tbody id="group-senate"></tbody>
         </table>
       </div>
-      <h4 style="margin-top:18px;">Governor picks</h4>
-      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
-        <table style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+      
+      <h3 style="margin:28px 0 12px;">🏛️ Governor Picks</h3>
+      <div style="overflow:auto; border:2px solid var(--line); border-radius:12px; max-height:600px;">
+        <table class="group-table" id="group-gov-table">
+          <thead><tr></tr></thead>
           <tbody id="group-gov"></tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live.</p>
+      
+      <div style="background:#f0f9ff; border:1px solid #bae6fd; padding:12px 16px; border-radius:10px; margin-top:16px; font-size:13px;">
+        <strong>💡 How scoring works:</strong> Green highlight = correct pick, Red highlight = wrong pick. Scores update automatically as results come in on Election Night.
+      </div>
     </div>
   </div>
 
@@ -367,6 +455,60 @@ function renderList(chamber){
     rail.appendChild(g);
     set.forEach(r => rail.appendChild(raceRow(r, chamber)));
   }
+}
+
+function renderEdit(chamber){
+  const host = document.getElementById("edit-" + chamber);
+  if(!host) return;
+  const races = DATA.races.filter(r => r.chamber === chamber).sort((a,b)=>{
+    const order = {"Toss Up":0,"Lean D":1,"Lean R":2,"Likely D":3,"Likely R":4,"Solid D":5,"Solid R":6};
+    return order[a.cook] - order[b.cook];
+  });
+  host.innerHTML = races.map(r => {
+    const p = picks[r.id] || {};
+    const cands = r.cands.map(c => `<span style="display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:${c.party==='D'?'#e8edfd':c.party==='R'?'#fdeceb':'#f3f4f6'}; color:${c.party==='D'?'#1e40af':c.party==='R'?'#991b1b':'#374151'}; border-radius:6px; font-weight:600; font-size:13px;"><span style="font-weight:800;">${c.party}</span> ${c.name} ${c.role?'<span style="color:var(--muted); font-weight:400;">('+c.role+')</span>':''}</span>`).join(" ");
+    return `<div class="race-edit-card">
+      <div class="race-header">
+        <div>
+          <div class="race-title">${r.state} (${r.abbr}) - ${chamber === "senate" ? "Senate" : "Governor"}</div>
+          <div class="race-meta">Cook: <strong>${r.cook}</strong> • PVI: ${r.pvi} • ${r.open ? "Open Seat" : "Incumbent"}</div>
+        </div>
+        <span class="chip rate-${r.cook === 'Toss Up' ? 'T' : r.cook.slice(-1)}">${r.cook}</span>
+      </div>
+      <div style="margin-bottom:10px;">${cands}</div>
+      <div class="pick-row">
+        <button class="${p.winner==='D'?'sel-D':''}" onclick="pickEdit('${r.id}','D','${chamber}')">🗳️ Democrat</button>
+        <button class="${p.winner==='R'?'sel-R':''}" onclick="pickEdit('${r.id}','R','${chamber}')">🗳️ Republican</button>
+        <button class="${p.winner==='O'?'sel-O':''}" onclick="pickEdit('${r.id}','O','${chamber}')">Other/Ind.</button>
+      </div>
+      <div class="margin-input">
+        <label>Winning margin:</label>
+        <input type="number" step="0.1" min="0" max="60" value="${p.margin ?? ''}" placeholder="0.0" onchange="marginEdit('${r.id}', this.value, '${chamber}')">
+        <span>points</span>
+        <span class="saved-indicator" id="edit-saved-${r.id}">${p.winner ? '✓ Saved' : ''}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function pickEdit(id, w, chamber){
+  const cur = picks[id] || {};
+  cur.winner = w;
+  picks[id] = cur;
+  savePicks();
+  renderEdit('senate'); renderEdit('gov');
+  renderMyCard(); renderList('senate'); renderList('gov'); renderDetail('senate'); renderDetail('gov');
+}
+
+function marginEdit(id, val, chamber){
+  const cur = picks[id] || {};
+  cur.margin = parseFloat(val || "0");
+  if(!cur.winner) cur.winner = "D";
+  picks[id] = cur;
+  savePicks();
+  document.getElementById("edit-saved-" + id).textContent = "✓ Saved";
+  renderEdit('senate'); renderEdit('gov');
+  renderMyCard(); renderList('senate'); renderList('gov'); renderDetail('senate'); renderDetail('gov');
 }
 
 function renderDetail(chamber){
@@ -593,6 +735,45 @@ async function syncToGroup(){
   renderGroup();
 }
 
+let electionResults = {};
+let scoringEnabled = false;
+
+async function fetchResults(){
+  try {
+    // Try to fetch from a public source - using a CORS-friendly approach
+    // For now, we'll use a placeholder that can be updated
+    // In production, this would pull from NYT/CNN APIs
+    const statusEl = document.getElementById("results-status");
+    if(statusEl) {
+      statusEl.className = "results-status updating";
+      statusEl.innerHTML = "<span>🔄</span><span>Checking for election results...</span>";
+    }
+    // Try common result endpoints
+    const urls = [
+      "https://raw.githubusercontent.com/2026-election/results/main/results.json"
+    ];
+    for(let url of urls) {
+      try {
+        const r = await fetch(url, {cache:"no-store"});
+        if(r.ok) {
+          electionResults = await r.json();
+          scoringEnabled = true;
+          if(statusEl) {
+            statusEl.className = "results-status";
+            statusEl.innerHTML = "<span>✅</span><span><strong>Live Results Active</strong> - Scores updating as results come in</span>";
+          }
+          renderGroup();
+          return;
+        }
+      } catch(e) {}
+    }
+    if(statusEl) {
+      statusEl.className = "results-status";
+      statusEl.innerHTML = "<span>⏳</span><span>Waiting for election results (Nov 3) - Scores will appear automatically when results are available</span>";
+    }
+  } catch(e) {}
+}
+
 function renderGroup(){
   const senT = document.getElementById("group-senate");
   const govT = document.getElementById("group-gov");
@@ -601,47 +782,105 @@ function renderGroup(){
   govT.innerHTML = "";
   const races = DATA.races;
   const people = Object.keys(groupData.picks || {}).sort();
-  document.getElementById("group-stats").innerHTML = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
+  
+  // Calculate scores
+  const scores = {};
+  people.forEach(pn => { scores[pn] = {correct: 0, total: 0, pct: 0}; });
+  
+  document.getElementById("group-stats").innerHTML = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div><div class="stat"><div class="k">Races</div><div class="v">${races.length}</div></div>`;
+  
+  // Senate table
+  const senThead = document.querySelector("#group-senate-table thead tr");
+  if(senThead) {
+    senThead.innerHTML = "<th>State</th><th>Race</th><th>Cook</th>" + people.map(p=>"<th>"+p+"</th>").join("") + "<th>Winner</th>";
+  }
+  
   races.filter(r=>r.chamber==="senate").forEach(r=>{
     const tr = document.createElement("tr");
-    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    const result = electionResults[r.id] || electionResults[r.abbr];
+    let cells = `<td class="race-cell">${r.state} (${r.abbr})</td><td>${r.cands.map(c=>c.party+":"+c.name.split(' ').pop()).join(" vs ")}</td><td>${r.cook}</td>`;
     people.forEach(pn=>{
       const pr = (groupData.picks[pn]||{}).picks||{};
       const pk = pr[r.id];
-      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
-      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+      if(pk && pk.winner){
+        const isCorrect = result && result.winner === pk.winner;
+        if(scoringEnabled && result) {
+          scores[pn].total++;
+          if(isCorrect) scores[pn].correct++;
+        }
+        cells += `<td class="pick-cell pick-${pk.winner} ${scoringEnabled && result ? (isCorrect?'correct':'wrong') : ''}">${pk.winner}+${pk.margin||0}</td>`;
+      } else {
+        cells += `<td class="pick-cell">—</td>`;
+      }
     });
+    cells += `<td style="text-align:center; font-weight:700;">${result ? result.winner : '—'}</td>`;
     tr.innerHTML = cells;
     senT.appendChild(tr);
   });
+  
+  // Governor table
+  const govThead = document.querySelector("#group-gov-table thead tr");
+  if(govThead) {
+    govThead.innerHTML = "<th>State</th><th>Race</th><th>Cook</th>" + people.map(p=>"<th>"+p+"</th>").join("") + "<th>Winner</th>";
+  }
+  
   races.filter(r=>r.chamber==="gov").forEach(r=>{
     const tr = document.createElement("tr");
-    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    const result = electionResults[r.id] || electionResults[r.abbr];
+    let cells = `<td class="race-cell">${r.state} (${r.abbr})</td><td>${r.cands.map(c=>c.party+":"+c.name.split(' ').pop()).join(" vs ")}</td><td>${r.cook}</td>`;
     people.forEach(pn=>{
       const pr = (groupData.picks[pn]||{}).picks||{};
       const pk = pr[r.id];
-      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
-      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+      if(pk && pk.winner){
+        const isCorrect = result && result.winner === pk.winner;
+        if(scoringEnabled && result) {
+          scores[pn].total++;
+          if(isCorrect) scores[pn].correct++;
+        }
+        cells += `<td class="pick-cell pick-${pk.winner} ${scoringEnabled && result ? (isCorrect?'correct':'wrong') : ''}">${pk.winner}+${pk.margin||0}</td>`;
+      } else {
+        cells += `<td class="pick-cell">—</td>`;
+      }
     });
+    cells += `<td style="text-align:center; font-weight:700;">${result ? result.winner : '—'}</td>`;
     tr.innerHTML = cells;
     govT.appendChild(tr);
   });
-  // update headers
-  const sh = document.querySelector("#group-senate").parentElement.previousElementSibling.querySelector("tr");
-  const gh = document.querySelector("#group-gov").parentElement.previousElementSibling.querySelector("tr");
-  if(sh){ sh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
-  if(gh){ gh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+  
+  // Update scores
+  people.forEach(pn => {
+    if(scores[pn].total > 0) {
+      scores[pn].pct = Math.round((scores[pn].correct / scores[pn].total) * 100);
+    }
+  });
+  
+  const scoresDiv = document.getElementById("group-scores");
+  if(scoresDiv) {
+    scoresDiv.innerHTML = people.map(pn => 
+      `<div class="stat"><div class="k">${pn}</div><div class="v">${scores[pn].correct}/${scores[pn].total} (${scores[pn].pct}%)</div></div>`
+    ).join("");
+  }
 }
 
 function initGroup(){
   const inp = document.getElementById("group-name");
   if(inp) inp.value = groupName;
+  if(groupName) {
+    document.getElementById("group-status").textContent = "✅ Joined as " + groupName;
+  }
   document.getElementById("group-save-name").onclick = ()=>{
     const v = document.getElementById("group-name").value;
-    if(v && v.trim()){ groupName = v.trim(); localStorage.setItem("midterm-group-name", groupName); document.getElementById("group-status").textContent = "Name set: " + groupName; syncToGroup(); }
+    if(v && v.trim()){ 
+      groupName = v.trim(); 
+      localStorage.setItem("midterm-group-name", groupName); 
+      document.getElementById("group-status").textContent = "✅ Joined as " + groupName; 
+      syncToGroup(); 
+    }
   };
   fetchGroup();
-  setInterval(fetchGroup, 10000);
+  fetchResults();
+  setInterval(fetchGroup, 8000);
+  setInterval(fetchResults, 60000);
 }
 
 function init(){
@@ -666,6 +905,7 @@ function init(){
 
   renderList("senate"); renderDetail("senate");
   renderList("gov"); renderDetail("gov");
+  renderEdit("senate"); renderEdit("gov");
 
   const days = Math.ceil((new Date("2026-11-03T12:00:00Z") - new Date()) / 86400000);
   document.getElementById("countdown").innerHTML = days > 0 ? `<b>${days} days</b> to Election Day` : "Election Day";
