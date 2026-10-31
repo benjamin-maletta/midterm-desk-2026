@@ -163,6 +163,7 @@
       <button role="tab" aria-selected="false" data-page="gov">Governor · 36 races</button>
       <button role="tab" aria-selected="false" data-page="national">National picture</button>
       <button role="tab" aria-selected="false" data-page="mycard">My card</button>
+      <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
       <button role="tab" aria-selected="false" data-page="howto">How to read this</button>
     </nav>
   </div>
@@ -245,6 +246,36 @@
     </div>
   </div>
 
+  <div class="page" id="page-group">
+    <div class="panel">
+      <h2>Live Group Board</h2>
+      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks will sync live for everyone to see.</p>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
+          <input type="text" id="group-name" placeholder="First name" style="font:inherit; padding:6px 10px; border:1px solid var(--line); border-radius:7px; width:200px;">
+        </label>
+        <button class="btn" id="group-save-name">Set name</button>
+        <span class="note" id="group-status">Not synced yet</span>
+      </div>
+      <div class="summary" id="group-stats"></div>
+      <h4>Senate picks</h4>
+      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+          <tbody id="group-senate"></tbody>
+        </table>
+      </div>
+      <h4 style="margin-top:18px;">Governor picks</h4>
+      <div style="overflow:auto; border:1px solid var(--line); border-radius:10px;">
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <thead style="background:#faf7f1;"><tr><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">State</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Race</th><th style="text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);">Cook</th></tr></thead>
+          <tbody id="group-gov"></tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:12px;">Picks sync automatically when you make them. Everyone sees updates live.</p>
+    </div>
+  </div>
+
   <div class="page" id="page-howto">
     <div class="panel">
       <h2>How to read this (and what's missing)</h2>
@@ -292,7 +323,10 @@ function loadPicks(){
     }catch(e){}
   }
 }
-function savePicks(){ localStorage.setItem(KEY, JSON.stringify(picks)); }
+function savePicks(){ 
+  localStorage.setItem(KEY, JSON.stringify(picks)); 
+  syncToGroup();
+}
 
 const RATING_ORDER = {"Toss Up":0,"Lean D":1,"Lean R":1,"Likely D":2,"Likely R":2,"Solid D":3,"Solid R":3};
 function rateClass(r){ return r==="Toss Up" ? "T" : r.slice(-1); }
@@ -507,6 +541,108 @@ function b64url(str){
 }
 
 const state = { sel: { senate: null, gov: null } };
+const GROUP_BUCKET = "JGPGwkq56cimrCLKd3JNkJ";
+const GROUP_BASE = "https://kvdb.io/JGPGwkq56cimrCLKd3JNkJ";
+
+let groupData = {picks:{}, updatedAt:0};
+let groupName = localStorage.getItem("midterm-group-name") || "";
+
+function getGroupName(){
+  if(!groupName){
+    const n = prompt("Enter your first name to join the live group board:");
+    if(n && n.trim()){
+      groupName = n.trim();
+      localStorage.setItem("midterm-group-name", groupName);
+      document.getElementById("group-name").value = groupName;
+    }
+  }
+  return groupName;
+}
+
+async function fetchGroup(){
+  try{
+    const r = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
+    if(r.ok){
+      const txt = await r.text();
+      try{ groupData = JSON.parse(txt); }catch(e){}
+    }
+  }catch(e){}
+  renderGroup();
+}
+
+async function syncToGroup(){
+  const name = getGroupName();
+  if(!name) return;
+  try{
+    const all = await fetch(GROUP_BASE + "/_key/picks_v1", {cache:"no-store"});
+    if(all.ok){
+      try{ groupData = JSON.parse(await all.text()); }catch(e){ groupData = {picks:{}, updatedAt:0}; }
+    }else{
+      groupData = {picks:{}, updatedAt:0};
+    }
+  }catch(e){ groupData = {picks:{}, updatedAt:0}; }
+  if(!groupData.picks) groupData.picks = {};
+  groupData.picks[name] = {picks: JSON.parse(JSON.stringify(picks)), updatedAt: Date.now()};
+  groupData.updatedAt = Date.now();
+  try{
+    await fetch(GROUP_BASE + "/_key/picks_v1", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(groupData)});
+    document.getElementById("group-status").textContent = "Synced as " + name;
+  }catch(e){
+    document.getElementById("group-status").textContent = "Sync failed";
+  }
+  renderGroup();
+}
+
+function renderGroup(){
+  const senT = document.getElementById("group-senate");
+  const govT = document.getElementById("group-gov");
+  if(!senT || !govT) return;
+  senT.innerHTML = "";
+  govT.innerHTML = "";
+  const races = DATA.races;
+  const people = Object.keys(groupData.picks || {}).sort();
+  document.getElementById("group-stats").innerHTML = `<div class="stat"><div class="k">People on board</div><div class="v">${people.length}</div></div>`;
+  races.filter(r=>r.chamber==="senate").forEach(r=>{
+    const tr = document.createElement("tr");
+    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    people.forEach(pn=>{
+      const pr = (groupData.picks[pn]||{}).picks||{};
+      const pk = pr[r.id];
+      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
+      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+    });
+    tr.innerHTML = cells;
+    senT.appendChild(tr);
+  });
+  races.filter(r=>r.chamber==="gov").forEach(r=>{
+    const tr = document.createElement("tr");
+    let cells = `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.state} (${r.abbr})</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cands.map(c=>c.party+":"+c.name).join(" vs ")}</td><td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${r.cook}</td>`;
+    people.forEach(pn=>{
+      const pr = (groupData.picks[pn]||{}).picks||{};
+      const pk = pr[r.id];
+      const val = pk && pk.winner ? (pk.winner + "+" + (pk.margin||0)) : "—";
+      cells += `<td style="padding:6px 10px; border-bottom:1px solid #f1ede5;">${pn}: <b>${val}</b></td>`;
+    });
+    tr.innerHTML = cells;
+    govT.appendChild(tr);
+  });
+  // update headers
+  const sh = document.querySelector("#group-senate").parentElement.previousElementSibling.querySelector("tr");
+  const gh = document.querySelector("#group-gov").parentElement.previousElementSibling.querySelector("tr");
+  if(sh){ sh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+  if(gh){ gh.innerHTML = "<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>State</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Race</th><th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>Cook</th>" + people.map(p=>"<th style='text-align:left; padding:8px 10px; border-bottom:1px solid var(--line);'>"+p+"</th>").join(""); }
+}
+
+function initGroup(){
+  const inp = document.getElementById("group-name");
+  if(inp) inp.value = groupName;
+  document.getElementById("group-save-name").onclick = ()=>{
+    const v = document.getElementById("group-name").value;
+    if(v && v.trim()){ groupName = v.trim(); localStorage.setItem("midterm-group-name", groupName); document.getElementById("group-status").textContent = "Name set: " + groupName; syncToGroup(); }
+  };
+  fetchGroup();
+  setInterval(fetchGroup, 10000);
+}
 
 function init(){
   loadPicks();
@@ -563,6 +699,7 @@ function init(){
     picks = {}; savePicks(); history.replaceState(null, "", location.pathname);
     renderList("senate"); renderDetail("senate"); renderList("gov"); renderDetail("gov"); renderMyCard();
   };
+  initGroup();
 }
 
 init();
