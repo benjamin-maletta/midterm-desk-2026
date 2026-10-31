@@ -182,6 +182,35 @@
   .mark.ok{color:#1c7a43}
   .mark.no{color:#b23b30}
   .muted{color:#9aa0aa}
+  .pickcell.mine{cursor:pointer}
+  .pickcell.mine:hover{background:#f1f6ff!important; box-shadow:inset 0 0 0 1px #cfdaf9}
+  .pickcell.mine:focus-visible{outline:2px solid var(--d); outline-offset:-2px}
+  .pickcell.mine::after{content:"✎"; font-size:10px; color:#9aa0aa; margin-left:5px; opacity:0}
+  .pickcell.mine:hover::after, .pickcell.mine:focus-visible::after{opacity:1}
+  .gh-you{font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; font-weight:800; color:#14348f; background:var(--d-soft); border:1px solid #cfdaf9; border-radius:999px; padding:0 5px; line-height:15px}
+
+  .pickpop{position:fixed; z-index:80; width:252px; padding:12px 13px 11px; background:var(--panel); border:1px solid var(--line); border-radius:12px; box-shadow:0 14px 34px rgba(20,22,27,.18), 0 1px 2px rgba(20,22,27,.08)}
+  .pickpop .pp-head{display:flex; align-items:flex-start; gap:8px}
+  .pickpop .pp-kicker{font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:800}
+  .pickpop .pp-title{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:15.5px; font-weight:600; line-height:1.25; margin-top:1px}
+  .pickpop .pp-cook{font-size:11.5px; color:var(--muted); font-weight:600; margin-top:1px}
+  .pickpop .pp-close{margin-left:auto; font:inherit; font-size:15px; line-height:1; font-weight:700; color:#9aa0aa; background:#fff; border:1px solid var(--line); border-radius:6px; width:22px; height:22px; display:grid; place-items:center; cursor:pointer; padding:0; flex:none}
+  .pickpop .pp-close:hover{color:var(--ink); border-color:#cfc8ba}
+  .pickpop .pp-row{display:flex; gap:5px; margin:10px 0 0}
+  .pickpop .pp-row button{flex:1; font:inherit; font-size:12.5px; font-weight:800; padding:7px 0; border-radius:7px; border:1px solid var(--line); background:#fff; color:#3f4551; cursor:pointer}
+  .pickpop .pp-row button[data-w="D"]{background:var(--d-soft); border-color:#cfdaf9; color:#14348f}
+  .pickpop .pp-row button[data-w="R"]{background:var(--r-soft); border-color:#f6d3d0; color:#8f2b21}
+  .pickpop .pp-row button[data-w="O"]{background:#f1f2f4; border-color:#d9dce1; color:#3f4551}
+  .pickpop .pp-row button:hover{filter:brightness(.97)}
+  .pickpop .pp-row button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
+  .pickpop .pp-row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
+  .pickpop .pp-row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
+  .pickpop .pp-margin{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted); font-weight:600; margin-top:8px}
+  .pickpop .pp-margin input{font:inherit; font-size:12.5px; width:62px; padding:4px 6px; border:1px solid var(--line); border-radius:6px; text-align:right; font-variant-numeric:tabular-nums; margin-left:auto}
+  .pickpop .pp-foot{display:flex; align-items:center; gap:8px; margin-top:9px; padding-top:8px; border-top:1px solid #f1ede5}
+  .pickpop .pp-note{font-size:10.5px; color:var(--muted); line-height:1.3; font-weight:600}
+  .pickpop .pp-clear{font:inherit; font-size:11px; font-weight:800; color:#8f2b21; background:none; border:0; padding:0; cursor:pointer; text-decoration:underline; margin-left:auto; white-space:nowrap}
+  .pickpop .pp-clear[disabled]{color:#c3c8d0; text-decoration:none; cursor:default}
   .gh{display:flex; flex-direction:column; gap:2px; min-width:92px}
   .gh-top{display:flex; align-items:center; gap:5px}
   .gh-name{font-weight:700; color:var(--ink); font-size:12.5px}
@@ -301,7 +330,7 @@
         <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board</span> and enter your first name.</span></button>
         <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Open <span class="go">Make Picks - Senate</span> or <span class="go">Governors</span>. In the box at the top of each card, pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b>; add an optional margin for the closeness bonus.</span></button>
         <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Predictions</span> to see everything in one place and quickly change any pick.</span></button>
-        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> for everyone's picks and scores. +1 per correct winner, plus an optional margin bonus.</span></button>
+        <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> for everyone's picks and scores. Click a cell in your own column to change that pick on the spot.</span></button>
       </div>
     </section>
     <nav class="tabs" role="tablist">
@@ -393,7 +422,7 @@
   <div class="page" id="page-group">
     <div class="panel">
       <h2>Live Group Board</h2>
-      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks sync live. Scores update automatically as results come in.</p>
+      <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks sync live. Scores update automatically as results come in. Click any cell in your own column to change that pick without leaving this page.</p>
       <div class="scorebox" aria-label="How scoring works">
         <div class="sb-head"><h3>How scoring works</h3><span class="sb-tag">Margins are optional</span></div>
         <div class="sb-grid">
@@ -443,7 +472,7 @@
       <h4 style="margin-top:22px;">Final scoreboard</h4>
       <div class="final-legend"><span class="sw win"></span> Winner points <span class="sw bonus"></span> Margin bonus</div>
       <div class="final-board" id="final-board"></div>
-      <p class="note" style="margin-top:12px;">Your name is the column header. Use the × in a header to remove someone, after confirming.</p>
+      <p class="note" style="margin-top:12px;">Your name is the column header, marked "you". Click a cell in that column to change your pick right there, or use the × to remove someone, after confirming.</p>
       <p class="note">Live results from <a href="https://civicapi.org" target="_blank" rel="noopener">civicAPI</a>. Scoring rules are at the top of this page.</p>
     </div>
   </div>
@@ -1034,6 +1063,150 @@ async function syncToGroup(){
   renderGroup();
 }
 
+function deepCopyPicks(obj){
+  return JSON.parse(JSON.stringify(obj || {}));
+}
+
+function myBoardKey(){
+  const raw = String(groupName || "").trim();
+  if(!raw) return "";
+  const names = Object.keys(groupData.picks || {});
+  if(names.indexOf(raw) !== -1) return raw;
+  const lower = raw.toLowerCase();
+  return names.find(n => n.toLowerCase() === lower) || "";
+}
+
+function boardPicksFor(key){
+  return ((groupData.picks[key] || {}).picks) || {};
+}
+
+let pickPop = {race:null, key:""};
+
+function pickPopEl(){
+  return document.getElementById("pickpop");
+}
+
+function closePickPop(){
+  const el = pickPopEl();
+  if(el) el.remove();
+  pickPop = {race:null, key:""};
+}
+
+function positionPickPop(){
+  const el = pickPopEl();
+  if(!el) return;
+  const race = String(pickPop.race).replace(/["\\]/g, "\\$&");
+  const anchor = document.querySelector(`td.pickcell.mine[data-race="${race}"]`);
+  if(!anchor){ closePickPop(); return; }
+  const a = anchor.getBoundingClientRect();
+  if(a.bottom < 0 || a.top > window.innerHeight){ closePickPop(); return; }
+  const b = el.getBoundingClientRect();
+  const pad = 10;
+  let top = a.bottom + 8;
+  if(top + b.height > window.innerHeight - pad) top = a.top - b.height - 8;
+  if(top < pad) top = pad;
+  let left = a.left + a.width / 2 - b.width / 2;
+  left = Math.max(pad, Math.min(left, window.innerWidth - b.width - pad));
+  el.style.top = Math.round(top) + "px";
+  el.style.left = Math.round(left) + "px";
+}
+
+function syncPickPop(){
+  const el = pickPopEl();
+  if(!el) return;
+  const p = boardPicksFor(pickPop.key)[pickPop.race] || {};
+  el.querySelectorAll(".pp-row button").forEach(b => {
+    b.classList.toggle("sel-D", p.winner === "D");
+    b.classList.toggle("sel-R", p.winner === "R");
+    b.classList.toggle("sel-O", p.winner === "O");
+  });
+  const inp = el.querySelector(".pp-margin input");
+  if(inp && document.activeElement !== inp){
+    inp.value = (p.margin === undefined || p.margin === null || p.margin === "") ? "" : p.margin;
+  }
+  const clr = el.querySelector(".pp-clear");
+  if(clr) clr.disabled = !p.winner;
+}
+
+function boardWritePick(raceId, winner, margin){
+  const key = pickPop.key || myBoardKey();
+  if(!key) return;
+  const merged = Object.assign(deepCopyPicks(boardPicksFor(key)), deepCopyPicks(picks));
+  if(winner === null){
+    delete merged[raceId];
+  } else {
+    const cur = merged[raceId] || {};
+    if(winner) cur.winner = winner;
+    if(margin !== undefined){
+      if(margin === null || !isFinite(Number(margin))) delete cur.margin;
+      else cur.margin = Number(margin);
+    }
+    if(cur.winner || cur.margin !== undefined) merged[raceId] = cur;
+    else delete merged[raceId];
+  }
+  picks = merged;
+  groupData.picks[key] = {picks: deepCopyPicks(picks), updatedAt: Date.now()};
+  savePicks();
+  refreshPicks();
+  renderGroup();
+  syncPickPop();
+  positionPickPop();
+}
+
+function openPickPop(raceId){
+  const key = myBoardKey();
+  if(!key) return;
+  if(key !== groupName){
+    groupName = key;
+    localStorage.setItem("midterm-group-name", groupName);
+    const nameInput = document.getElementById("group-name");
+    if(nameInput) nameInput.value = groupName;
+  }
+  const r = DATA.races.find(x => x.id === raceId);
+  if(!r) return;
+  closePickPop();
+  const el = document.createElement("div");
+  el.id = "pickpop";
+  el.className = "pickpop";
+  el.setAttribute("role", "dialog");
+  el.setAttribute("aria-label", "Edit your pick");
+  el.innerHTML = `
+    <div class="pp-head">
+      <div>
+        <div class="pp-kicker">Your pick · ${r.chamber === "senate" ? "Senate" : "Governor"}</div>
+        <div class="pp-title">${esc(r.title)}</div>
+        <div class="pp-cook">Cook: ${esc(r.cook)}</div>
+      </div>
+      <button type="button" class="pp-close" aria-label="Close">×</button>
+    </div>
+    <div class="pp-row" role="group" aria-label="Pick a winner">
+      <button type="button" data-w="D">D</button>
+      <button type="button" data-w="R">R</button>
+      <button type="button" data-w="O">O</button>
+    </div>
+    <label class="pp-margin">Margin <input type="number" step="0.1" min="0" max="60" placeholder="0.0"><span>pts</span></label>
+    <div class="pp-foot">
+      <span class="pp-note">Saves here, in My Predictions, and on the group board.</span>
+      <button type="button" class="pp-clear">Clear</button>
+    </div>`;
+  document.body.appendChild(el);
+  pickPop = {race: raceId, key};
+  el.querySelector(".pp-close").onclick = closePickPop;
+  el.querySelectorAll(".pp-row button").forEach(b => {
+    b.onclick = () => boardWritePick(raceId, b.dataset.w);
+  });
+  const inp = el.querySelector(".pp-margin input");
+  inp.onchange = () => {
+    const raw = inp.value.trim();
+    const val = parseFloat(raw);
+    boardWritePick(raceId, undefined, (raw === "" || !isFinite(val)) ? null : val);
+  };
+  el.querySelector(".pp-clear").onclick = () => boardWritePick(raceId, null);
+  syncPickPop();
+  positionPickPop();
+  requestAnimationFrame(positionPickPop);
+}
+
 function renderGroup(){
   const senT = document.getElementById("group-senate");
   const govT = document.getElementById("group-gov");
@@ -1041,6 +1214,7 @@ function renderGroup(){
 
   const races = DATA.races;
   const people = sortPeople(Object.keys(groupData.picks || {}));
+  const myKey = myBoardKey();
   const called = races.filter(r => resultFor(r.id)).length;
   const totalPicks = people.reduce((sum, pn) => {
     const pr = (groupData.picks[pn] || {}).picks || {};
@@ -1080,7 +1254,8 @@ function renderGroup(){
         ? (sc.avgMiss === null ? "" : `<div class="gh-score pts" title="${tooltip}">+${sc.bonus.toFixed(1)} margin</div>`)
         : `<div class="gh-score pts" title="${tooltip}">${sc.total.toFixed(1)} pts</div>`;
     const del = DEMO_FINAL ? "" : `<button class="del-name" data-name="${esc(pn)}" title="Remove ${esc(pn)}" aria-label="Remove ${esc(pn)}">×</button>`;
-    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span>${del}</div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tooltip}">${primary}</div>${secondary}</div></th>`;
+    const you = pn === myKey ? `<span class="gh-you">you</span>` : "";
+    return `<th class="name-th"><div class="gh"><div class="gh-top"><span class="gh-name">${esc(pn)}</span>${you}${del}</div><div class="gh-score ${sc.judged > 0 ? "live" : ""}" title="${tooltip}">${primary}</div>${secondary}</div></th>`;
   }).join("");
 
   const rows = (chamber) => races.filter(r => r.chamber === chamber).map(r => {
@@ -1097,18 +1272,22 @@ function renderGroup(){
     const cells = people.map(pn => {
       const pr = (groupData.picks[pn] || {}).picks || {};
       const pk = pr[r.id];
-      if(!pk || !pk.winner) return `<td class="pickcell"><span class="muted">—</span></td>`;
-      const hasMargin = pk.margin !== undefined && pk.margin !== null && pk.margin !== "" && isFinite(Number(pk.margin));
-      let content = `<span class="pickpill ${pk.winner}"><b>${pk.winner}</b>${hasMargin ? " +" + Number(pk.margin).toFixed(1) : ""}</span>`;
+      const isMine = pn === myKey;
+      let content = `<span class="muted">—</span>`;
       let cls = "pickcell";
-      if(res && res.called){
-        const ok = pk.winner === res.winner;
-        const miss = marginMiss(pk, res);
-        cls += ok ? " cell-ok" : " cell-no";
-        const why = ok ? (miss === null ? "Correct winner" : `Correct winner · margin off by ${miss.toFixed(1)}`) : "Wrong winner";
-        content += `<span class="mark ${ok ? "ok" : "no"}" title="${why}">${ok ? "✓" : "✗"}</span>`;
+      if(pk && pk.winner){
+        const hasMargin = pk.margin !== undefined && pk.margin !== null && pk.margin !== "" && isFinite(Number(pk.margin));
+        content = `<span class="pickpill ${pk.winner}"><b>${pk.winner}</b>${hasMargin ? " +" + Number(pk.margin).toFixed(1) : ""}</span>`;
+        if(res && res.called){
+          const ok = pk.winner === res.winner;
+          const miss = marginMiss(pk, res);
+          cls += ok ? " cell-ok" : " cell-no";
+          const why = ok ? (miss === null ? "Correct winner" : `Correct winner · margin off by ${miss.toFixed(1)}`) : "Wrong winner";
+          content += `<span class="mark ${ok ? "ok" : "no"}" title="${why}">${ok ? "✓" : "✗"}</span>`;
+        }
       }
-      return `<td class="${cls}">${content}</td>`;
+      if(!isMine) return `<td class="${cls}">${content}</td>`;
+      return `<td class="${cls} mine" data-race="${esc(r.id)}" role="button" tabindex="0" title="Click to edit your pick for ${esc(r.title)}">${content}</td>`;
     }).join("");
     return `<tr>${base}${cells}</tr>`;
   }).join("");
@@ -1134,6 +1313,16 @@ function renderGroup(){
   document.querySelectorAll(".del-name").forEach(b => {
     b.onclick = () => deletePerson(b.dataset.name);
   });
+  document.querySelectorAll("td.pickcell.mine").forEach(td => {
+    td.onclick = () => openPickPop(td.dataset.race);
+    td.onkeydown = (e) => {
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); openPickPop(td.dataset.race); }
+    };
+  });
+  if(pickPop.race){
+    if(myKey && pickPop.key === myKey){ syncPickPop(); positionPickPop(); }
+    else closePickPop();
+  }
   document.querySelectorAll(".rank-toggle button").forEach(b => {
     b.setAttribute("aria-pressed", String(b.dataset.rank === state.rankBy));
     b.onclick = () => { state.rankBy = b.dataset.rank; renderGroup(); };
@@ -1220,6 +1409,18 @@ function init(){
     if(!DEMO_FINAL) history.replaceState(null, "", location.pathname);
     refreshPicks();
   };
+  document.addEventListener("click", (e) => {
+    const el = pickPopEl();
+    if(!el) return;
+    if(el.contains(e.target)) return;
+    if(e.target.closest && e.target.closest("td.pickcell.mine")) return;
+    closePickPop();
+  });
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closePickPop();
+  });
+  window.addEventListener("resize", positionPickPop);
+  window.addEventListener("scroll", positionPickPop, true);
   initGroup();
   showPage("national", false);
 }
