@@ -55,7 +55,7 @@
   .race-btn.on{background:var(--panel); border-color:var(--line); box-shadow:var(--shadow)}
   .race-btn .ab{font-weight:700; font-size:13px; width:26px}
   .race-btn .nm{font-size:12.5px; color:#4b5160; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-  .race-btn .mv{font-size:11.5px; font-variant-numeric:tabular-nums; color:var(--muted)}
+  .race-btn .mv{font-size:11.5px; font-variant-numeric:tabular-nums}
   .dot{width:7px; height:7px; border-radius:50%; flex:none}
   .dot.D{background:var(--d)} .dot.R{background:var(--r)} .dot.T{background:var(--toss)}
 
@@ -87,7 +87,7 @@
   table.polls th{text-align:left; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; padding:0 0 6px; border-bottom:1px solid var(--line)}
   table.polls td{padding:7px 0; border-bottom:1px solid #f1ede5; vertical-align:top}
   table.polls td.num, table.polls th.num{text-align:right; font-variant-numeric:tabular-nums}
-  .lead-D{color:var(--d); font-weight:700} .lead-R{color:var(--r); font-weight:700} .lead-E{color:var(--muted); font-weight:700}
+  .lead-D{color:var(--d); font-weight:700} .lead-R{color:var(--r); font-weight:700} .lead-E{color:var(--muted); font-weight:700} .lead-T{color:var(--toss); font-weight:700}
   .q{display:inline-block; font-size:10px; padding:1px 6px; border-radius:999px; background:#eef6ee; color:#256b34; border:1px solid #d6e8d8; font-weight:700}
   .q.o{background:#f6f0e6; color:#8a5a12; border-color:#eadfc9}
   .empty{font-size:13px; color:var(--muted); font-style:italic}
@@ -103,21 +103,24 @@
     font:inherit; font-size:13px; font-weight:700; padding:8px 12px; border-radius:8px; cursor:pointer;
     border:1px solid var(--line); background:#fff; color:#3f4551; flex:1;
   }
-  .pick .row button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
-  .pick .row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
-  .pick .row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
+  .pick .row button[data-w="D"]{background:var(--d-soft); border-color:#cfdaf9; color:#14348f}
+  .pick .row button[data-w="R"]{background:var(--r-soft); border-color:#f6d3d0; color:#8f2b21}
+  .pick .row button[data-w="O"]{background:#f1f2f4; border-color:#d9dce1; color:#3f4551}
+  .pick .row button:hover{filter:brightness(.97)}
   .pick label{display:flex; align-items:center; gap:8px; font-size:13px; color:#4b5160}
   .pick input[type=number]{font:inherit; width:82px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; text-align:right; font-variant-numeric:tabular-nums}
   .pick .saved{font-size:12px; color:#256b34; font-weight:600; margin-left:auto}
 
-  .pick.hero{margin:0; border:0; border-bottom:1px solid var(--line); border-radius:0; padding:18px 24px 20px; background:linear-gradient(180deg,#eaf7ef,#dff2e6); box-shadow:inset 0 0 0 2px #2f9e57}
-  .pick.hero .sec{color:#146c3b; font-size:12px; letter-spacing:.13em; margin-bottom:10px}
+  .pick.hero{margin:0; border:0; border-bottom:1px solid var(--line); border-radius:0; padding:18px 24px 20px; background:#f7f6f2; box-shadow:inset 0 0 0 2px var(--line)}
+  .pick.hero .sec{color:#3c414b; font-size:12px; letter-spacing:.13em; margin-bottom:10px}
   .pick.hero .row{gap:8px}
-  .pick.hero .row button{font-size:14.5px; padding:12px 14px; border-width:2px; border-color:#bfe3ca; background:#fff}
-  .pick.hero .row button:hover{border-color:#2f9e57}
-  .pick.hero label{font-size:13.5px; font-weight:600; color:#1c5a36}
-  .pick.hero input[type=number]{border-color:#bfe3ca; border-width:2px}
-  .pick.hero .saved{color:#146c3b}
+  .pick.hero .row button{font-size:14.5px; padding:12px 14px; border-width:2px}
+  .pick.hero label{font-size:13.5px; font-weight:600; color:#3c414b}
+  .pick.hero input[type=number]{border-color:var(--line); border-width:2px}
+  .pick.hero .saved{color:#256b34}
+  .pick .row button.sel-D, .pick.hero .row button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
+  .pick .row button.sel-R, .pick.hero .row button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
+  .pick .row button.sel-O, .pick.hero .row button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
 
   .guide{background:linear-gradient(180deg,#f3fbf6,#eef7f1); border:1px solid #cfe6d7; border-radius:14px; box-shadow:var(--shadow); padding:16px 18px; margin:18px 0 4px}
   .guide h2{font-family:"Iowan Old Style",Charter,Georgia,serif; font-size:18px; margin:0 0 12px; font-weight:600; color:#14512f}
@@ -133,12 +136,18 @@
 
   .pcard .row.mini{display:flex; gap:5px; margin-top:8px}
   .pcard .row.mini button{flex:1; font:inherit; font-size:12px; font-weight:800; padding:6px 0; border-radius:7px; border:1px solid var(--line); background:#fff; color:#3f4551; cursor:pointer}
+  .pcard .row.mini button[data-w="D"]{background:var(--d-soft); border-color:#cfdaf9; color:#14348f}
+  .pcard .row.mini button[data-w="R"]{background:var(--r-soft); border-color:#f6d3d0; color:#8f2b21}
+  .pcard .row.mini button[data-w="O"]{background:#f1f2f4; border-color:#d9dce1; color:#3f4551}
+  .pcard .row.mini button:hover{filter:brightness(.97)}
   .pcard .row.mini button.sel-D{background:var(--d); border-color:var(--d); color:#fff}
   .pcard .row.mini button.sel-R{background:var(--r); border-color:var(--r); color:#fff}
   .pcard .row.mini button.sel-O{background:#4b5563; border-color:#4b5563; color:#fff}
   .pcard label.mini-margin{display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted); margin-top:6px; font-weight:600}
   .pcard input[type=number]{font:inherit; font-size:12.5px; width:64px; padding:4px 6px; border:1px solid var(--line); border-radius:6px; text-align:right; font-variant-numeric:tabular-nums}
-  .pcard.picked{border-color:#b9dcc4; box-shadow:0 0 0 1px #d7ecdd inset}
+  .pcard.picked.pick-D{border-color:#cfdaf9; box-shadow:inset 0 0 0 1px #e3ebfd}
+  .pcard.picked.pick-R{border-color:#f3cfcb; box-shadow:inset 0 0 0 1px #fbe4e2}
+  .pcard.picked.pick-O{border-color:#d9dce1; box-shadow:inset 0 0 0 1px #eceef1}
 
   .summary{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:6px}
   .stat{background:#faf7f1; border:1px solid var(--line); border-radius:10px; padding:12px 14px}
@@ -157,7 +166,7 @@
   .state-cell{font-weight:600; white-space:nowrap}
   .state-cell .abbr{font-size:10.5px; color:var(--muted); font-weight:700; margin-left:3px}
   .race-cell{min-width:210px; color:#3c414b}
-  .cook-cell{white-space:nowrap; color:#3c414b}
+  .cook-cell{white-space:nowrap}
   .result-cell{white-space:nowrap}
   .pickcell{white-space:nowrap}
   .pickcell.cell-ok{background:#f4fbf6!important}
@@ -228,11 +237,11 @@
       </div>
     </div>
     <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-page="group">Live Group Board &amp; Scores</button>
+      <button role="tab" aria-selected="true" data-page="national">National Picture</button>
       <button role="tab" aria-selected="false" data-page="senate">Make Picks - Senate</button>
       <button role="tab" aria-selected="false" data-page="gov">Make Picks - Governors</button>
-      <button role="tab" aria-selected="false" data-page="mycard">My Card &amp; Edit</button>
-      <button role="tab" aria-selected="false" data-page="national">National picture</button>
+      <button role="tab" aria-selected="false" data-page="mycard">My Predictions</button>
+      <button role="tab" aria-selected="false" data-page="group">Live Group Board</button>
     </nav>
   </div>
 </header>
@@ -241,17 +250,17 @@
   <section class="guide" aria-label="How to use this app">
     <h2>Start here: four quick steps</h2>
     <div class="steps">
-      <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board &amp; Scores</span> and enter your first name.</span></button>
-      <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:#1c7a43">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick D, R, or O and enter the margin.</span></button>
-      <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Card &amp; Edit</span> to see everything in one place and quickly change any pick.</span></button>
-      <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board &amp; Scores</span> to see everyone's picks and scores as results come in.</span></button>
+      <button class="stepcard" data-page="group"><span class="n">1</span><span class="txt"><b>Join the group</b>Go to <span class="go">Live Group Board</span> and enter your first name.</span></button>
+      <button class="stepcard" data-page="senate"><span class="n">2</span><span class="txt"><b>Make your picks</b>Go to <span class="go">Make Picks - Senate</span> or <span class="go">Make Picks - Governors</span>. The <b style="display:inline; color:var(--ink)">ENTER YOUR PREDICTION HERE</b> box is at the top of each race card. Pick <b style="display:inline; color:var(--d)">D</b>, <b style="display:inline; color:var(--r)">R</b>, or <b style="display:inline">O</b> and enter the margin.</span></button>
+      <button class="stepcard" data-page="mycard"><span class="n">3</span><span class="txt"><b>Check your card</b>Go to <span class="go">My Predictions</span> to see everything in one place and quickly change any pick.</span></button>
+      <button class="stepcard" data-page="group"><span class="n">4</span><span class="txt"><b>Follow along</b>Watch <span class="go">Live Group Board</span> to see everyone's picks and scores as results come in.</span></button>
     </div>
   </section>
 
   <div class="page" id="page-senate">
     <div class="lede">
       <h2>Flip through the map</h2>
-      <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin in the green box at the top of each card; everything saves in your browser.</p>
+      <p>Pick a race on the left. Each card shows who is running, the Cook rating, one polling average, the October polls behind it, and the last statewide result. Enter a winner and a margin in the prediction box at the top of each card; everything saves in your browser.</p>
     </div>
     <div class="layout">
       <aside class="rail" id="rail-senate"></aside>
@@ -262,7 +271,7 @@
   <div class="page" id="page-gov">
     <div class="lede">
       <h2>36 governorships</h2>
-      <p>Nineteen open seats. Ratings are Cook's as of Oct 29. Same deal: read, then use the green box at the top of each card to pick a winner and a margin.</p>
+      <p>Nineteen open seats. Ratings are Cook's as of Oct 29. Same deal: read, then use the prediction box at the top of each card to pick a winner and a margin.</p>
     </div>
     <div class="layout">
       <aside class="rail" id="rail-gov"></aside>
@@ -270,7 +279,7 @@
     </div>
   </div>
 
-  <div class="page" id="page-national">
+  <div class="page on" id="page-national">
     <div class="panel">
       <h2>The national picture</h2>
       <p class="sub">What the environment looks like four days out, and why so many Republican seats are in play.</p>
@@ -304,7 +313,7 @@
   <div class="page" id="page-mycard">
     <div class="banner" id="shared-banner"></div>
     <div class="panel">
-      <h2>My Card &amp; Edit</h2>
+      <h2>My Predictions</h2>
       <p class="sub" id="mycard-sub">Nothing picked yet. Go make some picks.</p>
       <div class="summary" id="mycard-stats"></div>
 
@@ -317,14 +326,14 @@
       <div class="btns">
         <button class="btn ghost" id="clear-picks">Clear my picks</button>
       </div>
-      <p class="note">Changes save automatically and sync to the Live Group Board &amp; Scores.</p>
+      <p class="note">Changes save automatically and sync to the Live Group Board.</p>
       <pre class="copybox" id="copybox" hidden></pre>
     </div>
   </div>
 
-  <div class="page on" id="page-group">
+  <div class="page" id="page-group">
     <div class="panel">
-      <h2>Live Group Board &amp; Scores</h2>
+      <h2>Live Group Board</h2>
       <p class="sub">Everyone who uses this link shares the same board. Set your name below and your picks sync live. Scores update automatically as results come in.</p>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
         <label style="display:flex; align-items:center; gap:8px; font-size:13px;">Your name
@@ -396,7 +405,7 @@ function loadPicks(){
         picks = incoming;
         const b = document.getElementById("shared-banner");
         b.className = "banner on";
-        b.innerHTML = "<b>You are viewing a shared card.</b> These picks came from a link, not from your browser. Anything you change now is yours; use My card to grab a link to your own.";
+        b.innerHTML = "<b>You are viewing a shared card.</b> These picks came from a link, not from your browser. Anything you change now is yours; use My Predictions to see your own picks.";
       }
     }catch(e){}
   }
@@ -408,6 +417,19 @@ function savePicks(){
 
 const RATING_ORDER = {"Toss Up":0,"Lean D":1,"Lean R":1,"Likely D":2,"Likely R":2,"Solid D":3,"Solid R":3};
 function rateClass(r){ return r==="Toss Up" ? "T" : r.slice(-1); }
+function cookClass(r){
+  if(!r) return "";
+  if(r === "Toss Up") return "lead-T";
+  if(r.endsWith(" D")) return "lead-D";
+  if(r.endsWith(" R")) return "lead-R";
+  return "";
+}
+function pviClass(p){
+  if(!p) return "";
+  if(p.startsWith("D")) return "lead-D";
+  if(p.startsWith("R")) return "lead-R";
+  return "lead-E";
+}
 function fmtMargin(v){
   if(v === null || v === undefined) return "—";
   const a = Math.abs(v).toFixed(1);
@@ -421,9 +443,11 @@ function raceRow(r, chamber){
   const p = picks[r.id];
   const btn = document.createElement("button");
   btn.className = "race-btn" + (r.id === state.sel[chamber] ? " on" : "");
+  const mvText = p ? (p.winner === "D" ? "D+" : p.winner === "R" ? "R+" : "O+") + Number(p.margin||0).toFixed(1) : (r.avg !== null ? fmtMargin(r.avg) : "");
+  const mvCls = p ? (p.winner === "D" ? "lead-D" : p.winner === "R" ? "lead-R" : "lead-E") : (r.avg !== null ? marginClass(r.avg) : "");
   btn.innerHTML = `<span class="dot ${rateClass(r.cook)}"></span><span class="ab">${r.abbr}</span>
     <span class="nm">${r.chamber === "senate" ? "Senate" : "Gov"}${r.open ? " · open" : ""}</span>
-    <span class="mv">${p ? (p.winner === "D" ? "D+" : p.winner === "R" ? "R+" : "O+") + Number(p.margin||0).toFixed(1) : (r.avg !== null ? fmtMargin(r.avg) : "")}</span>`;
+    <span class="mv ${mvCls}">${mvText}</span>`;
   btn.onclick = () => { state.sel[chamber] = r.id; renderList(chamber); renderDetail(chamber); };
   return btn;
 }
@@ -458,8 +482,8 @@ function renderDetail(chamber){
     <tr>
       <td>${pl.pollster} <span class="q ${pl.tag === "Higher-quality" ? "" : "o"}">${pl.tag === "Higher-quality" ? "HQ" : "other"}</span></td>
       <td>${pl.dates}</td>
-      <td class="num">${pl.d.toFixed(0)}</td>
-      <td class="num">${pl.r.toFixed(0)}</td>
+      <td class="num lead-D">${pl.d.toFixed(0)}</td>
+      <td class="num lead-R">${pl.r.toFixed(0)}</td>
       <td class="num ${marginClass(pl.margin)}">${pl.margin > 0 ? "+" : ""}${pl.margin.toFixed(1)}</td>
     </tr>`).join("");
 
@@ -489,8 +513,8 @@ function renderDetail(chamber){
         <h2>${r.title}</h2>
         <div class="chips">
           <span class="chip rate-${rateClass(r.cook)}">${r.cook}</span>
-          <span class="chip">PVI ${r.pvi}</span>
-          <span class="chip">Last: ${r.last}</span>
+          <span class="chip rate-${r.pvi.slice(0,1)}">PVI ${r.pvi}</span>
+          <span class="chip rate-${r.holder}">Last: ${r.last}</span>
           <span class="chip">${r.open ? "Open seat" : "Incumbent on ballot"}</span>
         </div>
       </div>
@@ -517,8 +541,8 @@ function renderDetail(chamber){
           <h3 class="sec">History</h3>
           <div class="summary">
             <div class="stat"><div class="k">Last statewide result</div><div class="v" style="font-size:19px">${r.last}</div></div>
-            <div class="stat"><div class="k">Cook rating</div><div class="v" style="font-size:19px">${r.cook}</div></div>
-            <div class="stat"><div class="k">2024 presidential lean</div><div class="v" style="font-size:19px">${r.pvi}</div></div>
+            <div class="stat"><div class="k">Cook rating</div><div class="v ${cookClass(r.cook)}" style="font-size:19px">${r.cook}</div></div>
+            <div class="stat"><div class="k">2024 presidential lean</div><div class="v ${pviClass(r.pvi)}" style="font-size:19px">${r.pvi}</div></div>
           </div>
           <h4 class="sec" style="margin-top:20px">What to weigh</h4>
           <ul style="padding-left:16px;margin:0;font-size:13.5px;color:#3c414b">
@@ -572,9 +596,9 @@ function renderMyCard(){
   const cardHtml = (r) => {
     const p = picks[r.id] || {};
     const picked = !!p.winner;
-    return `<div class="pcard${picked ? " picked" : " empty-p"}" data-race="${r.id}">
+    return `<div class="pcard${picked ? " picked pick-" + p.winner : " empty-p"}" data-race="${r.id}">
       <div class="t">${r.abbr} · ${r.state}</div>
-      <div class="g">Cook: ${r.cook}</div>
+      <div class="g">Cook: <span class="${cookClass(r.cook)}">${r.cook}</span></div>
       <div class="row mini">
         <button data-w="D" class="${p.winner === "D" ? "sel-D" : ""}">D</button>
         <button data-w="R" class="${p.winner === "R" ? "sel-R" : ""}">R</button>
@@ -620,7 +644,7 @@ function projectSenate(s){
     if(p.winner === "D" && !heldByD) d++;
     if(p.winner === "R" && heldByD) d--;
   });
-  return d + " D / " + (100 - d) + " R";
+  return `<span class="lead-D">${d} D</span> <span class="muted">/</span> <span class="lead-R">${100 - d} R</span>`;
 }
 function projectGov(g){
   let d = 24;
@@ -631,7 +655,7 @@ function projectGov(g){
     if(p.winner === "D" && !heldByD) d++;
     if(p.winner === "R" && heldByD) d--;
   });
-  return d + " D / " + (50 - d) + " R";
+  return `<span class="lead-D">${d} D</span> <span class="muted">/</span> <span class="lead-R">${50 - d} R</span>`;
 }
 
 function picksAsText(){
@@ -819,7 +843,8 @@ function renderGroup(){
     } else if(res && res.reporting > 0){
       resultCell = `<span class="muted">Counting ${Math.round(res.reporting)}%</span>`;
     }
-    const base = `<td class="state-cell">${r.state}<span class="abbr">${r.abbr}</span></td><td class="race-cell">${r.cands.map(c => c.party + ":" + c.name).join(" vs ")}</td><td class="cook-cell">${r.cook}</td><td class="result-cell">${resultCell}</td>`;
+    const cands = r.cands.map(c => `<span class="${c.party === "D" ? "lead-D" : c.party === "R" ? "lead-R" : "lead-E"}">${c.party}:${c.name}</span>`).join(" vs ");
+    const base = `<td class="state-cell">${r.state}<span class="abbr">${r.abbr}</span></td><td class="race-cell">${cands}</td><td class="cook-cell ${cookClass(r.cook)}">${r.cook}</td><td class="result-cell">${resultCell}</td>`;
     const cells = people.map(pn => {
       const pr = (groupData.picks[pn] || {}).picks || {};
       const pk = pr[r.id];
@@ -900,10 +925,10 @@ function init(){
   document.getElementById("countdown").innerHTML = days > 0 ? `<b>${days} days</b> to Election Day` : "Election Day";
 
   document.getElementById("national-stats").innerHTML = `
-    <div class="stat"><div class="k">Generic ballot</div><div class="v">D +9.4</div><div class="g" style="font-size:11.5px;color:var(--muted)">DDHQ, Oct 29</div></div>
+    <div class="stat"><div class="k">Generic ballot</div><div class="v lead-D">D +9.4</div><div class="g" style="font-size:11.5px;color:var(--muted)">DDHQ, Oct 29</div></div>
     <div class="stat"><div class="k">Trump disapproval</div><div class="v">61.2%</div><div class="g" style="font-size:11.5px;color:var(--muted)">Cook tracker, Oct 15</div></div>
-    <div class="stat"><div class="k">Senate needed</div><div class="v">+4</div><div class="g" style="font-size:11.5px;color:var(--muted)">for a 51-49 majority</div></div>
-    <div class="stat"><div class="k">Cook toss-ups</div><div class="v">7</div><div class="g" style="font-size:11.5px;color:var(--muted)">6 R-held, 1 D-held</div></div>`;
+    <div class="stat"><div class="k">Senate needed</div><div class="v lead-D">+4</div><div class="g" style="font-size:11.5px;color:var(--muted)">for a 51-49 majority</div></div>
+    <div class="stat"><div class="k">Cook toss-ups</div><div class="v lead-T">7</div><div class="g" style="font-size:11.5px;color:var(--muted)">6 R-held, 1 D-held</div></div>`;
 
   const spread = DATA.races.filter(r => r.chamber === "senate" && r.spread).slice(0, 6);
   document.getElementById("disagreement").innerHTML = spread.map(r => `
@@ -916,7 +941,7 @@ function init(){
     refreshPicks();
   };
   initGroup();
-  showPage(groupName ? "senate" : "group", false);
+  showPage("national", false);
 }
 
 init();
